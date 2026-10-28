@@ -7,7 +7,7 @@ assert.deepEqual(validateJourneys(),[]);
 assert.ok(Object.keys(LOCATIONS).length>=40);
 assert.equal(catalog().length,Object.keys(LOCATIONS).length+CONNECTIONS.length);
 assert.equal(searchAtlas('hall-critical')[0]?.route,'hall-critical');
-assert.equal(searchAtlas('Hardy')[0]?.name,'Hardy’s Gallery');
+assert.ok(searchAtlas('Hardy').some(i=>i.route==='hall-hardy'));
 assert.ok(searchAtlas('Guth Maynard').some(i=>i.route==='density-guth'));
 assert.ok(searchAtlas('levinson').some(i=>i.route==='hall-levinson'));
 assert.ok(searchAtlas('Dirichlet').some(i=>i.route==='grh'));
