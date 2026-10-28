@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "project": "The Zeta Citadel",
+  "repository": "jfairfaxball-348/The-Zeta-Citadel",
+  "site_url": "https://the-zeta-citadel.vercel.app/",
+  "updated_date_utc": "2026-10-28",
+  "programme": "S002-S010 progressively explorable mathematical world",
+  "baseline": {
+    "last_completed_session": "S001",
+    "status": "CLOSED",
+    "app_commit_sha": "577c5d1a92187cbd0d8db89a2160317706a3eec7",
+    "application": "Static HTML/CSS/ES-module atlas with eight top-level regions and two geographic drill-down levels"
+  },
+  "session": {
+    "next": "S002",
+    "status": "READY_UNEXECUTED",
+    "execution_authorized": false,
+    "canonical_prompt": "authoritative/NEXT_SESSION_PROMPT.md",
+    "predecessor": "S001",
+    "roadmap": "docs/ROADMAP.md",
+    "required_owner_invocation": "Separate explicit request to run S002"
+  },
+  "roadmap": [
+    {
+      "id": "S002",
+      "title": "Great Hall recursive vertical slice",
+      "status": "READY_UNEXECUTED"
+    },
+    {
+      "id": "S003",
+      "title": "Critical-line laboratory",
+      "status": "PLANNED"
+    },
+    {
+      "id": "S004",
+      "title": "Courtyard zero-density district",
+      "status": "PLANNED"
+    },
+    {
+      "id": "S005",
+      "title": "Keep zero-free territories",
+      "status": "PLANNED"
+    },
+    {
+      "id": "S006",
+      "title": "Dungeons numerical verification",
+      "status": "PLANNED"
+    },
+    {
+      "id": "S007",
+      "title": "Outer territories",
+      "status": "PLANNED"
+    },
+    {
+      "id": "S008",
+      "title": "Typed mathematics connections",
+      "status": "PLANNED"
+    },
+    {
+      "id": "S009",
+      "title": "Search and learning journeys",
+      "status": "PLANNED"
+    },
+    {
+      "id": "S010",
+      "title": "Consolidation and audited release",
+      "status": "PLANNED"
+    }
+  ],
+  "invariant_files": [
+    "index.html",
+    "styles.css",
+    "atlas.js",
+    "app.js",
+    "vercel.json"
+  ],
+  "authority_files": [
+    "AGENTS.md",
+    "authoritative/START_HERE.md",
+    "authoritative/STATE.json",
+    "authoritative/NEXT_SESSION_PROMPT.md",
+    "docs/SESSION_PROTOCOL.md",
+    "docs/ROADMAP.md"
+  ],
+  "prohibitions": [
+    "Installed future prompts never execute themselves",
+    "No skipping sessions or executing successors in one invocation",
+    "No fabricated mathematical assertions or source/status upgrades",
+    "No implication inferred from map geography",
+    "No automatic publication, external outreach, paid services, or proof-of-RH claim"
+  ],
+  "next_gate": "S002 map→Great Hall→chamber→exhibit, recursive graph, robust navigation and verified UI/content regression",
+  "deployment_note": "Live site URL confirmed by owner; this roadmap-only change is not an assertion of a newly tested deployment."
+}
