@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a1622" />
+  <meta name="description" content="The Zeta Citadel: an interactive cartographic atlas of the Riemann Hypothesis, its surrounding conjectures, and the mathematics at its frontiers." />
+  <meta property="og:title" content="The Zeta Citadel — An atlas of the Riemann Hypothesis" />
+  <meta property="og:description" content="Explore the mathematical landscape from the Selberg class to the critical line, density theorems and computational verification." />
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+  <title>The Zeta Citadel — A mathematical atlas</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="site-header">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">ζ<span>✧</span></div>
+        <div class="brand-copy"><strong>THE ZETA CITADEL</strong><span>AN ATLAS OF AN UNSOLVED WORLD</span></div>
+      </div>
+      <div class="header-meta"><span class="edition-dot"></span> ATLAS / VOL. I <span class="header-sep">·</span> <span id="edition"></span></div>
+      <button class="icon-button mobile-guide" id="mobile-guide" aria-label="Toggle atlas navigation" aria-expanded="false">☰</button>
+    </header>
+
+    <main class="atlas-layout">
+      <aside class="guide" id="guide" aria-label="Atlas navigation">
+        <div class="guide-intro">
+          <p class="eyebrow">FIELD NOTES / 001</p>
+          <h1>A landscape<br/>of <em>infinity.</em></h1>
+          <p>Follow the roads of prime numbers from the mathematical horizon to the heart of the Riemann Hypothesis.</p>
+        </div>
+        <div class="guide-section-label"><span>EXPLORE THE LANDSCAPE</span><span>08 REGIONS</span></div>
+        <nav id="region-nav" aria-label="Regions of the citadel"></nav>
+        <button class="guide-tour" id="guided-tour"><span class="tour-symbol">↗</span><span>Begin the guided journey<small>Start from the outer horizon</small></span></button>
+        <div class="guide-bottom"><div class="small-celestial">✳</div><p>An artistic map of connected ideas, <strong>not a theorem of logical containment.</strong></p></div>
+      </aside>
+
+      <section class="map-stage" aria-label="Interactive map of the Zeta Citadel">
+        <div class="map-topbar">
+          <div class="location-path"><span class="path-prefix">YOU ARE HERE</span><span class="path-separator">/</span><button id="map-home">THE ATLAS</button><span id="breadcrumbs"></span></div>
+          <button class="map-help" id="map-help" title="Map controls and analogy guide">? <span>MAP GUIDE</span></button>
+        </div>
+        <div class="map-viewport" id="map-viewport">
+          <svg id="citadel-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1560 980" role="img" aria-labelledby="map-title map-desc" tabindex="0">
+            <title id="map-title">The Zeta Citadel map</title>
+            <desc id="map-desc">Four concentric mathematical horizons surround a citadel containing a courtyard, great hall, keep and dungeons. Click a region to zoom into it and read its mathematical story.</desc>
+            <defs>
+              <radialGradient id="land" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="#263c48"/><stop offset=".6" stop-color="#182d39"/><stop offset="1" stop-color="#102330"/></radialGradient>
+              <radialGradient id="glow"><stop stop-color="#b9ad78" stop-opacity=".24"/><stop offset="1" stop-color="#b9ad78" stop-opacity="0"/></radialGradient>
+              <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#dfc38d"/><stop offset=".5" stop-color="#8b7855"/><stop offset="1" stop-color="#e7cb94"/></linearGradient>
+              <linearGradient id="hall-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#4c5b55"/><stop offset="1" stop-color="#263a40"/></linearGradient>
+              <pattern id="mesh" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#d7c796" stroke-opacity=".10" stroke-width=".8"/></pattern>
+              <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V10" stroke="#debb85" stroke-opacity=".12" stroke-width="2"/></pattern>
+              <filter id="shadow"><feDropShadow dx="0" dy="11" stdDeviation="15" flood-color="#01090e" flood-opacity=".55"/></filter>
+              <filter id="soft-glow"><feGaussianBlur stdDeviation="13"/></filter>
+            </defs>
+            <rect x="0" y="0" width="1560" height="980" fill="#102431" />
+            <rect x="0" y="0" width="1560" height="980" fill="url(#mesh)" opacity=".48"/>
+            <g class="terrain" aria-hidden="true">
+              <circle cx="780" cy="490" r="660" fill="url(#glow)"/>
+              <g fill="none" stroke="#8caaab" stroke-opacity=".10" stroke-width="1.5">
+                <path d="M-70 170Q380 -70 800 100T1660 125"/><path d="M-70 210Q380 -30 800 140T1660 165"/><path d="M-70 250Q380 10 800 180T1660 205"/>
+                <path d="M-40 760Q340 1010 780 870T1650 850"/><path d="M-40 797Q340 1047 780 907T1650 887"/><path d="M-40 834Q340 1084 780 944T1650 924"/>
+              </g>
+              <g id="stars"></g>
+              <path d="M0 510 C220 325 330 745 550 605 S945 245 1120 410 S1400 715 1580 510" fill="none" stroke="#76adb2" stroke-width="3" opacity=".16" stroke-dasharray="18 10"/>
+              <path d="M220 0C350 160 270 355 437 488S585 760 310 980M1250 0C1120 200 1320 310 1170 520S990 790 1220 980" fill="none" stroke="#7a899c" stroke-width="2" opacity=".17"/>
+              <g transform="translate(1410 143)" class="compass"><circle r="56" fill="none" stroke="#a8b3ad" stroke-opacity=".26"/><circle r="40" fill="none" stroke="#a8b3ad" stroke-opacity=".22"/><path d="M0 -68V68M-68 0H68" stroke="#cfba8a" opacity=".45"/><path d="M0 -45L9 -9L45 0L9 9L0 45L-9 9L-45 0L-9 -9Z" fill="#d1be91" opacity=".48"/><text x="0" y="-81" text-anchor="middle">N</text></g>
+              <text x="100" y="98" class="terrain-legend">TERRA INCOGNITA / ∞</text><text x="1088" y="878" class="terrain-legend">THE UNPROVEN FRONTIER</text>
+            </g>
+            <g id="rings">
+              <circle data-region="selberg" class="ring ring-selberg" cx="780" cy="490" r="443" stroke-width="84" tabindex="0" role="button" aria-label="Explore The Global Empire: Selberg class" />
+              <circle data-region="grand" class="ring ring-grand" cx="780" cy="490" r="359" stroke-width="82" tabindex="0" role="button" aria-label="Explore The Greater Metro: Grand Riemann Hypothesis" />
+              <circle data-region="grh" class="ring ring-grh" cx="780" cy="490" r="280" stroke-width="76" tabindex="0" role="button" aria-label="Explore The City Limits: Generalized Riemann Hypothesis" />
+              <circle data-region="erh" class="ring ring-erh" cx="780" cy="490" r="216" stroke-width="61" tabindex="0" role="button" aria-label="Explore The Inner Wall: Extended Riemann Hypothesis" />
+            </g>
+            <g id="roads" aria-hidden="true">
+              <circle cx="780" cy="490" r="485" fill="none" stroke="#ddc89f" stroke-opacity=".35" stroke-width="2.5" stroke-dasharray="3 14"/>
+              <circle cx="780" cy="490" r="399" fill="none" stroke="#ddc89f" stroke-opacity=".25" stroke-width="1" />
+              <circle cx="780" cy="490" r="318" fill="none" stroke="#ddc89f" stroke-opacity=".28" stroke-width="1.5" stroke-dasharray="9 12" />
+              <circle cx="780" cy="490" r="242" fill="none" stroke="#ddc89f" stroke-opacity=".34" stroke-width="2" />
+              <g stroke="#f2dbaa" opacity=".35" stroke-width="1.5"><path d="M780 20V270M780 715V959M305 490H573M990 490H1255"/><path d="M452 162L604 314M957 667L1117 827M460 825L610 665M970 310L1117 162" stroke-dasharray="5 12"/></g>
+              <g fill="#edcf91" opacity=".55"><circle cx="780" cy="5" r="5"/><circle cx="780" cy="975" r="5"/><circle cx="1290" cy="490" r="5"/><circle cx="270" cy="490" r="5"/></g>
+            </g>
+            <g class="ring-labels" aria-hidden="true">
+              <text x="780" y="65" class="ring-label small">01 · THE SELBERG CLASS</text>
+              <text x="780" y="145" class="ring-label small">02 · GRAND RIEMANN HYPOTHESIS</text>
+              <text x="780" y="224" class="ring-label small">03 · GENERALIZED RH</text>
+              <text x="780" y="293" class="ring-label small">04 · EXTENDED RH</text>
+            </g>
+            <g class="citadel" filter="url(#shadow)">
+              <path d="M780 311L843 333L898 382L925 451L918 528L883 604L826 650L734 650L676 604L642 528L635 451L663 382L718 333Z" fill="#0d2530" stroke="url(#wall)" stroke-width="13" stroke-linejoin="bevel" />
+              <path d="M780 328L835 348L884 392L908 454L901 522L870 591L817 634L743 634L690 591L659 522L652 454L676 392L725 348Z" fill="#1e3b42" stroke="#8b947d" stroke-width="2"/>
+              <path d="M780 348L826 363L870 400L890 457L884 517L852 576L811 611L749 611L708 576L676 517L670 457L690 400L734 363Z" fill="url(#hatch)" opacity=".8"/>
+              <g class="battlements" fill="#e4ce9b" opacity=".75"><rect x="766" y="303" width="27" height="20"/><rect x="830" y="327" width="20" height="17" transform="rotate(28 840 335)"/><rect x="898" y="441" width="27" height="19" transform="rotate(78 910 452)"/><rect x="886" y="584" width="24" height="16" transform="rotate(130 898 592)"/><rect x="755" y="635" width="51" height="22"/><rect x="648" y="580" width="24" height="16" transform="rotate(-48 660 588)"/><rect x="635" y="440" width="24" height="16" transform="rotate(-78 647 448)"/><rect x="700" y="333" width="20" height="17" transform="rotate(-28 710 341)"/></g>
+              <g class="interactive-room" data-region="courtyard" tabindex="0" role="button" aria-label="Explore the Courtyard, zero-density theorems"><path d="M780 346L831 362L882 411L898 464L891 524L863 583L815 618L745 618L698 581L669 522L662 464L683 411L728 362Z" class="room-courtyard"/><path d="M704 418L737 395H795M868 469V515M698 542L724 573" fill="none" stroke="#d0bd92" stroke-width="3" stroke-opacity=".34" stroke-dasharray="5 9"/></g>
+              <g class="interactive-room" data-region="hall" tabindex="0" role="button" aria-label="Explore the Great Hall, critical line theorems"><rect x="705" y="446" width="151" height="88" rx="2" class="room-hall"/><rect x="716" y="457" width="129" height="66" fill="none" stroke="#e2c992" stroke-width="2"/><path d="M730 459V522M831 459V522M716 476H844M716 503H844" stroke="#d1bc8f" stroke-opacity=".48" stroke-width="2"/><circle cx="780" cy="490" r="21" fill="#ba9b63" fill-opacity=".35" stroke="#e8d09a" stroke-width="2"/><path d="M780 472V508M762 490H798" stroke="#f7deb1" stroke-width="1.7"/></g>
+              <g class="interactive-room" data-region="keep" tabindex="0" role="button" aria-label="Explore the Keep, zero-free regions"><path d="M818 373L875 399L865 462L800 445L797 395Z" class="room-keep"/><path d="M813 401L844 388L865 408L856 443L818 431Z" fill="none" stroke="#b7deb7" stroke-opacity=".55" stroke-width="2"/><circle cx="838" cy="414" r="13" fill="#b5dac1" fill-opacity=".18" stroke="#d8ead1" stroke-width="2"/></g>
+              <g class="interactive-room" data-region="dungeon" tabindex="0" role="button" aria-label="Explore the Dungeons, numerical computation"><path d="M709 547H855L833 603H732Z" class="room-dungeon"/><path d="M729 556H836M741 574H824M751 591H810" stroke="#b7c4d9" stroke-opacity=".5" stroke-width="2"/><circle cx="781" cy="573" r="12" fill="#b4bfdb" fill-opacity=".17" stroke="#afc8dc" stroke-width="2"/></g>
+              <g class="room-labels" aria-hidden="true"><text x="741" y="398">COURTYARD</text><text x="781" y="545">GREAT HALL</text><text x="838" y="362">KEEP</text><text x="781" y="626">DUNGEONS</text></g>
+            </g>
+            <g id="subnode-markers"></g>
+          </svg>
+        </div>
+        <div class="map-controls" aria-label="Map zoom controls">
+          <button id="zoom-in" aria-label="Zoom in" title="Zoom in">+</button><button id="zoom-out" aria-label="Zoom out" title="Zoom out">−</button><span></span><button id="reset-view" class="reset-control" title="Return to full atlas">⌗</button>
+        </div>
+        <div class="map-bottom"><div><span class="live-indicator"></span><span id="map-mode">OVERVIEW / THE KNOWN & UNKNOWN</span></div><span class="map-hint">SCROLL TO ZOOM · DRAG TO PAN · CLICK TO EXPLORE</span></div>
+      </section>
+
+      <aside class="story-panel" id="story-panel" aria-label="Selected region details">
+        <div id="story-content"></div>
+      </aside>
+    </main>
+    <footer class="footer"><span>THE ZETA CITADEL <span class="footer-dim">/</span> CARTOGRAPHY OF A CONJECTURE</span><span>BUILT FOR EXPLORATION, NOT CERTAINTY <span class="footer-dim">·</span> <a href="https://github.com/jfairfaxball-348/The-Zeta-Citadel" target="_blank" rel="noopener noreferrer">SOURCE ↗</a></span></footer>
+  </div>
+  <dialog id="guide-dialog" class="guide-dialog"><div class="dialog-heading"><span>HOW TO READ THE MAP</span><button id="close-dialog" aria-label="Close map guide">×</button></div><h2>A metaphor, not a proof.</h2><p>This citadel is a <strong>spatial analogy</strong> to help explore connected problems. An outer ring is not necessarily stronger than or logically inclusive of an inner ring. In particular, ERH and GRH depend on definitions, and zero-free regions are regions in the complex plane — not literal rooms.</p><p>Click any ring or room to inspect it. Zoom with your mouse wheel or the +/− buttons, pan by dragging empty space, and use the breadcrumbs to move back. The Great Hall and Courtyard contain a second level of clickable sites.</p><button id="dialog-okay" class="dialog-okay">ENTER THE ATLAS ↗</button></dialog>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
