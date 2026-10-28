@@ -9,8 +9,12 @@ async function ready(){for(let i=0;i<60;i++){try{if((await fetch(base)).ok)retur
 try {
  await ready();browser=await chromium.launch({headless:true});
  const page=await browser.newPage({viewport:{width:1440,height:900}});
- page.on('pageerror',e=>errors.push(e.message));
+ page.on('pageerror',e=>{errors.push(e.message);console.error('BROWSER PAGE ERROR',e.stack||e.message);});
+ page.on('console',msg=>{if(msg.type()==='error')console.error('BROWSER CONSOLE ERROR',msg.text());});
+ page.on('requestfailed',req=>console.error('BROWSER REQUEST FAILED',req.url(),req.failure()));
  await page.goto(base);
+ await page.waitForTimeout(900);
+ console.log('BOOT DIAGNOSTIC nav count',await page.locator('#region-nav button').count(),'page errors',errors);
  await page.locator('#region-nav button').first().waitFor();
  assert.equal(await page.locator('#region-nav button').count(),8);
  await page.locator('#region-nav [data-navigate="hall"]').click();
