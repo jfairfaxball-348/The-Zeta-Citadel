@@ -389,3 +389,59 @@ button:focus-visible, a:focus-visible, [role="button"]:focus-visible { outline: 
 .outer-warning{border-top:1px solid #9eaa9f;margin-top:26px;padding:15px 0;color:#dac8a4;font:11px/1.7 var(--mono);}
 @media(max-width:720px){.outer-room,.outer-stat-grid{grid-template-columns:1fr}.outer-atlas{min-height:295px;border-width:4px}.outer-sky strong{font-size:85px}.outer-gate{margin-top:33px}.outer-medallion{font-size:40px}.outer-horizon-chart span{font-size:16px;padding:20px 5px;}}
 @media(prefers-reduced-motion:reduce){.outer-gate,.outer-entry{transition:none}}
+
+/* S008: Relationship topology is deliberately independent of the world-map geography. */
+.map-tools { display:flex; align-items:center; gap:9px; flex-shrink:0; }
+.location-path { min-width:0; overflow-x:auto; scrollbar-width:thin; }
+.connections-open { display:block; width:calc(100% - 44px); margin:16px 22px 4px; padding:14px; text-align:left; border:1px solid #a88d62; background:#182e37; color:#f3d7a0; font:10px var(--mono); letter-spacing:.04em; }
+.connections-open span {float:right;}
+.connections-open small { display:block; color:#b5c4bd; font:10px/1.5 var(--body); margin:6px 0 0; }
+.connections-open:hover,.connections-open:focus-visible,.connections-top-trigger:hover,.connections-top-trigger:focus-visible { border-color:#ffdf9e; background:#31505a; }
+.connections-top-trigger { min-height:30px; border:1px solid #a88d62; background:#1b303a; color:#f0d5a1; font:10px var(--mono); white-space:nowrap; padding:0 9px; }
+.connections-map { min-height:100%; padding:clamp(16px,2.8vw,34px); color:#eddcbb; }
+.connections-heading {max-width:750px; margin:0 auto 25px; text-align:center;}
+.connections-heading>span { color:#d8ba80; font:10px var(--mono); letter-spacing:.14em; }
+.connections-heading h2 { font:500 clamp(30px,4vw,55px)/1.05 var(--serif); margin:10px 0; }
+.connections-heading p { color:#b6c4bc; font:12px/1.7 var(--body); }
+.connections-legend { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin:0 auto 16px; max-width:920px;}
+.connections-legend>div { border:1px solid rgba(231,200,148,.28); padding:10px; background:rgba(13,35,45,.7); display:flex; align-items:center; gap:10px; }
+.connections-legend strong { display:block; font:11px/1.4 var(--mono); }
+.connections-legend small { display:block; color:#9eb0ad; font:10px/1.55 var(--body); margin-top:4px; }
+.connection-symbol { font:25px var(--serif); color:#e4bc85; width:26px; text-align:center; }
+.type-conditional_dependency .connection-symbol,.type-conditional_dependency .connection-glyph {color:#c7d6ae;}
+.type-historical_influence .connection-symbol,.type-historical_influence .connection-glyph {color:#aac7da;}
+.type-conceptual_analogy .connection-symbol,.type-conceptual_analogy .connection-glyph {color:#dbbcd6;}
+.connection-filters { display:flex; flex-wrap:wrap; gap:7px; justify-content:center; max-width:920px; margin:auto; }
+.connection-filters button { color:#e0dfc7; border:1px solid #647b7a; border-radius:3px; background:#18323d; padding:9px 10px; font:10px var(--mono); cursor:pointer; }
+.connection-filters button[aria-pressed="true"] { color:#112630; background:#f0d197; border-color:#f0d197; font-weight:700; }
+.connection-count { text-align:center; color:#a4b3b1; font:10px var(--mono); padding:15px 5px; }
+.connection-network { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:11px; max-width:1020px; margin:auto; }
+.connection-card { border:1px solid rgba(215,185,127,.36); background:linear-gradient(135deg,#193540,#0e252f); min-width:0; padding:13px; }
+.connection-card.connection-selected {outline:2px solid #f0d092; outline-offset:1px;}
+.connection-bridge { display:grid; grid-template-columns:minmax(0,1fr) 110px minmax(0,1fr); align-items:stretch; gap:6px; }
+.connection-place { min-width:0; display:flex; }
+.connection-endpoint { width:100%; color:#e8ddc0; background:#213d46; border:1px solid rgba(237,210,159,.31); padding:9px 5px; text-align:center; font:11px/1.4 var(--body); overflow-wrap:anywhere; }
+.connection-endpoint:hover,.connection-endpoint:focus-visible { background:#41616a; border-color:#e9c386; }
+.connection-link { background:rgba(12,37,47,.85); border:1px dashed #bfaa78; padding:3px; color:#f0c88c; display:flex; align-items:center; flex-direction:column; justify-content:center; cursor:pointer; }
+.connection-link:hover,.connection-link:focus-visible {background:#42616a; outline:2px solid #edd29c;}
+.connection-glyph { font:25px var(--serif); line-height:1.1; }
+.connection-type { font:8px/1.25 var(--mono); padding:4px 0; color:#d4c5a7; }
+.connection-claim { display:block; width:100%; text-align:left; padding:10px 0 0; background:transparent; border:0; color:#f2d4a0; font:15px/1.25 var(--serif); cursor:pointer; }
+.connection-claim span {color:#a5c5cb;}
+.connection-claim:hover,.connection-claim:focus-visible {text-decoration:underline;}
+.connections-disclaimer { max-width:940px; margin:22px auto 0; font:11px/1.75 var(--body); color:#b7c6bf; border-left:3px solid #b6a078; padding:0 15px; }
+.connection-story-places { display:grid; gap:7px; grid-template-columns:repeat(2,minmax(0,1fr)); margin-top:12px; }
+@media(max-width:1150px){.connection-network {grid-template-columns:1fr;}}
+@media(max-width:660px) {
+ .map-tools {gap:5px;}
+ .connections-top-trigger {padding:0 6px; font-size:9px;}
+ .connections-legend {grid-template-columns:1fr;}
+ .connection-network {grid-template-columns:1fr;}
+ .connection-bridge {grid-template-columns:minmax(0,1fr) 68px minmax(0,1fr); gap:3px;}
+ .connection-endpoint {font-size:10px; padding:7px 3px;}
+ .connection-type {font-size:8px;}
+ .connections-map {padding:16px 12px;}
+ .connections-heading {margin-bottom:16px;}
+ .connection-filters button {font-size:9px; padding:8px 7px;}
+ .map-stage:has(.connections-map) {min-height:650px;}
+}

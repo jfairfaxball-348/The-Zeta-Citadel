@@ -5,13 +5,14 @@ import { renderCourtyardScene, updateCourtyard, isCourtyardLocation } from './co
 import { renderKeepScene, updateKeep, isKeepLocation } from './keep.js';
 import { renderDungeonScene, updateDungeon, isDungeonLocation } from './dungeon.js';
 import { renderOuterScene, updateOuter, isOuterLocation } from './outer.js';
+import { isConnectionRoute, connectionFromRoute, renderConnectionsMap, renderConnectionStory } from './connections.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const WIDTH = 1560;
 const HEIGHT = 980;
 const ASPECT = HEIGHT / WIDTH;
 const HOME = { x: 0, y: 0, w: WIDTH, h: HEIGHT };
-const state = { selected: null, view: { ...HOME }, animation: null, drag: null, moved: false, tourIndex: -1 };
+const state = { selected: null, view: { ...HOME }, animation: null, drag: null, moved: false, tourIndex: -1, connectionsFilter: 'all' };
 const $ = (selector) => document.querySelector(selector);
 const svg = $('#citadel-map');
 const regionNav = $('#region-nav');
@@ -100,16 +101,16 @@ function idFromURL() {
 }
 function restoreURL() {
   const id = idFromURL();
-  select(getNode(id) ? id : null, { noURL: true });
+  select(getNode(id) || isConnectionRoute(id) ? id : null, { noURL: true });
 }
 function hideMobileMenu() {
   $('#guide').classList.remove('open');
   $('#mobile-guide').setAttribute('aria-expanded','false');
 }
 function select(id, options = {}) {
-  if (id && !getNode(id)) return;
+  if (id && !getNode(id) && !isConnectionRoute(id)) return;
   state.selected = id || null;
-  if (!options.keepView) zoomTo(id ? targetFor(id) : HOME, true);
+  if (!options.keepView) zoomTo(id && !isConnectionRoute(id) ? targetFor(id) : HOME, true);
   if (!options.noURL) updateURL(state.selected);
   const root = getRootRegion(id);
   document.querySelectorAll('[data-region]').forEach((el) => el.classList.toggle('active', el.getAttribute('data-region') === root));
@@ -118,11 +119,16 @@ function select(id, options = {}) {
   renderHall();
   renderStory();
   updateBreadcrumbs();
-  $('#map-mode').textContent = id ? `FOCUSED / ${getNode(id).name.toUpperCase()}` : 'OVERVIEW / THE KNOWN & UNKNOWN';
+  $('#map-mode').textContent = isConnectionRoute(id) ? 'CONNECTIONS / SOURCE-AUDITED BRIDGES' : id ? `FOCUSED / ${getNode(id).name.toUpperCase()}` : 'OVERVIEW / THE KNOWN & UNKNOWN';
   hideMobileMenu();
-  if (window.matchMedia('(max-width: 660px)').matches && id) $('#story-panel').scrollIntoView({behavior:reducedMotion ? 'instant' : 'smooth', block:'nearest'});
+  if (window.matchMedia('(max-width: 660px)').matches && id && (!isConnectionRoute(id) || connectionFromRoute(id))) $('#story-panel').scrollIntoView({behavior:reducedMotion ? 'instant' : 'smooth', block:'nearest'});
 }
 function updateBreadcrumbs() {
+  if (isConnectionRoute(state.selected)) {
+    const edge=connectionFromRoute(state.selected);
+    $('#breadcrumbs').innerHTML = edge ? `<span class="crumb-sep">/</span><button data-navigate="connections">CONNECTIONS</button><span class="crumb-sep">/</span><span class="crumb-name" aria-current="location">BRIDGE DETAIL</span>` : '<span class="crumb-sep">/</span><span class="crumb-name" aria-current="location">CONNECTIONS</span>';
+    return;
+  }
   const path = getAncestors(state.selected);
   $('#breadcrumbs').innerHTML = path.map((id,index) =>
     `<span class="crumb-sep">/</span>${index === path.length-1
@@ -136,11 +142,12 @@ function renderHall() {
   const keep = isKeepLocation(state.selected);
   const dungeon = isDungeonLocation(state.selected);
   const outer = isOuterLocation(state.selected);
-  const interior = hall || courtyard || keep || dungeon || outer;
+  const connections = isConnectionRoute(state.selected);
+  const interior = hall || courtyard || keep || dungeon || outer || connections;
   svg.hidden = interior;
   svg.setAttribute('aria-hidden', String(interior));
   hallScene.hidden = !interior;
-  hallScene.innerHTML = hall ? renderHallScene(state.selected) : courtyard ? renderCourtyardScene(state.selected) : keep ? renderKeepScene(state.selected) : dungeon ? renderDungeonScene(state.selected) : outer ? renderOuterScene(state.selected) : '';
+  hallScene.innerHTML = hall ? renderHallScene(state.selected) : courtyard ? renderCourtyardScene(state.selected) : keep ? renderKeepScene(state.selected) : dungeon ? renderDungeonScene(state.selected) : outer ? renderOuterScene(state.selected) : connections ? renderConnectionsMap(state.connectionsFilter, connectionFromRoute(state.selected)?.id) : '';
   if (hall) updateLab(hallScene);
   if (courtyard) updateCourtyard(hallScene);
   if (keep) updateKeep(hallScene);
@@ -153,7 +160,7 @@ function renderHall() {
 }
 function renderMarkers() {
   markers.replaceChildren();
-  if (!state.selected || isHallLocation(state.selected) || isCourtyardLocation(state.selected) || isKeepLocation(state.selected) || isDungeonLocation(state.selected)) {showView();return;}
+  if (!state.selected || isConnectionRoute(state.selected) || isHallLocation(state.selected) || isCourtyardLocation(state.selected) || isKeepLocation(state.selected) || isDungeonLocation(state.selected)) {showView();return;}
   const parent = getRegion(getRootRegion(state.selected));
   if (!parent?.subnodes?.length) {showView();return;}
   const fragment = document.createDocumentFragment();
@@ -178,6 +185,7 @@ function section(kicker, title, body, extraClass = '') {
 }
 function renderStory() {
   const id = state.selected;
+  if (isConnectionRoute(id)) { storyContent.innerHTML = renderConnectionStory(connectionFromRoute(id)?.id); return; }
   if (!id) {
     storyContent.innerHTML = `<div class="story-head"><div class="story-eyebrow"><i></i>WELCOME TO THE ATLAS</div><h2>The mystery<br/>at the <em>centre.</em></h2><p class="story-subtitle">One question, many frontiers</p><p class="story-teaser">Every nontrivial zero of the Riemann zeta function is conjectured to lie on a single vertical line: Re(s) = ½. From this unresolved centre radiate entire fields of mathematics.</p><div class="overview-sigil"><svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="44" stroke="#d8bd87" stroke-opacity=".55"/><circle cx="50" cy="50" r="32" stroke="#d8bd87" stroke-opacity=".55"/><circle cx="50" cy="50" r="20" stroke="#d8bd87" stroke-opacity=".65"/><path d="M50 0V100M0 50H100" stroke="#d8bd87" stroke-opacity=".42"/><text x="50" y="63" text-anchor="middle" font-family="Georgia" font-size="37" fill="#d8bd87">ζ</text></svg></div></div><div class="story-section"><h3><span>01 /</span>THE READING KEY</h3><p>The outer rings describe broader mathematical settings. The fortress holds different kinds of progress on the original Riemann Hypothesis. Choose a region on the map or in the index to explore it.</p><div class="legend"><div class="legend-item"><i class="legend-dot horizon"></i> The mathematical horizons</div><div class="legend-item"><i class="legend-dot interior"></i> The citadel's four chambers</div><div class="legend-item"><i class="legend-dot sites"></i> Smaller sites discovered when you zoom in</div></div></div><div class="overview-card"><strong>THE CARTOGRAPHER'S WARNING</strong><p>The geography is a teaching metaphor, not a strict hierarchy of implication. Terms like Grand RH and Extended RH vary by author. Dates and sources are given for specific claims.</p></div><div class="story-actions"><button data-navigate="selberg">START EXPLORING ↗</button><button data-action="guide">MAP GUIDE ?</button></div>`;
     return;
@@ -202,7 +210,7 @@ function svgPoint(event) {
   return matrix ? point.matrixTransform(matrix.inverse()) : {x:780,y:490};
 }
 function zoomStep(factor, at) {
-  if (isHallLocation(state.selected) || isCourtyardLocation(state.selected) || isKeepLocation(state.selected)) return;
+  if (isConnectionRoute(state.selected) || isHallLocation(state.selected) || isCourtyardLocation(state.selected) || isKeepLocation(state.selected)) return;
   const current = state.view;
   const anchor = at || {x:current.x+current.w/2,y:current.y+current.h/2};
   const scale = clamp(current.w * factor,155,WIDTH) / current.w;
@@ -239,6 +247,8 @@ function bindEvents() {
     }
   });
   document.addEventListener('click',(event)=>{
+    const filter=event.target.closest('[data-connection-filter]');
+    if (filter) { state.connectionsFilter=filter.dataset.connectionFilter; renderHall(); hallScene.querySelector('[data-connection-filter="'+state.connectionsFilter+'"]').focus(); return; }
     const nav = event.target.closest('[data-navigate]');
     if(nav) { select(nav.getAttribute('data-navigate') || null);return; }
     if(event.target.closest('[data-action="guide"]')) showDialog();
@@ -293,12 +303,12 @@ function bindEvents() {
   window.addEventListener('hashchange', restoreURL);
   window.addEventListener('popstate', restoreURL);
 }
-function goBack() {select(getParent(state.selected) || null);}
+function goBack() {select(connectionFromRoute(state.selected) ? 'connections' : isConnectionRoute(state.selected) ? null : getParent(state.selected) || null);}
 function showDialog() {$('#guide-dialog').showModal();}
 function boot() {
   $('#edition').textContent = EDITION;
   buildNav();createStars();bindEvents();
   const hash = idFromURL();
-  if (hash && getNode(hash)) select(hash,{noURL:true}); else {showView();renderHall();renderStory();updateBreadcrumbs();}
+  if (hash && (getNode(hash) || isConnectionRoute(hash))) select(hash,{noURL:true}); else {showView();renderHall();renderStory();updateBreadcrumbs();}
 }
 boot();
