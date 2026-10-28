@@ -6,30 +6,30 @@
   "updated_date_utc": "2026-10-28",
   "programme": "S002-S010 progressively explorable mathematical world",
   "baseline": {
-    "last_completed_session": "S001",
+    "last_completed_session": "S002",
     "status": "CLOSED",
-    "app_commit_sha": "577c5d1a92187cbd0d8db89a2160317706a3eec7",
-    "application": "Static HTML/CSS/ES-module atlas with eight top-level regions and two geographic drill-down levels"
+    "app_commit_sha": "a23a2d07b2c94a750cc36dd9ef7ca70ec73ef160",
+    "application": "Static atlas with recursive place graph, Great Hall five-chamber floor plan, coordinate teaching exhibit, browser-history navigation"
   },
   "session": {
-    "next": "S002",
+    "next": "S003",
     "status": "READY_UNEXECUTED",
     "execution_authorized": false,
     "canonical_prompt": "authoritative/NEXT_SESSION_PROMPT.md",
-    "predecessor": "S001",
+    "predecessor": "S002",
     "roadmap": "docs/ROADMAP.md",
-    "required_owner_invocation": "Separate explicit request to run S002"
+    "required_owner_invocation": "Separate explicit owner request to run S003"
   },
   "roadmap": [
     {
       "id": "S002",
       "title": "Great Hall recursive vertical slice",
-      "status": "READY_UNEXECUTED"
+      "status": "CLOSED"
     },
     {
       "id": "S003",
       "title": "Critical-line laboratory",
-      "status": "PLANNED"
+      "status": "READY_UNEXECUTED"
     },
     {
       "id": "S004",
@@ -72,6 +72,8 @@
     "styles.css",
     "atlas.js",
     "app.js",
+    "locations.js",
+    "hall.js",
     "vercel.json"
   ],
   "authority_files": [
@@ -89,6 +91,6 @@
     "No implication inferred from map geography",
     "No automatic publication, external outreach, paid services, or proof-of-RH claim"
   ],
-  "next_gate": "S002 map→Great Hall→chamber→exhibit, recursive graph, robust navigation and verified UI/content regression",
-  "deployment_note": "Live site URL confirmed by owner; this roadmap-only change is not an assertion of a newly tested deployment."
+  "next_gate": "S003: at least three sourced Great Hall exhibits with meaningful interaction, status caveats, and no invented computational zeros",
+  "deployment_note": "S002 approved on GitHub Actions PR head a23a2d07 (run 40717477709). Live Vercel deployment of merged main requires separate verification; no claim that it has already deployed."
 }

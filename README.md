@@ -67,3 +67,11 @@ Apache-2.0 (see LICENSE).
 The expandable-world development plan is [docs/ROADMAP.md](docs/ROADMAP.md). Start from [authoritative/START_HERE.md](authoritative/START_HERE.md), follow [AGENTS.md](AGENTS.md) and [docs/SESSION_PROTOCOL.md](docs/SESSION_PROTOCOL.md), and consult [authoritative/STATE.json](authoritative/STATE.json). The **single next ready (unexecuted)** prompt is [authoritative/NEXT_SESSION_PROMPT.md](authoritative/NEXT_SESSION_PROMPT.md). S001's retrospective checkpoint is in [sessions/S001/CLOSEOUT.md](sessions/S001/CLOSEOUT.md).
 
 Installing the roadmap and prompt does not execute S002. Each numbered session requires a separate explicit owner invocation.
+
+## Session 002 · Enter the Great Hall
+
+The map now supports a stable arbitrary-depth location graph (`locations.js`) and browser history. Select **The Great Hall** to enter the architectural floor plan, then a chamber, then the **Critical Strip Coordinate Explorer** from the Critical Line Observatory. The explorer is a **schematic coordinate lesson**, not a zeta calculator or a list of verified zeros. Select **Up** or breadcrumbs to retrace the path, and use browser Back/Forward or a deep link such as `#critical-line-exhibit`.
+
+Run `node tests/graph.mjs` to validate recursive IDs. The S002 GitHub Actions workflow also performs syntax checks and real HTTP Chromium desktop/mobile smoke tests using test-only Playwright. The deployed site remains a no-build static project; no client package installation is required.
+
+S002 implementation evidence is in [sessions/S002/VALIDATION.md](sessions/S002/VALIDATION.md) and [sessions/S002/CLOSEOUT.md](sessions/S002/CLOSEOUT.md). The next separately authorised milestone is **S003**; the canonical prepared prompt remains [authoritative/NEXT_SESSION_PROMPT.md](authoritative/NEXT_SESSION_PROMPT.md).

@@ -1,28 +1,23 @@
 # START HERE — The Zeta Citadel
 
-**Current status (28 October 2026):** S001 CLOSED; S002 READY / UNEXECUTED; S003–S010 PLANNED. The only prepared invocation is `authoritative/NEXT_SESSION_PROMPT.md`. Installing it does **not** execute it.
+**Date:** 28 October 2026. **S002:** CLOSED following accepted regression and ordinary merge workflow; **S003:** READY / UNEXECUTED; **S004–S010:** PLANNED. Installing the next prompt does not execute it.
 
-## Repository and deployed product
-- GitHub: https://github.com/jfairfaxball-348/The-Zeta-Citadel
-- User-confirmed live Vercel site: https://the-zeta-citadel.vercel.app/
-- S001 application commit: `577c5d1a92187cbd0d8db89a2160317706a3eec7`. Always fetch current remote `main` before proceeding; do not treat this historical content commit as an assertion that HEAD has not moved.
-- S001 product: dependency-free static site, SVG global map, eight labelled mathematical regions, two geographic drill-down levels, navigation/zoom, editorial source data in `atlas.js`.
+## Repository, product, and evidence
+- Repo: https://github.com/jfairfaxball-348/The-Zeta-Citadel
+- Owner-confirmed website: https://the-zeta-citadel.vercel.app/
+- S002 PR: https://github.com/jfairfaxball-348/The-Zeta-Citadel/pull/2
+- Tested implementation checkpoint: `a23a2d07b2c94a750cc36dd9ef7ca70ec73ef160`; CI PR run: https://github.com/jfairfaxball-348/The-Zeta-Citadel/actions/runs/40717477709 . Always pin **live remote main** rather than assuming historical SHAs remain HEAD.
+- S002 delivered `locations.js` recursive parent/children graph, `hall.js` Great Hall floor plan and coordinate explorer, improved history and breadcrumbs, and automated headless HTTP desktop/mobile regression. S001 world map, eight original regions and hashes are retained.
+- Validation, limitations and CI evidence: `sessions/S002/VALIDATION.md`, `sessions/S002/CLOSEOUT.md`.
 
 ## Required read order
-1. Live remote `main` SHA and repository status; reconcile any intervening changes.
-2. `authoritative/STATE.json`.
-3. `AGENTS.md`.
-4. This document.
-5. `docs/SESSION_PROTOCOL.md`.
-6. `docs/ROADMAP.md`.
-7. `sessions/S001/CLOSEOUT.md` and relevant application files.
-8. `authoritative/NEXT_SESSION_PROMPT.md`, the single S002 instruction.
+Live remote `main` and branch/PR reconciliation → `authoritative/STATE.json` → `AGENTS.md` → this document → `docs/SESSION_PROTOCOL.md` → `docs/ROADMAP.md` → `sessions/S002/{CLOSEOUT,VALIDATION}.md` → relevant code → `authoritative/NEXT_SESSION_PROMPT.md`.
 
-## Immediate next objective
-S002 — first genuine recursive vertical slice, `world → Great Hall → chamber → exhibit`, plus an architectural floor plan, interactive critical-line learning exhibit, backwards-compatible links and navigation. Preserve the S001 design and all eight outer regions. Scope, gates, exclusions and closeout rules are in the authoritative prompt.
+## Sole next objective
+S003 — deepen the Great Hall into an accurate critical-line laboratory with at least three working, differentiated educational exhibits, careful zero-data provenance and preprint status distinctions. Do not develop the other districts, publish results or claim RH is solved. Detailed tests and scope in the canonical prompt.
 
-## Owner invocation boundary
-This documentation/roadmap installation is **not** an instruction to run S002. S002 begins only on a fresh owner request such as “run next session.” No S003 work may be performed during S002.
+## Invocation boundary
+A fresh owner request ("run next session") is mandatory to start S003. The existence of an installed S003 prompt, this closeout, or an automatic deploy never authorises another session.
 
-## End-of-session checklist
-Record actual tests, stop on failed gates, make a reviewable PR, merge normally (not forced), independently verify remote `main`, close the invoked session, install but do not execute the single next prompt. Keep `STATE.json`, this document and prompt consistent. Do not invent SHAs or test outcomes.
+## Quality reminder
+Always check the current remote head; preserve prior deep links, static Vercel compatibility, no false computational/proof claims, accessible keyboard/touch/navigation, and exact observed test evidence. Never invent merged commit SHAs before observing them.
