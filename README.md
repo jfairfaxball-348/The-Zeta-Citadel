@@ -36,6 +36,7 @@ No npm install or build is required.
 | `styles.css` | Cartographic visual design, transitions and responsive layout. |
 | `atlas.js` | All region definitions, mathematical copy, milestones, sources and subsite data. |
 | `app.js` | Viewport animation, shared Hall/Courtyard interiors, browser-history navigation and story rendering. |
+| `discovery.js` | S009 derived title/ID/author/subject search, original source/status labels, two authored learning routes and local-only preference presentation. |
 | `locations.js` | Validated arbitrary-depth typed place graph, stable URLs, status and sources. |
 | `hall.js` / `laboratory.js` | Great Hall floor plan and six labelled, interactive educational exhibits. |
 | `courtyard.js` | S004 Courtyard floor plan, exponent comparison and sparse-versus-zero exhibit. |
@@ -114,4 +115,14 @@ Open **⌁ BRIDGES** at the map top or the side navigation, or visit `#connectio
 
 The two proved **implications between mathematical statements** have conjectural *premises*: (i) universal Dirichlet GRH entails ordinary RH, since the principal character modulo 1 gives ζ; (ii) the defined universal Dedekind-zeta ERH entails RH, since ζ_Q=ζ. **Neither premise is proved.** Conditional connections explain what RH would force in zero-free and zero-density views. The other connections are historical or analogous and carry no implied proof arrows. All are reviewed as mathematical exposition, not independent research discoveries or new zero calculations.
 
-[S008 validation](sessions/S008/VALIDATION.md) records the source audit, test cases, CI evidence and limitations. Only **S009 — discovery/search and learning journeys** is installed for a future, separate owner invocation.
+[S008 validation](sessions/S008/VALIDATION.md) records the source audit, test cases, CI evidence and limitations. S009 search and learning journeys have since been executed. Only **S010 — first-release consolidation and research audit** is now installed, READY / UNEXECUTED, requiring a separate future owner invocation.
+
+## Search, save and learn (S009)
+
+Choose **⌕ SEARCH** at the top of the map, **SEARCH & LEARN** in the guide, or open the stable `#discover` deep link. The index is derived automatically from the canonical locations and S008 audited bridges rather than copying their mathematics into a second unsynchronised table. Search for a theorem, mathematician or source author, subject term, original place ID (e.g. `hall-critical`) or complete bridge ID (e.g. `connection--dirichlet-grh-rh`). Matches are ranked by exact title/ID then relevant metadata, and every card retains its recorded editorial status and cited-source count. Search stays in the browser.
+
+Two optional guided reading paths are directly linkable: **beginner** `#journey--beginner` (six stops: the Hall, critical line, types of zeros, finite verification, density and a conceptual connection) and **advanced** `#journey--advanced` (seven stops: Dirichlet and Dedekind examples, Euler-factor analogy, published density estimates and a conditional conclusion). Each stop opens an existing sourced room or bridge in the shared router, with a path back to the trail. **Visited** means viewed, not mathematically verified.
+
+Every room/bridge also offers **COPY DEEP LINK** and **SAVE PLACE**. Saved places and journey checkmarks are initially **session-only**. To retain them across page reloads on the current device, explicitly check **Remember my saved places and journey progress on this device** in Discovery; this uses `localStorage` only, with a visible session-only fallback if storage is unavailable. Disable retention from the same control. There is **no account, cookie, remote search API or tracking**, and neither browsing nor a schematic map implies proof of RH. Old eight region IDs and prior hashes still work.
+
+[S009 detailed validation](sessions/S009/VALIDATION.md) documents the exact successful GitHub-hosted real HTTP Chromium desktop/touch-mobile run at implementation SHA `cff8bd9086d1a43ef9510d13b1962aa6c5182c7c` and remaining audit gaps. [S009 closeout](sessions/S009/CLOSEOUT.md) records the downstream PR/production verification boundary. S010 is the separate **source, accessibility, performance and release consolidation** stage — it is prepared, not run.
