@@ -59,7 +59,7 @@ try {
  await page.locator('#map-up').click();assert.equal(new URL(page.url()).hash,'#connections');
  await page.goto(base+'/#journey--beginner');assert.equal(await page.locator('.journey-steps > li').count(),6);
  await page.locator('#map-home').click();assert.equal(new URL(page.url()).hash,'');
- await page.goto(base+'/#not-a-real-id');assert.equal(new URL(page.url()).hash,'');
+ await page.goto(base+'/#not-a-real-id');await page.waitForFunction(()=>location.hash==='');assert.equal(new URL(page.url()).hash,'');
  assert.ok(await page.locator('#story-content').innerText().then(t=>t.includes('mystery')));
  assert.ok(!(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2)));
  const mobile=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});check(mobile);
