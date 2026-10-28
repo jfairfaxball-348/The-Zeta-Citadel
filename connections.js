@@ -8,11 +8,12 @@ export const CONNECTION_TYPES = Object.freeze({
   conceptual_analogy: {label:'Conceptual analogy', hint:'Related ideas or methods, without mathematical implication.', symbol:'↔'}
 });
 
-const DLMF_ZETA = {name:'NIST DLMF `25.10 — zeros and the Riemann hypothesis',url:'https://dlmf.nist.gov/25.10'};
-const DLMF_DIRICHLET = {name:'NIST DLMF `25.15 — Dirichlet L-functions',url:'https://dlmf.nist.gov/25.15'};
+const DLMF_ZETA = {name:'NIST DLMF §25.10 — zeros and the Riemann hypothesis',url:'https://dlmf.nist.gov/25.10'};
+const DLMF_DIRICHLET = {name:'NIST DLMF §25.15 — Dirichlet L-functions',url:'https://dlmf.nist.gov/25.15'};
 const HARVARD_NUMBER_FIELDS = {name:'Harvard algebraic number theory notes — Dedekind zeta, Definition 2.6.6',url:'https://people.math.harvard.edu/~achenjang/assets/pdf/Fall_2020_Course_Notes.pdf'};
 const GUTH_MAYNARD = {name:'Guth and Maynard, Annals of Mathematics 203 (2026), 623–675',url:'https://annals.math.princeton.edu/2026/203-2/p06'};
-const CONREY = {name:'J. B. Conrey, More than two fifths of the zeros, J. reine angew. Math. 399 (1989), `1',url:'https://maths.dur.ac.uk/users/herbert.gangl/morethan2_5.PDF'};
+const CONREY = {name:'J. B. Conrey, More than two fifths of the zeros, J. reine angew. Math. 399 (1989), §1',url:'https://maths.dur.ac.uk/users/herbert.gangl/morethan2_5.PDF'};
+const HUGHES = {name:'C. Hughes, LMS Summer School lectures (2017), Lecture 2 §2.1 history',url:'https://personal.maths.manchester.ac.uk/jm/wiki/uploads/LMS/Hughes-lectures.pdf'};
 
 export const CONNECTIONS = Object.freeze([
   {
@@ -53,7 +54,7 @@ export const CONNECTIONS = Object.freeze([
     claim:'Hardy’s existence theorem preceded Levinson’s theorem that at least one-third of the zeros lie on the critical line.',
     scope:'Historical mathematical progression, as reviewed in Conrey’s 1989 introduction. This arrow indicates chronology and problem development, not deduction of Levinson from Hardy.',
     status:'Peer-reviewed historical account', reviewDate:'2026-10-28',
-    sources:[CONREY]
+    sources:[CONREY,HUGHES]
   },
   {
     id:'levinson-mollifier-method', from:'hall-levinson', to:'hall-mollifier', type:'historical_influence', directed:true,
