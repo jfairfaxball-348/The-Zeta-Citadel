@@ -1,0 +1,48 @@
+import assert from 'node:assert/strict';
+import {spawn} from 'node:child_process';
+import {chromium} from 'playwright';
+const port=8765, base='http://127.0.0.1:'+port;
+const server=spawn('python3',['-m','http.server',String(port),'--bind','127.0.0.1'],{stdio:'ignore'});
+let browser;const errors=[];
+const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+async function ready(){for(let i=0;i<60;i++){try{if((await fetch(base)).ok)return;}catch{}await pause(200);}throw Error('HTTP server unavailable');}
+try {
+ await ready();browser=await chromium.launch({headless:true});
+ const page=await browser.newPage({viewport:{width:1440,height:900}});
+ page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(base);
+ await page.locator('#region-nav button').first().waitFor();
+ assert.equal(await page.locator('#region-nav button').count(),8);
+ await page.locator('#region-nav [data-navigate="hall"]').click();
+ await page.locator('.hall-plan').waitFor();
+ assert.equal(new URL(page.url()).hash,'#hall');
+ assert.equal(await page.locator('.hall-room').count(),5);
+ await page.locator('.hall-plan [data-navigate="hall-critical"]').click();
+ assert.equal(new URL(page.url()).hash,'#hall-critical');
+ await page.locator('#story-content [data-navigate="critical-line-exhibit"]').click();
+ await page.locator('#critical-sigma').waitFor();
+ assert.match(await page.locator('#critical-coordinate').innerText(),/on the critical line/);
+ await page.locator('#critical-sigma').focus();await page.keyboard.press('ArrowLeft');
+ assert.match(await page.locator('#critical-coordinate').innerText(),/off the critical line/);
+ assert.match(await page.locator('.critical-nonzero').innerText(),/Not a verified zero/);
+ await page.goBack();assert.equal(new URL(page.url()).hash,'#hall-critical');
+ await page.goForward();assert.equal(new URL(page.url()).hash,'#critical-line-exhibit');
+ await page.reload();await page.locator('#critical-sigma').waitFor();
+ await page.locator('#map-up').click();assert.equal(new URL(page.url()).hash,'#hall-critical');
+ await page.locator('#map-home').click();assert.equal(new URL(page.url()).hash,'');
+ await page.goto(base+'/#hall-hardy');await page.locator('.hall-plan').waitFor();
+ await page.goto(base+'/#density-guth');assert.match(await page.locator('#story-content h2').innerText(),/Guth/);
+ await page.goto(base+'/#%ZZ');assert.match(await page.locator('.story-head h2').innerText(),/The mystery/);
+ const mobile=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+ mobile.on('pageerror',e=>errors.push(e.message));
+ await mobile.goto(base+'/#hall');
+ await mobile.locator('.hall-plan [data-navigate="hall-critical"]').tap();
+ await mobile.locator('#story-content [data-navigate="critical-line-exhibit"]').tap();
+ await mobile.locator('#critical-sigma').waitFor();
+ assert.ok(!(await mobile.evaluate(()=>document.documentElement.scrollWidth > innerWidth + 2)),'horizontal mobile overflow');
+ await mobile.emulateMedia({reducedMotion:'reduce'});
+ await mobile.locator('#map-up').tap();
+ assert.equal(new URL(mobile.url()).hash,'#hall-critical');
+ assert.deepEqual(errors,[],'uncaught browser errors');
+ console.log('PASS desktop & touch mobile, depth, Back/Forward, reload, invalid route, legacy hashes, keyboard, reduced motion, console');
+} finally {await browser?.close();server.kill();}

@@ -167,3 +167,44 @@ button:focus-visible, a:focus-visible, [role="button"]:focus-visible { outline: 
 @media (max-width: 1020px) { .atlas-layout { grid-template-columns: 224px minmax(0,1fr); }.story-panel { grid-column: 2; border-top: 1px solid var(--line); border-left: 0; max-height: unset; overflow: visible; }.story-head { padding: 28px 32px; }.story-section { padding: 23px 32px 0; }.story-actions { padding: 28px 32px; }.map-stage { min-height: 700px; }.guide { grid-row: span 2; }.footer { flex-wrap: wrap; height: auto; min-height: 45px; padding: 10px 22px; } }
 @media (max-width: 660px) { .site-header { height: 67px; flex-basis: 67px; padding: 0 15px; }.brand-mark { width: 37px; height: 37px; font-size: 27px; }.brand-copy strong { font-size: 11px; letter-spacing: .17em; }.brand-copy span { font-size: 8px; letter-spacing: .07em; }.header-meta { display: none; }.mobile-guide { display: block; border: 1px solid #8a785a; color: #e6d2ac; background: transparent; height: 36px; width: 38px; font-size: 20px; }.atlas-layout { display: flex; flex-direction: column; }.guide { display: none; border-right: 0; order: 0; }.guide.open { display: flex; }.guide-intro { padding: 23px; }.guide-intro h1 { font-size: 42px; margin: 14px 0; }.guide-bottom { display: none; }.guide-tour { margin-bottom: 20px; }.map-stage { min-height: 465px; order: 1; }.map-topbar { height: 48px; flex-basis: 48px; padding: 0 12px; }.location-path { gap: 6px; }.path-prefix { display: none; }#breadcrumbs { font-size: 9px; }.map-viewport { min-height: 360px; }.map-bottom { padding: 0 12px; height: 35px; flex-basis: 35px; font-size: 8px; }.map-controls { right: 12px; bottom: 47px; }.map-controls button { width: 35px; height: 35px; }.story-panel { order: 2; }.story-head { padding: 28px 23px; }.story-head h2 { font-size: 45px; }.story-section { padding: 25px 23px 0; }.story-actions { padding: 27px 23px; }.footer { font-size: 8px; line-height: 1.6; }.footer span:last-child { display: none; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }
+
+/* S002: architectural Hall interior and proof-honest teaching diagram. */
+#citadel-map[hidden], #hall-scene[hidden] { display: none !important; }
+.hall-scene { position:absolute; inset:0; overflow-y:auto; background:radial-gradient(ellipse at 50% 15%, #28404a, #0c1d2a 70%); z-index:1; scrollbar-color:#667c7b #10202c; }
+.hall-plan, .critical-exhibit { padding: clamp(18px,3vw,34px); min-height:100%; color:#e9dabc; }
+.hall-plan-head { text-align:center; max-width:800px; margin:0 auto 18px; }
+.hall-plan-head > span { color:#e2c38b; font:10px var(--mono); letter-spacing:.17em; }
+.hall-plan-head h2 { font:500 clamp(33px,4vw,56px)/1 var(--serif); letter-spacing:.08em; margin:12px 0 8px; }
+.hall-plan-head p { color:#b3c0b9; font:12px/1.6 var(--body); max-width:600px; margin:0 auto; }
+.hall-plan-frame { border:9px double rgba(202,171,114,.55); border-radius:42% 42% 5px 5px / 10% 10% 5px 5px; padding:24px; position:relative; background:repeating-linear-gradient(0deg,rgba(226,200,143,.035) 0px,rgba(226,200,143,.035) 1px,transparent 1px,transparent 34px),repeating-linear-gradient(90deg,rgba(226,200,143,.035) 0px,rgba(226,200,143,.035) 1px,transparent 1px,transparent 34px),#102733; box-shadow:inset 0 0 75px #071924,0 12px 40px #06131d; max-width:880px; margin:auto; }
+.hall-plan-grid { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); grid-template-rows:minmax(118px,auto) 82px minmax(130px,auto); gap:10px; position:relative; }
+.hall-room { color:#f0e2c5; text-align:center; min-width:0; border:2px solid #8e7755; background:radial-gradient(ellipse at top,rgba(223,191,132,.18),rgba(17,39,49,.95)); display:flex; flex-direction:column; justify-content:center; align-items:center; gap:5px; padding:12px 7px; transition:background .2s,border-color .2s; }
+.hall-room:hover, .hall-room:focus-visible, .hall-room-active { background:#34505a; border-color:#e7c98e; }
+.hall-room-hardy { grid-area:1 / 1 / 2 / 3; }.hall-room-levinson { grid-area:1 / 3 / 2 / 5; }.hall-room-mollifier { grid-area:1 / 5 / 2 / 7; }.hall-room-research { grid-area:3 / 2 / 4 / 4; }.hall-room-critical { grid-area:3 / 4 / 4 / 6; border-color:#e8c88e; }
+.hall-room-glyph { color:#e7d094; font:30px var(--serif); line-height:1; }
+.hall-room strong { font:600 clamp(16px,1.8vw,23px)/1.1 var(--serif); }
+.hall-room small { font:9px/1.4 var(--body); color:#bfc8bd; }
+.hall-room-entry { color:#e9cc92; letter-spacing:.08em; font:9px var(--mono); margin-top:4px; }
+.hall-plan-nave { grid-area:2 / 1 / 3 / 7; border-top:1px solid #9a8963; border-bottom:1px solid #9a8963; background:repeating-linear-gradient(90deg,transparent 0px,transparent 56px,rgba(223,197,141,.12) 57px,rgba(223,197,141,.12) 65px,transparent 66px,transparent 72px); color:#cab27e; font:11px var(--mono); letter-spacing:.15em; display:flex; gap:24px; align-items:center; justify-content:center; }
+.hall-plan-nave span:first-child,.hall-plan-nave span:last-child { font:25px var(--serif); }
+.hall-plan-foot { display:flex; gap:14px; justify-content:space-between; max-width:880px; margin:12px auto 0; color:#a4b3ae; font:9px var(--mono); }
+.hall-room-active { box-shadow:inset 0 0 22px rgba(232,201,142,.17); }
+.critical-exhibit-body { max-width:980px; margin:22px auto; display:grid; grid-template-columns:minmax(0,1.4fr) minmax(230px,1fr); gap:22px; align-items:start; }
+#critical-graph { display:block; width:100%; background:#0c2331; border:1px solid rgba(227,194,137,.42); border-radius:9px; }
+.critical-plot-fill { fill:rgba(37,77,91,.5); stroke:#8a987d; stroke-width:1.3; }
+.critical-grid { stroke:rgba(190,202,188,.24); stroke-width:1; fill:none; }
+.critical-line { stroke:#f3d496; stroke-width:4; stroke-dasharray:11 5; }
+.critical-line-label { fill:#f1d397; font:10px var(--mono); }
+.critical-axis-labels { fill:#d6d6bd; font:12px var(--mono); }
+.critical-point-ring { fill:rgba(243,217,161,.23); stroke:#f5e0ae; stroke-width:2; }
+.critical-point { fill:#fff0cb; }
+.critical-controls { border:1px solid rgba(227,194,137,.3); padding:20px; background:#122b37; }
+.critical-controls label { font:11px var(--mono); display:flex; justify-content:space-between; gap:10px; color:#e8d3a5; margin:7px 0; }
+.critical-controls output { color:#fff1d4; }
+.critical-controls input { width:100%; min-height:32px; accent-color:#ddc397; margin-bottom:18px; cursor:pointer; }
+.critical-coordinate { font:12px/1.6 var(--mono); color:#e7d49f; }
+.critical-nonzero { color:#f2d7a6; font:12px/1.7 var(--body); border-left:3px solid #d5a677; padding-left:12px; }
+.critical-disclaimer { color:#aebfbc; font:12px/1.7 var(--body); }
+.map-controls button:disabled { opacity:.28; cursor:not-allowed; }
+@media(max-width:1100px) { .critical-exhibit-body { grid-template-columns:1fr; } }
+@media(max-width:660px) { .hall-plan-frame { border-width:5px; padding:12px; border-radius:24px 24px 3px 3px; }.hall-plan-grid { grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:none; gap:7px; }.hall-room { grid-area:auto !important; min-height:128px; }.hall-room-critical { grid-column:1 / -1 !important; }.hall-plan-nave { grid-area:auto !important; grid-column:1 / -1 !important; grid-row:auto !important; height:36px; font-size:9px; }.hall-plan-foot { font-size:8px; flex-wrap:wrap; }.hall-room strong {font-size:20px;} .hall-room small {font-size:10px;} .hall-scene {overscroll-behavior:contain;} }
