@@ -61,7 +61,7 @@ export function catalog() {
       summary:[node.teaser,node.concept,node.progress,node.stakes].filter(Boolean).join(' ')
     })),
     ...CONNECTIONS.map(edge=>({
-      id:edge.id,route:connectionRoute(edge.id),type:'bridge · '+CONNECTION_TYPES[edge.type].label,
+      id:connectionRoute(edge.id),route:connectionRoute(edge.id),type:'bridge · '+CONNECTION_TYPES[edge.type].label,
       name:edge.title,subtitle:edge.claim,status:edge.status,
       sourceCount:edge.sources.length,
       sources:edge.sources.map(s=>s.name).join(' '),
