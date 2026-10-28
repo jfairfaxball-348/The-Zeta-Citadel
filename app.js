@@ -3,6 +3,7 @@ import { getLocation as getNode, getAncestors, getRootRegion, isHallLocation } f
 import { renderHallScene, updateCriticalExplorer, updateLab } from './hall.js';
 import { renderCourtyardScene, updateCourtyard, isCourtyardLocation } from './courtyard.js';
 import { renderKeepScene, updateKeep, isKeepLocation } from './keep.js';
+import { renderDungeonScene, updateDungeon, isDungeonLocation } from './dungeon.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const WIDTH = 1560;
@@ -54,7 +55,7 @@ function createStars() {
 function showView() {
   const v = state.view;
   svg.setAttribute('viewBox', `${v.x.toFixed(3)} ${v.y.toFixed(3)} ${v.w.toFixed(3)} ${v.h.toFixed(3)}`);
-  markers.style.display = state.selected && !isHallLocation(state.selected) && !isCourtyardLocation(state.selected) && !isKeepLocation(state.selected) && v.w < 680 && getRegion(getRootRegion(state.selected))?.subnodes?.length ? '' : 'none';
+  markers.style.display = state.selected && !isHallLocation(state.selected) && !isCourtyardLocation(state.selected) && !isKeepLocation(state.selected) && !isDungeonLocation(state.selected) && v.w < 680 && getRegion(getRootRegion(state.selected))?.subnodes?.length ? '' : 'none';
 }
 function bounded(v) {
   const w = clamp(v.w, 155, WIDTH);
@@ -132,14 +133,16 @@ function renderHall() {
   const hall = isHallLocation(state.selected);
   const courtyard = isCourtyardLocation(state.selected);
   const keep = isKeepLocation(state.selected);
-  const interior = hall || courtyard || keep;
+  const dungeon = isDungeonLocation(state.selected);
+  const interior = hall || courtyard || keep || dungeon;
   svg.hidden = interior;
   svg.setAttribute('aria-hidden', String(interior));
   hallScene.hidden = !interior;
-  hallScene.innerHTML = hall ? renderHallScene(state.selected) : courtyard ? renderCourtyardScene(state.selected) : keep ? renderKeepScene(state.selected) : '';
+  hallScene.innerHTML = hall ? renderHallScene(state.selected) : courtyard ? renderCourtyardScene(state.selected) : keep ? renderKeepScene(state.selected) : dungeon ? renderDungeonScene(state.selected) : '';
   if (hall) updateLab(hallScene);
   if (courtyard) updateCourtyard(hallScene);
   if (keep) updateKeep(hallScene);
+  if (dungeon) updateDungeon(hallScene);
   $('#map-up').disabled = !state.selected;
   $('#zoom-in').disabled = interior;
   $('#zoom-out').disabled = interior;
@@ -147,7 +150,7 @@ function renderHall() {
 }
 function renderMarkers() {
   markers.replaceChildren();
-  if (!state.selected || isHallLocation(state.selected) || isCourtyardLocation(state.selected) || isKeepLocation(state.selected)) {showView();return;}
+  if (!state.selected || isHallLocation(state.selected) || isCourtyardLocation(state.selected) || isKeepLocation(state.selected) || isDungeonLocation(state.selected)) {showView();return;}
   const parent = getRegion(getRootRegion(state.selected));
   if (!parent?.subnodes?.length) {showView();return;}
   const fragment = document.createDocumentFragment();
@@ -215,8 +218,17 @@ function bindEvents() {
     if (event.target.matches('#taxonomy-case, #hardy-waves, #milestone-select, #toy-a, #paper-select')) updateLab(hallScene);
     if (event.target.matches('#density-sigma, #density-logt, #density-mode')) updateCourtyard(hallScene);
     if (event.target.matches('#keep-logt')) updateKeep(hallScene);
+    if (event.target.matches('#dungeon-logt, #dungeon-method')) {
+      if (event.target.matches('#dungeon-logt')) {const p=hallScene.querySelector('#dungeon-preset');if(p)p.value='';}
+      updateDungeon(hallScene);
+    }
   });
   document.addEventListener('change',event=>{
+    if(event.target.matches('#dungeon-preset')) {
+      const slider=hallScene.querySelector('#dungeon-logt');
+      if(slider && event.target.value){slider.value=String(Math.log10(Number(event.target.value)));updateDungeon(hallScene);}
+    }
+    if(event.target.matches('#dungeon-method')) updateDungeon(hallScene);
     if(event.target.matches('#keep-preset')) {
       const slider=hallScene.querySelector('#keep-logt');
       if(slider){slider.value=event.target.value;updateKeep(hallScene);}

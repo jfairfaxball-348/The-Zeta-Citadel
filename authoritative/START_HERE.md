@@ -1,24 +1,30 @@
 # START HERE — The Zeta Citadel
 
-**Date:** 28 October 2026. **S002–S005:** CLOSED on evidenced implementation (S005 merge checks are independently reconciled after the closeout commit). **S006:** READY / UNEXECUTED; **S007–S010:** PLANNED. A future prompt is not execution authorisation.
+**Date:** 28 October 2026. **S002–S006:** CLOSED on evidenced implementations, subject to independent final S006 PR/main merge and production verification noted below. **S007:** READY / UNEXECUTED; **S008–S010:** PLANNED. Installing the successor prompt never authorises its execution.
 
-## Verified source-of-truth anchors
+## Current verified source-of-truth anchors
+
 - Repository: https://github.com/jfairfaxball-348/The-Zeta-Citadel
-- Production: https://the-zeta-citadel.vercel.app/
-- S005 entry main: S004 ordinary two-parent merge `f5b77d32f1e856351d248820064118d6844bb113`, parents `055f56741b6de0d7c53281a6bc5012dceb7cf69b` and `111fc56871bf8bb227e75ea4e10fe2e026b36fd1`; main CI S002/S003/S004 successful on entry main.
-- S005: [PR #5](https://github.com/jfairfaxball-348/The-Zeta-Citadel/pull/5), pre-governance implementation commit `0b9c6651e3c37a9d6c2e0cb147ef94a7a36ee19e`, [green S005 branch](https://github.com/jfairfaxball-348/The-Zeta-Citadel/actions/runs/40725770263), [green S005 PR](https://github.com/jfairfaxball-348/The-Zeta-Citadel/actions/runs/40725822208), [green S002 PR](https://github.com/jfairfaxball-348/The-Zeta-Citadel/actions/runs/40725821077), [green S003 PR](https://github.com/jfairfaxball-348/The-Zeta-Citadel/actions/runs/40725821668), [green S004 PR](https://github.com/jfairfaxball-348/The-Zeta-Citadel/actions/runs/40725821300). Those results do not pre-approve later governance commits.
-- Vercel S005 same-commit preview READY: `dpl_CG51yxMSZVf2MdzPPCTs6hqquUxm` (preview, **not production**). Entry-main S004 production READY: `dpl_3WH5kxHYUiB4tjiXzC3wFnDyvxj2`. Recheck post-merge production separately.
-- The Keep now preserves `#keep-boundary` and adds typed `#keep-classical`, `#keep-vk`, `#keep-geometry-exhibit`, `#keep-comparison-exhibit`, `#keep-vk-exhibit`. The old eight top-level IDs, all Hall and Courtyard links are unchanged. One router and one interior canvas serve all districts.
+- Public site: https://the-zeta-citadel.vercel.app/
+- S006 pinned entry: S005 ordinary two-parent main merge `747272f66b7c646d1ca70aee138d65dcd8e47bf0`, tree `79e4e19820d333ee5d4f63bfbc6d5dfd1c4d7d4b`, parents `f5b77d32f1e856351d248820064118d6844bb113` and `586f6f63951e4da9a7250f184086364afd834c93`.
+- Merged S005 main CI [S002 40726386914](https://github.com/jfairfaxball-348/The-Zeta-Citadel/actions/runs/40726386914), [S003 40726386705](https://github.com/jfairfaxball-348/The-Zeta-Citadel/actions/runs/40726386705), [S004 40726386902](https://github.com/jfairfaxball-348/The-Zeta-Citadel/actions/runs/40726386902), [S005 40726386963](https://github.com/jfairfaxball-348/The-Zeta-Citadel/actions/runs/40726386963) all completed success.
+- S006 [PR #6](https://github.com/jfairfaxball-348/The-Zeta-Citadel/pull/6), dedicated `session/S006-dungeons-certificates` branch. Tested initial corrected implementation `f6764c082cdf0492f52bdca236f97ec3226f4cff`: all S002–S006 same-head PR workflows passed. Later mathematical source/copy and precise rounded ordinate audit committed on branch; final PR/head/main checks must be verified separately, not presumed from earlier tests.
+- S005 production `dpl_BMPpszmqoFUCj7B15E7t4G1QnnH6`, state READY, target production, commit `747272f6...`. S006 earlier branch preview `dpl_YTUoiQjWRy49XdWS8rNNXWhhESoT` READY target preview. Do not confuse branch preview with merged production.
 
-## Mathematical provenance
-- NIST [DLMF §25.10](https://dlmf.nist.gov/25.10): no zeros for Re(s)>1 and the defined part of Re(s)=1, negative-even trivial zeros and simple pole at 1.
-- Mossinghoff–Trudgian–Yang, [*Research in Number Theory* 10:11 (2024)](https://link.springer.com/article/10.1007/s40993-023-00498-y): two explicit unconditional zero-free regions, `5.558691 ln|t|` for |t|≥2 and `55.241 (ln|t|)^(2/3)(ln ln|t|)^(1/3)` for |t|≥3. Exhibit slider uses the intersection |t|≥10 and computes boundary values **not** zeros. Neither is advertised as a 2026 record or a proof of RH.
-- The [S005 validation record](../sessions/S005/VALIDATION.md) distinguishes graphical illustration from theorem assertions, along with CI, navigation, physical-device limits and deployment evidence.
+## What S006 provides
 
-## Read order
-First pin live remote main, compare PR merge and production status → `authoritative/STATE.json` → `AGENTS.md` → this file → `docs/SESSION_PROTOCOL.md` → `docs/ROADMAP.md` → `sessions/S005/{PLAN,VALIDATION,CLOSEOUT}.md` → relevant application/tests → `authoritative/NEXT_SESSION_PROMPT.md`.
+The existing public hashes `#dungeon` and `#dungeon-cert` remain valid (singular `dungeon` is the true S001 ID). The Dungeons now has source-backed nested sites `#dungeon-counting`, `#dungeon-methods` and three exhibits `#dungeon-height-exhibit`, `#dungeon-count-exhibit`, `#dungeon-certification-exhibit`. All use the original shared scene, location graph, browser-history navigation, Up/Home, keyboard and touch controls. No new runtime framework or credentials.
 
-## One next task — S006
-The Dungeons: explain rigorous finite-height verification, certified computation, source-backed height and count metrics, and the exact logical gap to an all-height RH claim. No certification claims without exact primary data. See the one committed canonical prompt.
+The published [Platt–Trudgian 2021 theorem](https://doi.org/10.1112/blms.12460) establishes all nontrivial zeros with `0<Im(ρ)≤3×10¹²` simple and on the critical line; `3×10¹²` is an imaginary **height**, not number of zeros. [DLMF §25.10](https://dlmf.nist.gov/25.10) gives zero counting and historical context. The interactive [Riemann–von Mangoldt](https://mathworld.wolfram.com/Riemann-vonMangoldtFormula.html) `M(T)` is only an asymptotic **approximation**, never exact `N(T)`; three truncated ordinates are taken from [Odlyzko’s primary tables](https://www-users.cse.umn.edu/~odlyzko/zeta_tables/zeros2), not independently certified by this app. Finite verification cannot prove RH for unbounded height. S006 methods distinguish candidate roots, interval enclosures and completeness.
 
-**S006 is READY / UNEXECUTED.** A separate new owner instruction is required. No execution of S006 or later stages as part of S005.
+Evidence, regression, caveats and any initial failure/fix are in [S006 validation](../sessions/S006/VALIDATION.md) and [closeout](../sessions/S006/CLOSEOUT.md). No new theorem or RH proof is claimed.
+
+## Canonical read order
+
+Pin live remote main and inspect the S006 PR/merge and deployment → `authoritative/STATE.json` → `AGENTS.md` → this file → `docs/SESSION_PROTOCOL.md` → `docs/ROADMAP.md` → `sessions/S006/{PLAN,VALIDATION,CLOSEOUT}.md` → `atlas.js`, `locations.js`, `app.js`, `dungeon.js`, tests/CI → `authoritative/NEXT_SESSION_PROMPT.md`.
+
+## One next task
+
+**S007 — Outer Territories:** source-audited, navigable Selberg Class, automorphic Grand RH, Dirichlet GRH and explicitly defined ERH. Geography is an explanatory analogy, not a universal hierarchy of conjectures; all previous URLs and lessons must survive.
+
+**S007 is READY / UNEXECUTED**, and must await a fresh owner instruction. No S008 or later work and no automatic successor execution.

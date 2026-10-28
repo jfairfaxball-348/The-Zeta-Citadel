@@ -52,3 +52,27 @@ assert.ok(zeroFreeBoundsAtLog10(4000).vk<zeroFreeBoundsAtLog10(4000).classical);
 assert.throws(()=>zeroFreeBoundsAtLog10(0.5),RangeError);
 assert.throws(()=>zeroFreeBoundsAtLog10(5001),RangeError);
 console.log('PASS S005 Keep location graph, domains and exact published-boundary arithmetic');
+
+
+// S006: identity-preserving Dungeons graph and mathematically distinct units.
+import {VERIFIED_HEIGHT, zeroCountMainTerm, approximateHeightComparison} from '../dungeon.js';
+assert.equal(VERIFIED_HEIGHT,3e12);
+assert.deepEqual(getAncestors('dungeon-cert'),['dungeon','dungeon-cert']);
+assert.deepEqual(getAncestors('dungeon-height-exhibit'),['dungeon','dungeon-cert','dungeon-height-exhibit']);
+assert.deepEqual(getAncestors('dungeon-count-exhibit'),['dungeon','dungeon-counting','dungeon-count-exhibit']);
+assert.deepEqual(getAncestors('dungeon-certification-exhibit'),['dungeon','dungeon-methods','dungeon-certification-exhibit']);
+assert.deepEqual(LOCATIONS.dungeon.children,['dungeon-cert','dungeon-counting','dungeon-methods']);
+for(const id of ['dungeon-cert','dungeon-counting','dungeon-methods','dungeon-height-exhibit','dungeon-count-exhibit','dungeon-certification-exhibit']){
+ assert.ok(LOCATIONS[id].sources.length>=2);
+ assert.ok(LOCATIONS[id].sourceIds.every(url=>url.startsWith('https://')));
+}
+const T=1e6, u=T/(2*Math.PI);
+assert.ok(Math.abs(zeroCountMainTerm(T)-(u*Math.log(u)-u))<0.0001);
+assert.ok(!Number.isInteger(zeroCountMainTerm(1e6)),'the estimator is not an exact integer count');
+assert.equal(approximateHeightComparison(6).height,1e6);
+assert.ok(Math.abs(approximateHeightComparison(Math.log10(VERIFIED_HEIGHT)).height-VERIFIED_HEIGHT)<.001);
+assert.ok(zeroCountMainTerm(VERIFIED_HEIGHT)>zeroCountMainTerm(1e6));
+for(const bad of [99,VERIFIED_HEIGHT+1,NaN,Infinity])assert.throws(()=>zeroCountMainTerm(bad),RangeError);
+assert.throws(()=>approximateHeightComparison(1.9),RangeError);
+assert.deepEqual(validateLocations(),[]);
+console.log('PASS S006 Dungeons recursive graph, primary-source IDs, height vs noninteger asymptotic count and range guards');

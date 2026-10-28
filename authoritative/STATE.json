@@ -6,19 +6,19 @@
   "updated_date_utc": "2026-10-28",
   "programme": "S002-S010 progressively explorable mathematical world",
   "baseline": {
-    "last_completed_session": "S005",
+    "last_completed_session": "S006",
     "status": "CLOSED",
-    "app_commit_sha": "0b9c6651e3c37a9d6c2e0cb147ef94a7a36ee19e",
-    "application": "Recursive Keep zero-free territory rooms; DLMF zero/pole chart; source-backed effective published height-dependent boundary comparison; full legacy Hall/Courtyard navigation regression"
+    "app_commit_sha": "e62864fdd342237ca6902b99e5785db798c94062",
+    "application": "Recursive source-backed Dungeons: published finite-height ledger, noninteger Riemann–von Mangoldt main-term comparator, and error-bounded completeness-method workshop; legacy routes and S002–S005 navigation retained"
   },
   "session": {
-    "next": "S006",
+    "next": "S007",
     "status": "READY_UNEXECUTED",
     "execution_authorized": false,
     "canonical_prompt": "authoritative/NEXT_SESSION_PROMPT.md",
-    "predecessor": "S005",
+    "predecessor": "S006",
     "roadmap": "docs/ROADMAP.md",
-    "required_owner_invocation": "Separate explicit owner request to run S006"
+    "required_owner_invocation": "Separate explicit owner request to run S007"
   },
   "roadmap": [
     {
@@ -44,12 +44,12 @@
     {
       "id": "S006",
       "title": "Dungeons numerical verification",
-      "status": "READY_UNEXECUTED"
+      "status": "CLOSED"
     },
     {
       "id": "S007",
       "title": "Outer territories",
-      "status": "PLANNED"
+      "status": "READY_UNEXECUTED"
     },
     {
       "id": "S008",
@@ -77,7 +77,8 @@
     "vercel.json",
     "laboratory.js",
     "courtyard.js",
-    "keep.js"
+    "keep.js",
+    "dungeon.js"
   ],
   "authority_files": [
     "AGENTS.md",
@@ -94,6 +95,6 @@
     "No implication inferred from map geography",
     "No automatic publication, external outreach, paid services, or proof-of-RH claim"
   ],
-  "next_gate": "S006: Dungeons finite-height verified-zero certificates with defensible data provenance, exact zero-height/count distinction and rigorous completeness limitations",
-  "deployment_note": "S004 main f5b77d32 has Vercel production READY dpl_3WH5kxHYUiB4tjiXzC3wFnDyvxj2. S005 branch implementation 0b9c6651 has Vercel preview READY dpl_CG51yxMSZVf2MdzPPCTs6hqquUxm. S005 pre-governance GitHub Actions push 40725770263 and PR 40725822208, 40725821077, 40725821668, 40725821300 all success. S005 post-governance PR/main and final production deployment require separate live check."
+  "next_gate": "S007: source-cited, explicitly defined Selberg Class / automorphic Grand RH / Dirichlet GRH / ERH outer territories; no inference from drawn nested rings",
+  "deployment_note": "S005 merged-main production dpl_BMPpszmqoFUCj7B15E7t4G1QnnH6 READY on 747272f6. S006 early branch preview READY dpl_YTUoiQjWRy49XdWS8rNNXWhhESoT; final S006 PR checks, two-parent merge, main CI, and production deployment must be checked LIVE after governance and merge. No post-merge deployment claim embedded in this pre-merge file."
 }
