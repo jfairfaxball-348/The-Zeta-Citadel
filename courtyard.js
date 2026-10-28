@@ -1,7 +1,7 @@
 /* S004: density theorem district; graph IDs and maths metadata live in locations.js. */
 import {getLocation, getRootRegion} from './locations.js';
 export const isCourtyardLocation = id => getRootRegion(id) === 'courtyard';
-const esc = x => String(x ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;':'&quot;',"'":'&#39;'}[c]));
+const esc = x => String(x ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const annals = 'https://annals.math.princeton.edu/2026/203-2/p06';
 const arxiv = 'https://arxiv.org/pdf/2405.20552';
 const source = '<a href="'+annals+'" target="_blank" rel="noopener noreferrer">Guth–Maynard, Annals (2026)</a> · <a href="'+arxiv+'" target="_blank" rel="noopener noreferrer">author manuscript, Theorem 1.2 and (1.4)</a>';
