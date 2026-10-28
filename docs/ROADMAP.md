@@ -1,7 +1,7 @@
 # The Zeta Citadel — authoritative development roadmap (S002–S010)
 
 **Adopted:** 28 October 2026. **Predecessor:** S001, commit `577c5d1a92187cbd0d8db89a2160317706a3eec7`. **Site:** https://the-zeta-citadel.vercel.app/  
-**Programme status (updated 28 October 2026):** S002–S006 CLOSED; S007 READY / UNEXECUTED; S008–S010 PLANNED. Each session requires its own explicit owner invocation.
+**Programme status (updated 28 October 2026):** S002–S007 CLOSED; S008 READY / UNEXECUTED; S009–S010 PLANNED. Each session requires its own explicit owner invocation.
 
 ## Product vision and non-negotiable invariants
 Build an explorable mathematical world in which a visitor journeys from the larger RH context into the Citadel, a district, an individual building, a theorem chamber, and an interactive exhibit. The goal is mathematical clarity as well as visual immersion; the map is *not* a diagram of logically nested conjectures. Preserve the existing S001 Vercel static site, eight top-level regions, content provenance, brand/design, navigation and deep links. Maintain a single navigable place graph; avoid a parallel hardcoded experience that cannot scale. Do not mistake numerical checking, zero proportions, density estimates or new preprints for a proof of RH.
@@ -60,12 +60,12 @@ Use stable node IDs, parent IDs, ordered children, world/local geometry, camera 
 
 **PASS (S006 achieved):** two units never conflated; verified 2021 finite-height statement, separate noninteger Riemann–von Mangoldt estimate, rigorous error/completeness explanation, Odlyzko primary sample-ordinate provenance, source IDs and legacy deep-link/desktop/mobile regression. [S006 validation](../sessions/S006/VALIDATION.md). **Boundary:** no exact N(T) counts or independently certified computations were manufactured.
 
-### S007 — The Outer Territories: the mathematical horizons (READY / UNEXECUTED)
+### S007 — The Outer Territories: the mathematical horizons (CLOSED)
 **Objective:** Expand the Selberg Class / Grand RH / GRH / ERH into explorable subregions.
 
 **Build:** hierarchical geographic overview with independent mathematical taxonomy: Dirichlet L-functions; number-field/Dedekind zeta examples; automorphic L-functions and relevant Langlands context; Selberg Class axioms and limitations. Explain that ERH/GRH terminology varies by author, and geographic nesting is explanatory, not universal logical implication.
 
-**PASS:** four expanded regions with at least one substantive nested destination each; terms defined explicitly, source-backed navigation and an accurate relationship disclaimer. **Boundary:** no asserted equivalence based solely on drawing two concentric rings.
+**PASS (S007 achieved):** four original outer-region hashes now expand to eight graph-linked site/exhibit IDs, with interactive axioms, automorphic families, character-series arithmetic and prime splitting; source references and explicit non-implication warning; S002–S007 same-head Playwright checks completed green at implementation commit `fcfa1904`. [S007 validation](../sessions/S007/VALIDATION.md). **Boundary:** no asserted equivalence based solely on drawing two concentric rings.
 
 ### S008 — Connections: paths between mathematical ideas
 **Objective:** Add a cross-map network without misrepresenting logical relations.
@@ -89,7 +89,7 @@ Use stable node IDs, parent IDs, ordered children, world/local geometry, camera 
 **PASS:** no known critical navigation or factual blocker; tests and remaining limitations truthfully documented; production deployment checked if access permits. **Boundary:** do not execute S011 or submit mathematical research.
 
 ## Gates and succession
-S002–S006 have been executed with evidence in `sessions/S002/` through `sessions/S006/`. S007 is the *only* installed ready-but-unexecuted prompt (`authoritative/NEXT_SESSION_PROMPT.md`). S008–S010 remain roadmap only. At closeout of each accepted session, promote **exactly one** successor and update `authoritative/STATE.json`, `START_HERE.md` and `NEXT_SESSION_PROMPT.md` consistently. If the acceptance gate is blocked, stop and record what remains rather than skipping to another stage. Preserve the predecessor's evidence and fully distinguish implementation tests from mathematics/source verification.
+S002–S007 have been executed with evidence in `sessions/S002/` through `sessions/S007/`. S008 is the *only* installed ready-but-unexecuted prompt (`authoritative/NEXT_SESSION_PROMPT.md`). S009–S010 remain roadmap only. At closeout of each accepted session, promote **exactly one** successor and update `authoritative/STATE.json`, `START_HERE.md` and `NEXT_SESSION_PROMPT.md` consistently. If the acceptance gate is blocked, stop and record what remains rather than skipping to another stage. Preserve the predecessor's evidence and fully distinguish implementation tests from mathematics/source verification.
 
 ## Editorial risk register
 - **M1 mathematical topology:** apparent containment on map misread as logical implication. *Mitigation:* repeated disclaimer and typed edges.

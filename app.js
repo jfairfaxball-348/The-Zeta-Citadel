@@ -4,6 +4,7 @@ import { renderHallScene, updateCriticalExplorer, updateLab } from './hall.js';
 import { renderCourtyardScene, updateCourtyard, isCourtyardLocation } from './courtyard.js';
 import { renderKeepScene, updateKeep, isKeepLocation } from './keep.js';
 import { renderDungeonScene, updateDungeon, isDungeonLocation } from './dungeon.js';
+import { renderOuterScene, updateOuter, isOuterLocation } from './outer.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const WIDTH = 1560;
@@ -55,7 +56,7 @@ function createStars() {
 function showView() {
   const v = state.view;
   svg.setAttribute('viewBox', `${v.x.toFixed(3)} ${v.y.toFixed(3)} ${v.w.toFixed(3)} ${v.h.toFixed(3)}`);
-  markers.style.display = state.selected && !isHallLocation(state.selected) && !isCourtyardLocation(state.selected) && !isKeepLocation(state.selected) && !isDungeonLocation(state.selected) && v.w < 680 && getRegion(getRootRegion(state.selected))?.subnodes?.length ? '' : 'none';
+  markers.style.display = state.selected && !isHallLocation(state.selected) && !isCourtyardLocation(state.selected) && !isKeepLocation(state.selected) && !isDungeonLocation(state.selected) && !isOuterLocation(state.selected) && v.w < 680 && getRegion(getRootRegion(state.selected))?.subnodes?.length ? '' : 'none';
 }
 function bounded(v) {
   const w = clamp(v.w, 155, WIDTH);
@@ -134,15 +135,17 @@ function renderHall() {
   const courtyard = isCourtyardLocation(state.selected);
   const keep = isKeepLocation(state.selected);
   const dungeon = isDungeonLocation(state.selected);
-  const interior = hall || courtyard || keep || dungeon;
+  const outer = isOuterLocation(state.selected);
+  const interior = hall || courtyard || keep || dungeon || outer;
   svg.hidden = interior;
   svg.setAttribute('aria-hidden', String(interior));
   hallScene.hidden = !interior;
-  hallScene.innerHTML = hall ? renderHallScene(state.selected) : courtyard ? renderCourtyardScene(state.selected) : keep ? renderKeepScene(state.selected) : dungeon ? renderDungeonScene(state.selected) : '';
+  hallScene.innerHTML = hall ? renderHallScene(state.selected) : courtyard ? renderCourtyardScene(state.selected) : keep ? renderKeepScene(state.selected) : dungeon ? renderDungeonScene(state.selected) : outer ? renderOuterScene(state.selected) : '';
   if (hall) updateLab(hallScene);
   if (courtyard) updateCourtyard(hallScene);
   if (keep) updateKeep(hallScene);
   if (dungeon) updateDungeon(hallScene);
+  if (outer) updateOuter(hallScene);
   $('#map-up').disabled = !state.selected;
   $('#zoom-in').disabled = interior;
   $('#zoom-out').disabled = interior;
@@ -218,6 +221,7 @@ function bindEvents() {
     if (event.target.matches('#taxonomy-case, #hardy-waves, #milestone-select, #toy-a, #paper-select')) updateLab(hallScene);
     if (event.target.matches('#density-sigma, #density-logt, #density-mode')) updateCourtyard(hallScene);
     if (event.target.matches('#keep-logt')) updateKeep(hallScene);
+    if (event.target.matches('#outer-axiom, #outer-grand-family, #outer-grh-N, #outer-erh-prime')) updateOuter(hallScene);
     if (event.target.matches('#dungeon-logt, #dungeon-method')) {
       if (event.target.matches('#dungeon-logt')) {const p=hallScene.querySelector('#dungeon-preset');if(p)p.value='';}
       updateDungeon(hallScene);

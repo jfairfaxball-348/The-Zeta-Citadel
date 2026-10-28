@@ -76,3 +76,28 @@ for(const bad of [99,VERIFIED_HEIGHT+1,NaN,Infinity])assert.throws(()=>zeroCount
 assert.throws(()=>approximateHeightComparison(1.9),RangeError);
 assert.deepEqual(validateLocations(),[]);
 console.log('PASS S006 Dungeons recursive graph, primary-source IDs, height vs noninteger asymptotic count and range guards');
+
+
+// S007: four horizon roots and eight exact nested destinations.
+import {chi4,dirichletBetaPartial,gaussianSplitting} from '../outer.js';
+const roots={selberg:'selberg-axioms',grand:'grand-automorphic',grh:'grh-characters',erh:'erh-gaussian'};
+for(const [root,site] of Object.entries(roots)){
+ const exhibit=site+'-exhibit';
+ assert.deepEqual(LOCATIONS[root].children,[site]);
+ assert.deepEqual(getAncestors(exhibit),[root,site,exhibit]);
+ for(const id of [root,site,exhibit]){
+  assert.ok(LOCATIONS[id].sources.length>=2,'S007 sources missing at '+id);
+  assert.ok(LOCATIONS[id].sourceIds.every(s=>s.startsWith('https://')));
+ }
+}
+assert.deepEqual(validateLocations(),[]);
+assert.equal(chi4(1),1);assert.equal(chi4(2),0);assert.equal(chi4(3),-1);assert.equal(chi4(13),1);
+for(const n of [4,5,40,160]){const v=dirichletBetaPartial(n);let expected=0;for(let i=1;i<=n;i++)expected+=chi4(i)/i**2;assert.equal(v.sum,expected);assert.equal(v.absoluteTailBound,1/n);}
+assert.throws(()=>chi4(0),RangeError);assert.throws(()=>dirichletBetaPartial(3),RangeError);
+assert.equal(gaussianSplitting(2).kind,'ramified');
+assert.equal(gaussianSplitting(5).kind,'split');
+assert.equal(gaussianSplitting(13).local,'(1−13⁻ˢ)⁻²');
+assert.equal(gaussianSplitting(7).kind,'inert');
+assert.equal(gaussianSplitting(3).local,'(1−3⁻²ˢ)⁻¹');
+assert.throws(()=>gaussianSplitting(9),RangeError);
+console.log('PASS S007 horizon graph, sourced nodes, exact Dirichlet character series, Gaussian splitting.');

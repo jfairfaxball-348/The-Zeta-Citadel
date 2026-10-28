@@ -352,3 +352,40 @@ button:focus-visible, a:focus-visible, [role="button"]:focus-visible { outline: 
 @media(max-width:780px){.dungeon-gates,.dungeon-milestones,.dungeon-workbench{grid-template-columns:1fr;}.dungeon-gate{min-height:135px;}.dungeon-floor{border-width:5px;}.dungeon-logic{grid-template-columns:1fr;}.dungeon-logic-symbol{line-height:1;}}
 @media(max-width:540px){.dungeon-site{display:block;padding:16px;}.dungeon-seal{font-size:34px;margin-bottom:10px;}.dungeon-samples{padding:16px 5px;}.dungeon-milestones strong{font-size:22px;}}
 @media(prefers-reduced-motion:reduce){.dungeon-gate,.dungeon-entry{transition:none;}}
+
+
+/* S007: four outer horizons share the existing interior scene and router. */
+.outer-district{padding:clamp(16px,3vw,34px);min-height:100%;color:#eaf0e9;}
+.outer-atlas{position:relative;max-width:930px;min-height:340px;margin:22px auto;padding:26px;border:6px double rgba(157,192,215,.55);border-radius:50% 50% 20px 20px/23% 23% 20px 20px;background:radial-gradient(ellipse at 50% 45%,#274051,#101f36 74%);overflow:hidden;box-shadow:inset 0 0 65px rgba(7,19,31,.8);}
+.outer-sky{position:absolute;inset:5% 10% 10%;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:.38;}
+.outer-sky strong{font:120px/1 var(--serif);color:#d8c08d;}
+.outer-orbit{position:absolute;border:2px solid #a4c3c5;border-radius:50%;transform:rotate(-17deg);}
+.outer-orbit-one{width:70%;height:70%}.outer-orbit-two{width:98%;height:92%;border-style:dashed;}
+.outer-atlas-notice{position:relative;max-width:640px;margin:auto;text-align:center;letter-spacing:.13em;font:10px/1.8 var(--mono);color:#bfc9d6;}
+.outer-gate{position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;width:min(390px,95%);min-height:175px;margin:42px auto 8px;padding:18px;background:#162f40e8;border:2px solid #d1b986;color:#f6e1ad;cursor:pointer;text-align:center;}
+.outer-gate strong{font:500 28px/1.2 var(--serif)}.outer-gate small{font:12px/1.5 var(--body);color:#d7e4e1}
+.outer-gate>span:last-child{font:10px var(--mono);letter-spacing:.1em}
+.outer-glyph{font:40px var(--serif)}.outer-gate:hover,.outer-gate:focus-visible,.outer-entry:hover,.outer-entry:focus-visible{outline:3px solid #e8d19b;outline-offset:3px;background:#314d60;}
+.outer-note{max-width:930px;margin:16px auto;font:13px/1.75 var(--body);color:#d6e4e5;overflow-wrap:anywhere;}
+.outer-note a,.outer-exhibit a{color:#e6d6a9;}
+.outer-room{display:grid;grid-template-columns:minmax(100px,.55fr) minmax(0,2fr);gap:22px;max-width:900px;margin:28px auto;padding:27px;background:#182e42;border:1px solid #91aeba;}
+.outer-medallion{font:80px/1.3 var(--serif);text-align:center;color:#dfc48d}.outer-room h3{color:#dfcda9;font:12px/1.6 var(--mono);letter-spacing:.07em}
+.outer-room p{color:#deebe9;font:13px/1.75 var(--body);}
+.outer-entry{display:flex;flex-direction:column;gap:8px;width:100%;margin-top:22px;padding:17px;text-align:left;border:1px solid #b8c1ac;background:#294355;color:#f1dbb7;cursor:pointer;font:11px/1.5 var(--mono)}
+.outer-entry small{font:22px/1.3 var(--serif);color:#f9e6bc}
+.outer-exhibit .lab-card{max-width:960px}.outer-panel{display:flex;flex-direction:column;gap:15px;min-width:0;}
+.outer-panel>label{color:#eddcba;font:12px/1.5 var(--mono);}
+.outer-panel select,.outer-panel input[type=range]{width:100%;max-width:700px;}
+.outer-panel select{background:#1e3445;color:#f3e6c6;border:1px solid #b5c3bc;padding:11px;min-height:45px;}
+.outer-panel h3{color:#ead3aa;font:23px/1.3 var(--serif)}.outer-panel p{color:#e3e9e8;font:14px/1.75 var(--body);}
+.outer-seal,.outer-formula{padding:20px;border-left:4px solid #c2b486;background:#142b3d;color:#f1d5a6;font:clamp(15px,2.2vw,23px)/1.6 var(--serif);overflow-wrap:anywhere;}
+.outer-seal span{display:block;color:#d6e5e5;font:10px/1.7 var(--mono);letter-spacing:.04em;}
+.outer-stat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+.outer-stat-grid>div{padding:20px;background:#1a3447;border-top:3px solid #adbea8;min-width:0;}
+.outer-stat-grid small{display:block;font:10px/1.7 var(--mono);color:#c1d5d8;}
+.outer-stat-grid strong{display:block;overflow-wrap:anywhere;margin-top:8px;color:#f0d6aa;font:clamp(17px,2vw,26px)/1.5 var(--serif);}
+.outer-horizon-chart{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;align-items:center;margin:8px 0;}
+.outer-horizon-chart span{padding:28px 8px;text-align:center;background:linear-gradient(155deg,#3b5269,#1b344c);border:1px solid #afc2c2;color:#ebdcb4;font:22px var(--serif);}
+.outer-warning{border-top:1px solid #9eaa9f;margin-top:26px;padding:15px 0;color:#dac8a4;font:11px/1.7 var(--mono);}
+@media(max-width:720px){.outer-room,.outer-stat-grid{grid-template-columns:1fr}.outer-atlas{min-height:295px;border-width:4px}.outer-sky strong{font-size:85px}.outer-gate{margin-top:33px}.outer-medallion{font-size:40px}.outer-horizon-chart span{font-size:16px;padding:20px 5px;}}
+@media(prefers-reduced-motion:reduce){.outer-gate,.outer-entry{transition:none}}

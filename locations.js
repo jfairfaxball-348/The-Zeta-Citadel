@@ -211,6 +211,83 @@ const ADDITIONS = {
   }
 };
 
+
+const SOURCE_OUTER = {
+ selberg:[
+  {name:'Farmer, Strong multiplicity one for the Selberg class, Mathematika (2021)',url:'https://londmathsoc.onlinelibrary.wiley.com/doi/full/10.1112/mtk.12093'},
+  {name:'Selberg class axioms and examples · scholarly survey',url:'https://www.math.ubc.ca/~gerg/teaching/613-Winter2011/SelbergClass.pdf'}
+ ],
+ grand:[
+  {name:'James Arthur, Lectures on automorphic L-functions',url:'https://www.math.toronto.edu/arthur/pdf/automorphic-L.pdf'},
+  {name:'Automorphic L-functions, local Euler factors and zero-density context (2021)',url:'https://www.mdpi.com/2227-7390/9/17/2061'}
+ ],
+ grh:[
+  {name:'NIST DLMF §25.15, Dirichlet L-functions and zeros',url:'https://dlmf.nist.gov/25.15'},
+  {name:'NIST DLMF §27.8, Dirichlet characters',url:'https://dlmf.nist.gov/27.8'}
+ ],
+ erh:[
+  {name:'Keith Conrad, Gaussian Integers, Theorem 9.7',url:'https://kconrad.math.uconn.edu/math5230f12/handouts/Zinotes.pdf'},
+  {name:'Harvard algebraic number theory notes, Dedekind zeta and Euler factors',url:'https://people.math.harvard.edu/~achenjang/assets/pdf/Fall_2020_Course_Notes.pdf'}
+ ]
+};
+const OUTER_ADDITIONS = {
+ 'selberg-axioms':{
+  id:'selberg-axioms',parent:'selberg',type:'site',name:'The Five-Axiom Archive',subtitle:'Five conditions, one defined class',status:'Classical definition · research classification open',
+  concept:'The classical Selberg class S is defined by an absolutely convergent Dirichlet series for Re(s)>1, meromorphic continuation with possible pole only at one, a gamma-factor functional equation, an Oε(n^ε) coefficient condition and a prime-power-supported Euler-product axiom.',
+  progress:'Membership of a particular L-function demands these hypotheses. Conjectural classification and universal identification with automorphic L-functions are separate open questions.',
+  stakes:'A definition is not a proof that every object of interest belongs to the class.',teaser:'Turn five precise axioms over, one at a time.',
+  sources:SOURCE_OUTER.selberg,children:['selberg-axioms-exhibit']
+ },
+ 'selberg-axioms-exhibit':{
+  id:'selberg-axioms-exhibit',parent:'selberg-axioms',type:'exhibit',name:'Axiom Compass',subtitle:'Select the defining hypotheses without confusing them with conjectures',status:'Exact definition · educational selector',
+  concept:'The Selberg class is a class of specific Dirichlet series, not a single Riemann hypothesis.',progress:'Each selected axiom displays its scope and a warning against overgeneralisation.',stakes:'Analyticity, arithmetic and functional equations serve different roles.',teaser:'Inspect all five defining gates.',
+  sources:SOURCE_OUTER.selberg,children:[],exhibit:'outer-selberg'
+ },
+ 'grand-automorphic':{
+  id:'grand-automorphic',parent:'grand',type:'site',name:'The Automorphic Observatory',subtitle:'GL(1), GL(2), GL(n) · a taxonomy not a proof chain',status:'Automorphic context · global conjecture remains open',
+  concept:'In this atlas Grand RH refers to a zero-location conjecture for relevant standard automorphic L-functions, in the normalizations where their functional equations have central line Re(s)=1/2.',
+  progress:'Dirichlet and modular-form examples help orient the subject; Langlands also investigates representations, local factors and functoriality, not solely zeros.',
+  stakes:'One must fix both the family of L-functions and its normalization when making a global statement.',
+  teaser:'Visit three doorways into the automorphic programme.',sources:SOURCE_OUTER.grand,children:['grand-automorphic-exhibit']
+ },
+ 'grand-automorphic-exhibit':{
+  id:'grand-automorphic-exhibit',parent:'grand-automorphic',type:'exhibit',name:'Automorphic Doorways',subtitle:'Families and caveats from degree one to higher rank',status:'Sourced conceptual taxonomy · no computational zero test',
+  concept:'Standard automorphic L-functions can be organized through representation-theoretic settings; known analytic properties depend on the precise family.',
+  progress:'Compare GL(1), GL(2), and higher rank without conflating Langlands conjectures, Selberg class membership or RH.',
+  stakes:'There is no geographic argument that one chosen broad conjecture subsumes every other version of GRH or ERH.',
+  teaser:'Choose a family and inspect what is known or conjectured.',sources:SOURCE_OUTER.grand,children:[],exhibit:'outer-grand'
+ },
+ 'grh-characters':{
+  id:'grh-characters',parent:'grh',type:'site',name:'The Character Streets',subtitle:'Arithmetic progressions and Dirichlet L-functions',status:'Defined conjecture · exact character arithmetic',
+  concept:'For this atlas Dirichlet GRH asserts that every nontrivial zero of every Dirichlet L-function has real part one half. A character modulo four assigns values 0, +1 or −1 according to residue class.',
+  progress:'The convergent series L(2,χ₄) gives a direct finite arithmetic example; its Euler product and zeros are very different questions.',
+  stakes:'Computing an L-series value at s=2 does not test zero locations in the critical strip.',
+  teaser:'Calculate a finite character-weighted Dirichlet series with a rigorous tail bound.',sources:SOURCE_OUTER.grh,children:['grh-characters-exhibit']
+ },
+ 'grh-characters-exhibit':{
+  id:'grh-characters-exhibit',parent:'grh-characters',type:'exhibit',name:'Modulo-Four Character Laboratory',subtitle:'A nonprincipal Dirichlet character and a convergent L-series',status:'Exact finite arithmetic · rigorous coarse tail inequality',
+  concept:'The character χ₄ is 0 on even integers, +1 on n≡1 mod 4, and −1 on n≡3 mod 4. It defines an L-function by a Dirichlet series for Re(s)>1.',
+  progress:'Compute ∑n≤N χ₄(n)/n² with absolute tail at most 1/N; no zeros are being searched for.',
+  stakes:'Even a rigorously bounded value away from the strip does not establish GRH.',teaser:'Move the series cutoff and inspect the certified elementary error bound.',
+  sources:SOURCE_OUTER.grh,children:[],exhibit:'outer-grh'
+ },
+ 'erh-gaussian':{
+  id:'erh-gaussian',parent:'erh',type:'site',name:'The Gaussian Number-Field Gate',subtitle:'Dedekind zeta and the prime ideals of Q(i)',status:'ERH convention · exact algebraic example',
+  concept:'Here ERH is the conjecture that every nontrivial zero of every number-field Dedekind zeta function lies on Re(s)=1/2. A Dedekind zeta function counts nonzero ideals by absolute norm.',
+  progress:'For the Gaussian field Q(i), rational primes split, stay inert, or ramify. These proved patterns determine the local Euler factors of its Dedekind zeta function.',
+  stakes:'Prime splitting is understood in this example; the global zero-location assertion remains unproved.',
+  teaser:'Select primes and watch their exact number-field splitting pattern.',sources:SOURCE_OUTER.erh,children:['erh-gaussian-exhibit']
+ },
+ 'erh-gaussian-exhibit':{
+  id:'erh-gaussian-exhibit',parent:'erh-gaussian',type:'exhibit',name:'Gaussian Prime-Splitting Atlas',subtitle:'Prime ideals and Dedekind zeta local Euler factors',status:'Established algebra · not a Dedekind zero calculation',
+  concept:'In Z[i], prime two ramifies, a prime p≡1 mod4 splits, and p≡3 mod4 stays inert.',
+  progress:'The Euler factors at p follow the norms of prime ideals above p; the displayed formulas are exact in Re(s)>1.',
+  stakes:'An explicit Euler factor does not prove the Extended Riemann Hypothesis.',
+  teaser:'Choose a rational prime and inspect splitting and the zeta factor.',
+  sources:SOURCE_OUTER.erh,children:[],exhibit:'outer-erh'
+ }
+};
+
 export const LOCATIONS = Object.fromEntries([
   ...REGIONS.map(region => [region.id, {
     ...region, type: 'region', parent: null,
@@ -220,6 +297,7 @@ export const LOCATIONS = Object.fromEntries([
   ...Object.values(SUBNODES).map(node => [node.id, {
     ...node, type: 'site', children: [], sourceIds: (node.sources || []).map(item => item.url)
   }]),
+  ...Object.values(OUTER_ADDITIONS).map(node => [node.id, {...node, sourceIds: (node.sources || []).map(item=>item.url)}]),
   ...Object.values(ADDITIONS).map(node => [node.id, {
     ...node, sourceIds: (node.sources || []).map(item => item.url)
   }])
@@ -268,6 +346,12 @@ LOCATIONS['dungeon-cert'].sources = SOURCE_DUNGEON;
 LOCATIONS['dungeon-cert'].sourceIds = SOURCE_DUNGEON.map(item=>item.url);
 LOCATIONS['dungeon-cert'].teaser = 'Published certified height, historically counted zeros, and why the units differ.';
 
+// S007: expand only the pre-existing outer-region IDs and preserve historic routes.
+for (const [root,site] of Object.entries({selberg:'selberg-axioms',grand:'grand-automorphic',grh:'grh-characters',erh:'erh-gaussian'})){
+ LOCATIONS[root].children=[site];
+ LOCATIONS[root].sources=SOURCE_OUTER[root];
+ LOCATIONS[root].sourceIds=SOURCE_OUTER[root].map(item=>item.url);
+}
 export const getLocation = id => (id ? LOCATIONS[id] : null) || null;
 export const getParentLocation = id => getLocation(getLocation(id)?.parent);
 export function getAncestors(id) {

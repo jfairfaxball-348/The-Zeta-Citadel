@@ -6,19 +6,19 @@
   "updated_date_utc": "2026-10-28",
   "programme": "S002-S010 progressively explorable mathematical world",
   "baseline": {
-    "last_completed_session": "S006",
+    "last_completed_session": "S007",
     "status": "CLOSED",
-    "app_commit_sha": "e62864fdd342237ca6902b99e5785db798c94062",
-    "application": "Recursive source-backed Dungeons: published finite-height ledger, noninteger Riemann–von Mangoldt main-term comparator, and error-bounded completeness-method workshop; legacy routes and S002–S005 navigation retained"
+    "app_commit_sha": "fcfa1904efc556923e9fe0d7ab3a503e2dc9b418",
+    "application": "Four recursively navigable mathematical horizon territories with source-defined Selberg axioms, automorphic Grand RH taxonomy, exact Dirichlet character series with rigorous finite tail bound, and Gaussian prime splitting/Dedekind Euler factors; map geography never implies a conjecture hierarchy"
   },
   "session": {
-    "next": "S007",
+    "next": "S008",
     "status": "READY_UNEXECUTED",
     "execution_authorized": false,
     "canonical_prompt": "authoritative/NEXT_SESSION_PROMPT.md",
-    "predecessor": "S006",
+    "predecessor": "S007",
     "roadmap": "docs/ROADMAP.md",
-    "required_owner_invocation": "Separate explicit owner request to run S007"
+    "required_owner_invocation": "New and separate owner instruction to run S008"
   },
   "roadmap": [
     {
@@ -49,12 +49,12 @@
     {
       "id": "S007",
       "title": "Outer territories",
-      "status": "READY_UNEXECUTED"
+      "status": "CLOSED"
     },
     {
       "id": "S008",
       "title": "Typed mathematics connections",
-      "status": "PLANNED"
+      "status": "READY_UNEXECUTED"
     },
     {
       "id": "S009",
@@ -78,7 +78,8 @@
     "laboratory.js",
     "courtyard.js",
     "keep.js",
-    "dungeon.js"
+    "dungeon.js",
+    "outer.js"
   ],
   "authority_files": [
     "AGENTS.md",
@@ -95,6 +96,6 @@
     "No implication inferred from map geography",
     "No automatic publication, external outreach, paid services, or proof-of-RH claim"
   ],
-  "next_gate": "S007: source-cited, explicitly defined Selberg Class / automorphic Grand RH / Dirichlet GRH / ERH outer territories; no inference from drawn nested rings",
-  "deployment_note": "S005 merged-main production dpl_BMPpszmqoFUCj7B15E7t4G1QnnH6 READY on 747272f6. S006 early branch preview READY dpl_YTUoiQjWRy49XdWS8rNNXWhhESoT; final S006 PR checks, two-parent merge, main CI, and production deployment must be checked LIVE after governance and merge. No post-merge deployment claim embedded in this pre-merge file."
+  "next_gate": "S008: carefully sourced typed relations between existing place nodes, with explicit proved/conditional/historical/analogy types and accessible graph interactions, never inferred from map nesting",
+  "deployment_note": "S006 merged-main production READY dpl_6kfSpcz3zRs4gCSvxM3DJQs7mG6A at 35a8c573. S007 implementation preview READY dpl_9PrBgDcsCHPTk51HwGPxuYUMgvB1 on fcfa1904, target preview (not production). Final S007 governance-head CI, PR merge, main CI and production target must be checked LIVE; this committed note does not claim those future events."
 }
