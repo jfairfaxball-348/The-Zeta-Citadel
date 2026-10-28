@@ -45,6 +45,56 @@ const ADDITIONS = {
     stakes: 'Neither a diagram nor checking finitely many zeros can settle a claim about all nontrivial zeros.',
     teaser: 'Choose coordinates and inspect their location relative to the line.',
     sources: SOURCE_DLMF, children: [], exhibit: 'critical-strip', viewBounds: {x: 0, y: 0, w: 580, h: 320}
+  },
+  'zero-types-exhibit': {
+    id:'zero-types-exhibit', parent:'hall-critical',type:'exhibit',
+    name:'Zero, Pole or Just a Point?',subtitle:'Identify what the coordinates mean',
+    status:'Established classifications · schematic visual',
+    concept:'Trivial zeros occur at negative even integers. The zeta function has a simple pole at 1. A generic point on the critical line need not be a zeta zero.',
+    progress:'The selectable examples distinguish exact mathematical facts from arbitrary, untested complex coordinates. No finite plot proves RH.',
+    stakes:'Prevents the most common confusion between a line, a zero, and the pole.',
+    teaser:'Choose examples and distinguish verified facts from untested coordinates.',
+    sources:SOURCE_DLMF,children:[],exhibit:'zero-taxonomy'
+  },
+  'hardy-signs-exhibit': {
+    id:'hardy-signs-exhibit',parent:'hall-hardy',type:'exhibit',
+    name:'Hardy’s Sign-Change Window',subtitle:'Continuous functions and zeros',
+    status:'Established theorem context · exact toy illustration',
+    concept:'A continuous real function changing sign between two points must vanish somewhere in between. Hardy proved infinitely many critical-line zeros using the zeta-derived real-valued Z(t).',
+    progress:'The adjustable sine wave is a different toy function, not a calculation of zeta or a proof of Hardy’s infinite result.',
+    stakes:'Learn why a finite picture and an infinity theorem have fundamentally different logical strength.',
+    teaser:'Increase the number of toy oscillations and distinguish the argument from its illustration.',
+    sources:SOURCE_DLMF,children:[],exhibit:'hardy-signs'
+  },
+  'milestones-exhibit': {
+    id:'milestones-exhibit',parent:'hall-levinson',type:'exhibit',
+    name:'Proportion Milestone Comparator',subtitle:'Existence is not a percentage',
+    status:'Classical results + labelled 2026 preprint claim',
+    concept:'Hardy, Selberg, Levinson, Conrey and later work prove increasingly quantitative statements; one must distinguish infinitely many from a positive fraction and a lower bound from 100%.',
+    progress:'Select a result to view its quantifier and asymptotic lower bound; avoid interpreting the bar as a census of observed zeros.',
+    stakes:'Explains the logical gap between lower bounds and RH’s universal quantification.',
+    teaser:'Compare milestones, limiting proportions and their different logical strengths.',
+    sources:[...SOURCE_DLMF,{name:'Conrey (1989) journal paper',url:'https://eudml.org/doc/153151'},...SOURCES_2026],children:[],exhibit:'milestones'
+  },
+  'mollifier-toy-exhibit': {
+    id:'mollifier-toy-exhibit',parent:'hall-mollifier',type:'exhibit',
+    name:'The Toy Mollifier Bench',subtitle:'An inverse-shaped multiplier',
+    status:'Exact toy algebra · not a zeta computation',
+    concept:'Multiplying (1+a cos x) by (1−a cos x) yields 1−a² cos² x. This elementary illustration is not the analytic Dirichlet-polynomial construction used in mollifier proofs.',
+    progress:'Vary a and compare original and product waves. The toy identity illustrates why inverse-shaped factors can damp variation without establishing any zeta theorem.',
+    stakes:'Understand the method’s intuition without mistaking algebraic play for proof.',
+    teaser:'Modify the amplitude of two toy curves and see the exact product.',
+    sources:[...SOURCE_DLMF,{name:'Conrey (1989) journal paper',url:'https://eudml.org/doc/153151'}],children:[],exhibit:'toy-mollifier'
+  },
+  'research-comparison-exhibit': {
+    id:'research-comparison-exhibit',parent:'hall-2026',type:'exhibit',
+    name:'2026 Preprint Comparison Desk',subtitle:'Simple, distinct, on-line and unions',
+    status:'Research preprints · checked 28 October 2026',
+    concept:'Alpöge–Furman and Lamzouri report unconditional lower bounds for simple and on-line zeros and distinct zeros, using different methods. Definitions and set combinations matter.',
+    progress:'Compare the authors’ preprint statements; do not turn the asymptotic bounds into a complete list of zeros, a peer-review claim or a proof of RH.',
+    stakes:'Learn the distinction between simple AND on-line, simple OR on-line, and merely distinct.',
+    teaser:'Inspect separately attributed 2026 preprint claims and their denominators.',
+    sources:SOURCES_2026,children:[],exhibit:'preprint-desk'
   }
 };
 
@@ -70,6 +120,11 @@ LOCATIONS['hall-2026'].type = 'chamber';
 LOCATIONS['hall-2026'].room = 'research';
 LOCATIONS['hall-2026'].teaser = '2026 research preprints on zero proportions, not a proof of RH.';
 LOCATIONS['hall-2026'].sources = SOURCES_2026;
+LOCATIONS['hall-hardy'].children = ['hardy-signs-exhibit'];
+LOCATIONS['hall-levinson'].children = ['milestones-exhibit'];
+LOCATIONS['hall-mollifier'].children = ['mollifier-toy-exhibit'];
+LOCATIONS['hall-2026'].children = ['research-comparison-exhibit'];
+LOCATIONS['hall-critical'].children.push('zero-types-exhibit');
 
 export const getLocation = id => (id ? LOCATIONS[id] : null) || null;
 export const getParentLocation = id => getLocation(getLocation(id)?.parent);
