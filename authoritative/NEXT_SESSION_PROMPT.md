@@ -1,25 +1,24 @@
-# S010 — First-release consolidation and mathematical provenance audit (READY, UNEXECUTED)
+# Programme-end handoff — The Zeta Citadel (NO READY NEXT SESSION)
 
-**Authorisation boundary:** This is the SOLE next-session prompt prepared by the separately owner-invoked S009. It does NOT authorise the assistant to execute S010 now. A NEW separate owner instruction such as “run next session” is mandatory. No S011+, research theorem development, preprint/journal submission, arXiv/Palomar registration, publicity, contact or autonomous mathematical discovery is authorised.
+**Authority date:** 28 October 2026. **Status:** S010 closed on owner-authorised audited implementation, subject to independently observed final governance checks. **This is NOT an S011 or executable session prompt.** There is no next numbered session installed or authorised. An instruction such as “run next session” must not be construed as automatic S011 execution; the owner must separately specify/approve a fresh scope and roadmap.
 
-## Live entry and reconciliation
-Repository: https://github.com/jfairfaxball-348/The-Zeta-Citadel ; site: https://the-zeta-citadel.vercel.app/
-1. Pin live `main` SHA/tree and check S009 PR, dedicated branch `session/S009-discovery-journeys`, actual **ordinary two-parent non-force merge**, final head checks of all S002–S009 workflows, merged-main checks and actual Vercel READY production deployment SHA. Do not infer from S009's premerge closeout. Its earlier tested implementation was `cff8bd9086d1a43ef9510d13b1962aa6c5182c7c`, [green S009 implementation run 40737691789](https://github.com/jfairfaxball-348/The-Zeta-Citadel/actions/runs/40737691789).
-2. Read in canonical order `authoritative/STATE.json`, `AGENTS.md`, `authoritative/START_HERE.md`, `docs/SESSION_PROTOCOL.md`, `docs/ROADMAP.md`, `sessions/S009/{PLAN,VALIDATION,CLOSEOUT}.md` and their evidence, `authoritative/NEXT_SESSION_PROMPT.md`, all production data/views and tests. Confirm S009 genuinely CLOSED and S010 the only READY_UNEXECUTED stage and that no parallel S010 branch exists.
-3. Create `session/S010-release-audit` from pinned main, write `sessions/S010/PLAN.md` first, include audited surface inventory, concrete gating tests, edit boundaries, rollback path and stop criteria.
+## Completed programme
+S002–S010 produced a recursive static cartographic atlas with the eight original regions, mathematical exhibits, eight explicit typed source-backed bridges, search and two optional learning trails. S010 addressed source-provenance, stale links, graph/route safety and browser release tests, and consolidated architecture, contribution rules, privacy and limitations.
 
-## Objective: reliable, mathematically transparent first public release
-Finish and audit the S001–S009 Citadel, preserving its eight original regions and deep links. The metaphor is NOT a mathematical implication lattice. Do not introduce any claim that RH is proved or that finite/approximate data certifies infinite assertions.
+Canonical evidence:
+- [State](STATE.json) and [start here](START_HERE.md)
+- [Roadmap](../docs/ROADMAP.md), [source audit](../docs/MATHEMATICAL_SOURCE_AUDIT.md), [release limits](../docs/RELEASE_AND_PRIVACY.md)
+- [S010 plan](../sessions/S010/PLAN.md), [validation](../sessions/S010/VALIDATION.md), [closeout](../sessions/S010/CLOSEOUT.md)
 
-## Bounded S010 scope
-- Perform an **independent source and claim audit** of the existing region/location/exhibit narratives, source URLs, publication status and timestamps; verify primary theorem statements and numerical units in the actual linked documents. Flag every source needing update, removed link, ambiguity or incomplete support. Clearly distinguish theorem, conditional inference, research preprint, sample, schematic, estimate and open conjecture. In particular check the S008 eight edge directions/scopes, S009 trail copy, Grand/Generalized/Extended RH convention, zero-density interpretation, exact published zero-free boundaries and the Dungeons height versus count. Correct only sourced errors, do not assert novel mathematics.
-- Validate the entire recursive `LOCATIONS` graph, `REGIONS`, `CONNECTIONS` and S009 discovery/index/journeys/bookmarks via data validators and explicit negative tests: orphan/cyclic IDs, broken children and routes, type/status mismatches, invalid source URLs and escaped content. Keep one canonical router and prior hash aliases.
-- Exercise a representative desktop/tablet/mobile browser matrix, keyboard and screen-reader semantics, focus order, touch, Back/Forward/Up/Home/deep-link reload/invalid hashes, search ranking, source opening, connection filters, both full journeys, saving/copying with permissions/storage denial, reduced-motion, viewport overflow and page/console errors. Add tests for any regressions found and basic performance/render budgets if repeatable.
-- Verify production Vercel deployment independently, exact live Git SHA, deploy target and runtime page availability; log gaps if the public endpoint or instrumentation cannot be observed. Do not add analytics, remote telemetry or credentials.
-- Consolidate README, contributor/source-update guide, architecture/data contracts, privacy statement, clear limitations and an evidence/audit register. Distinguish measured results from CI-only tests, unobserved devices and editorial judgments. Maintain static dependency-light Vercel stack unless a demonstrated need warrants a separately scoped change.
+The S010 closeout and validation must identify the exact reviewed PR head, GitHub Actions checks, ordinary two-parent merge, merged main and Vercel production SHA **observed live**; do not infer a later status from a document written before merge.
 
-## Acceptance, merge and STOP
-- CI on exact final S010 head: `node --check` all JS, parse JSON, location/edge/journey validation and negative cases, legacy S002–S009 browser regressions, new S010 audits; real HTTP Chromium desktop/touch mobile plus tablet and keyboard, no runtime/console errors, no critical broken links or materially unsupported claims. Record exactly which external sources were read and dates/statuses checked. Never mark a gap as green.
-- If blocking mathematical citation inaccuracies, unverified critical deployment or navigation/accessibility regressions remain, STOP BLOCKED with a precise report; do not release as accepted.
-- If accepted, write `sessions/S010/{PLAN,VALIDATION,CLOSEOUT}.md`, update `authoritative/STATE.json`, `START_HERE.md`, `docs/ROADMAP.md`, README, and the release/audit record. A subsequent S011+ roadmap may be proposed for future *separate* authorisation but must not automatically become an executable session. Make a reviewed ordinary PR, non-force **two-parent** merge, independently inspect merged main, final workflow statuses and Vercel production SHA; report exact refs and limitations.
-- **Hard stop:** end the owner-invoked S010. No successor execution, new mathematical research claim, automatic outreach/publication or paid services.
+## Optional future directions (ideas, not authorised)
+Possible independently scoped future programmes: targeted external source re-review and link maintenance; manual cross-browser/screen-reader and physical-device accessibility acceptance; expandable provenance metadata and accessible figure labels; optional offline-first bibliography export. These are ideas only, not a committed S011, launch permission, mathematical proof programme, manuscript, journal submission, public outreach or paid service.
+
+## Safe activation protocol for a future owner-approved programme
+1. User expressly approves a specific new numbered session or roadmap and its scope.
+2. Pin live remote `main` and Vercel source SHA; audit the S010 release and read `AGENTS.md`, `STATE.json`, `START_HERE.md`, `docs/SESSION_PROTOCOL.md`, and S010 closeout.
+3. Only then install a single READY/UNEXECUTED plan in committed authority. That plan itself never executes a successor.
+4. Any later implementation must have fresh independent owner invocation, dedicated branch, reviewable PR, green exact-head CI, ordinary two-parent merge and postmerge verification.
+
+**Hard stop:** No autonomous S011+. No claim that the Riemann Hypothesis has been solved.

@@ -1,7 +1,7 @@
 # The Zeta Citadel — authoritative development roadmap (S002–S010)
 
 **Adopted:** 28 October 2026. **Predecessor:** S001, commit `577c5d1a92187cbd0d8db89a2160317706a3eec7`. **Site:** https://the-zeta-citadel.vercel.app/  
-**Programme status (updated 28 October 2026):** S002–S009 CLOSED; S010 READY / UNEXECUTED. Each session requires its own explicit owner invocation.
+**Programme status (updated 28 October 2026):** S002–S010 CLOSED on bounded audited implementation. No S011+ is authorised. Each session requires its own explicit owner invocation.
 
 ## Product vision and non-negotiable invariants
 Build an explorable mathematical world in which a visitor journeys from the larger RH context into the Citadel, a district, an individual building, a theorem chamber, and an interactive exhibit. The goal is mathematical clarity as well as visual immersion; the map is *not* a diagram of logically nested conjectures. Preserve the existing S001 Vercel static site, eight top-level regions, content provenance, brand/design, navigation and deep links. Maintain a single navigable place graph; avoid a parallel hardcoded experience that cannot scale. Do not mistake numerical checking, zero proportions, density estimates or new preprints for a proof of RH.
@@ -81,15 +81,15 @@ Use stable node IDs, parent IDs, ordered children, world/local geometry, camera 
 
 **PASS (S009 achieved on tested implementation):** six-stop beginner and seven-stop advanced trails, derived case/diacritic-normalized source/status-labelled ranked search, opt-in local bookmarks/visited checkpoints with storage-denied fallback, copied deep links, preserved Back/Forward/Up/Home, existing eight regions and S008 connections, clean legacy S002–S008 and new desktop/touch mobile/keyboard/reduced-motion/console Chromium checks. [S009 validation](../sessions/S009/VALIDATION.md) records tested SHA `cff8bd9` and successful run 40737691789. This implementation evidence does not itself verify final merge or Vercel deployment.
 
-### S010 — First release consolidation and research audit
+### S010 — First release consolidation and research audit (CLOSED)
 **Objective:** Consolidate S001–S009 into a dependable, maintainable and mathematically carefully edited release.
 
 **Build:** source-status/content audit; regression and link checking; semantic/provenance validation for location graph and cross-edges; representative desktop/tablet/mobile accessibility and performance passes; deployment verification; documentation and contributor guide; backlog for a possible separately authorised S011+ roadmap.
 
-**PASS:** no known critical navigation or factual blocker; tests and remaining limitations truthfully documented; production deployment checked if access permits. **Boundary:** do not execute S011 or submit mathematical research.
+**PASS (implementation):** source/provenance register, fixed obsolete AIM citations, enhanced graph/negative/schema and desktop/tablet/mobile CI, release/architecture/privacy documentation with exact evidence and limitations. Final PR-head, merged-main and production evidence are separately checked at release time; consult [S010 validation](../sessions/S010/VALIDATION.md) and [closeout](../sessions/S010/CLOSEOUT.md) for the observed statuses. **Boundary:** do not execute S011 or submit mathematical research.
 
 ## Gates and succession
-S002–S009 have been executed with evidence in `sessions/S002/` through `sessions/S009/`. S010 is the *only* installed ready-but-unexecuted prompt (`authoritative/NEXT_SESSION_PROMPT.md`). S011+ is not authorised. At closeout of each accepted session, promote **exactly one** successor and update `authoritative/STATE.json`, `START_HERE.md` and `NEXT_SESSION_PROMPT.md` consistently. If the acceptance gate is blocked, stop and record what remains rather than skipping to another stage. Preserve the predecessor's evidence and fully distinguish implementation tests from mathematics/source verification.
+S002–S010 have been executed separately with evidence in their respective `sessions/` directories. The adopted roadmap **ends at S010**. The canonical `authoritative/NEXT_SESSION_PROMPT.md` is a non-executable programme-end notice, not an installed ready session. S011+ is not authorised. Any extension needs a separately scoped owner-approved roadmap; a closeout cannot self-authorise successors. Preserve the predecessor's evidence and fully distinguish implementation tests from mathematics/source verification.
 
 ## Editorial risk register
 - **M1 mathematical topology:** apparent containment on map misread as logical implication. *Mitigation:* repeated disclaimer and typed edges.
