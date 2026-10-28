@@ -8,7 +8,30 @@ const SOURCES_2026 = [
   {name: 'Lamzouri (2026 research preprint)', url: 'https://arxiv.org/abs/2609.02882'}
 ];
 
+const SOURCE_DENSITY = [
+  {name:'Guth–Maynard, Annals of Mathematics 203 (2026), 623–675; peer reviewed',url:'https://annals.math.princeton.edu/2026/203-2/p06'},
+  {name:'Guth–Maynard, author manuscript §1, Theorem 1.2 and equation (1.4)',url:'https://arxiv.org/pdf/2405.20552'},
+  {name:'NIST DLMF §25.10, zero strip and symmetry',url:'https://dlmf.nist.gov/25.10'}
+];
 const ADDITIONS = {
+  'density-exponent-exhibit': {
+    id:'density-exponent-exhibit',parent:'density-guth',type:'exhibit',name:'The Density Exponent Bench',
+    subtitle:'Sigma and asymptotic height-scale controls',status:'Published theorem · symbolic exponent demonstration',
+    concept:'The authors define their N(σ,T) using both signs of Im(ρ), with Re(ρ)≥σ. Their theorem gives exponent 15(1−σ)/(3+5σ); together with Ingham, a uniform exponent 30(1−σ)/13 over the usual 1/2≤σ≤1 range.',
+    progress:'Compare the σ-dependent exponent, its uniform 30/13 corollary and the older 12/5 exponent. All are asymptotic statements as T→∞ and hide o(1) factors; no numerical zero counts are estimated.',
+    stakes:'A power bound can control potential exceptions without proving that no exceptional zeros exist.',
+    teaser:'Adjust σ and log-height to see exponent tradeoffs, never claimed as zero data.',
+    sources:SOURCE_DENSITY,children:[],exhibit:'density-exponents'
+  },
+  'density-definition-exhibit': {
+    id:'density-definition-exhibit',parent:'density-idea',type:'exhibit',name:'Sparse Is Not Zero',
+    subtitle:'Counts, zero-free claims, and RH',status:'Definitions · logical distinction',
+    concept:'N(T) counts 0<Im(ρ)≤T; N⁺(σ,T) further counts Re(ρ)≥σ, in each case with multiplicity. The plus sign distinguishes this positive-height convention from the authors’ two-sided rectangle.',
+    progress:'A density theorem bounds N⁺(σ,T) asymptotically; a zero-free theorem establishes absence in its stated domain; RH asks for zero off-line exceptions at every height.',
+    stakes:'An upper bound that grows with T cannot be treated as a proof that the counting function vanishes.',
+    teaser:'Compare different mathematical claims and their quantifiers.',
+    sources:SOURCE_DENSITY,children:[],exhibit:'density-meaning'
+  },
   'hall-levinson': {
     id: 'hall-levinson', parent: 'hall', type: 'chamber', name: "Levinson's Workshop",
     subtitle: '1974 · from existence to proportion', status: 'Classical result',
@@ -126,6 +149,18 @@ LOCATIONS['hall-mollifier'].children = ['mollifier-toy-exhibit'];
 LOCATIONS['hall-2026'].children = ['research-comparison-exhibit'];
 LOCATIONS['hall-critical'].children.push('zero-types-exhibit');
 
+// Retain pre-S004 public IDs and their parent links while making both sites traversable.
+LOCATIONS['density-guth'].children = ['density-exponent-exhibit'];
+LOCATIONS['density-guth'].status = 'Guth–Maynard · Annals of Mathematics (2026)';
+LOCATIONS['density-guth'].concept = 'Guth and Maynard proved zero-density estimates, including N(σ,T) with exponent 30(1−σ)/13+o(1) as T→∞. The estimate counts possible zeros in a rectangle, rather than excluding them.';
+LOCATIONS['density-guth'].progress = 'The 2024 preprint was published online 1 March 2026 in the peer-reviewed Annals. The author manuscript gives a σ-dependent estimate and a combined 30/13 corollary; which exponent is lower depends on σ.';
+LOCATIONS['density-guth'].sources = SOURCE_DENSITY;
+LOCATIONS['density-guth'].sourceIds = SOURCE_DENSITY.map(item => item.url);
+LOCATIONS['density-guth'].teaser = 'A published theorem with an interactive asymptotic exponent chart.';
+LOCATIONS['density-idea'].children = ['density-definition-exhibit'];
+LOCATIONS['density-idea'].sources = SOURCE_DENSITY;
+LOCATIONS['density-idea'].sourceIds = SOURCE_DENSITY.map(item => item.url);
+LOCATIONS['density-idea'].teaser = 'Why very few potential exceptions is different from none.';
 export const getLocation = id => (id ? LOCATIONS[id] : null) || null;
 export const getParentLocation = id => getLocation(getLocation(id)?.parent);
 export function getAncestors(id) {

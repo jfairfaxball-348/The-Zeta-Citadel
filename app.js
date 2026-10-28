@@ -1,6 +1,7 @@
 import { EDITION, REGIONS, SUBNODES, getRegion } from './atlas.js';
 import { getLocation as getNode, getAncestors, getRootRegion, isHallLocation } from './locations.js';
 import { renderHallScene, updateCriticalExplorer, updateLab } from './hall.js';
+import { renderCourtyardScene, updateCourtyard, isCourtyardLocation } from './courtyard.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const WIDTH = 1560;
@@ -52,7 +53,7 @@ function createStars() {
 function showView() {
   const v = state.view;
   svg.setAttribute('viewBox', `${v.x.toFixed(3)} ${v.y.toFixed(3)} ${v.w.toFixed(3)} ${v.h.toFixed(3)}`);
-  markers.style.display = state.selected && !isHallLocation(state.selected) && v.w < 680 && getRegion(getRootRegion(state.selected))?.subnodes?.length ? '' : 'none';
+  markers.style.display = state.selected && !isHallLocation(state.selected) && !isCourtyardLocation(state.selected) && v.w < 680 && getRegion(getRootRegion(state.selected))?.subnodes?.length ? '' : 'none';
 }
 function bounded(v) {
   const w = clamp(v.w, 155, WIDTH);
@@ -128,19 +129,22 @@ function updateBreadcrumbs() {
 }
 function renderHall() {
   const hall = isHallLocation(state.selected);
-  svg.hidden = hall;
-  svg.setAttribute('aria-hidden', String(hall));
-  hallScene.hidden = !hall;
-  hallScene.innerHTML = hall ? renderHallScene(state.selected) : '';
+  const courtyard = isCourtyardLocation(state.selected);
+  const interior = hall || courtyard;
+  svg.hidden = interior;
+  svg.setAttribute('aria-hidden', String(interior));
+  hallScene.hidden = !interior;
+  hallScene.innerHTML = hall ? renderHallScene(state.selected) : courtyard ? renderCourtyardScene(state.selected) : '';
   if (hall) updateLab(hallScene);
+  if (courtyard) updateCourtyard(hallScene);
   $('#map-up').disabled = !state.selected;
-  $('#zoom-in').disabled = hall;
-  $('#zoom-out').disabled = hall;
-  $('.map-hint').textContent = hall ? 'CHOOSE A CHAMBER · USE UP TO RETURN' : 'SCROLL TO ZOOM · DRAG TO PAN · CLICK TO EXPLORE';
+  $('#zoom-in').disabled = interior;
+  $('#zoom-out').disabled = interior;
+  $('.map-hint').textContent = interior ? 'CHOOSE A SITE · USE UP TO RETURN' : 'SCROLL TO ZOOM · DRAG TO PAN · CLICK TO EXPLORE';
 }
 function renderMarkers() {
   markers.replaceChildren();
-  if (!state.selected || isHallLocation(state.selected)) {showView();return;}
+  if (!state.selected || isHallLocation(state.selected) || isCourtyardLocation(state.selected)) {showView();return;}
   const parent = getRegion(getRootRegion(state.selected));
   if (!parent?.subnodes?.length) {showView();return;}
   const fragment = document.createDocumentFragment();
@@ -189,7 +193,7 @@ function svgPoint(event) {
   return matrix ? point.matrixTransform(matrix.inverse()) : {x:780,y:490};
 }
 function zoomStep(factor, at) {
-  if (isHallLocation(state.selected)) return;
+  if (isHallLocation(state.selected) || isCourtyardLocation(state.selected)) return;
   const current = state.view;
   const anchor = at || {x:current.x+current.w/2,y:current.y+current.h/2};
   const scale = clamp(current.w * factor,155,WIDTH) / current.w;
@@ -206,6 +210,7 @@ function bindEvents() {
   document.addEventListener('input', event => {
     if (event.target.matches('#critical-sigma, #critical-height')) updateCriticalExplorer(hallScene);
     if (event.target.matches('#taxonomy-case, #hardy-waves, #milestone-select, #toy-a, #paper-select')) updateLab(hallScene);
+    if (event.target.matches('#density-sigma, #density-logt, #density-mode')) updateCourtyard(hallScene);
   });
   document.addEventListener('click',(event)=>{
     const nav = event.target.closest('[data-navigate]');
