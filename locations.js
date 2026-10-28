@@ -368,24 +368,33 @@ export function getAncestors(id) {
 }
 export const getRootRegion = id => getAncestors(id)[0] || null;
 export const isHallLocation = id => getRootRegion(id) === 'hall';
-export function validateLocations() {
+export function validateLocations(nodes=LOCATIONS) {
   const errors = [];
-  for (const [key, node] of Object.entries(LOCATIONS)) {
+  const allowedTypes = new Set(['region','site','chamber','exhibit']);
+  for (const [key, node] of Object.entries(nodes)) {
+    if (!node || typeof node !== 'object') { errors.push('Invalid location: ' + key); continue; }
     if (key !== node.id) errors.push('Key/ID mismatch: ' + key);
-    if (node.parent && !LOCATIONS[node.parent]) errors.push('Missing parent for ' + key);
+    if (!allowedTypes.has(node.type)) errors.push('Invalid location type: ' + key);
+    if (node.parent && !nodes[node.parent]) errors.push('Missing parent for ' + key);
     if (!node.parent && node.type !== 'region') errors.push('Unexpected root: ' + key);
+    if (!Array.isArray(node.children)) {errors.push('Invalid children for ' + key); continue;}
     if (new Set(node.children).size !== node.children.length) errors.push('Duplicate children for ' + key);
     for (const child of node.children) {
-      if (!LOCATIONS[child]) errors.push('Missing child: ' + key + ' -> ' + child);
-      else if (LOCATIONS[child].parent !== key) errors.push('Parent mismatch: ' + key + ' -> ' + child);
+      if (!nodes[child]) errors.push('Missing child: ' + key + ' -> ' + child);
+      else if (nodes[child].parent !== key) errors.push('Parent mismatch: ' + key + ' -> ' + child);
     }
-    if (node.parent && !LOCATIONS[node.parent]?.children.includes(key)) errors.push('Missing reverse child: ' + key);
+    if (node.parent && !nodes[node.parent]?.children?.includes(key)) errors.push('Missing reverse child: ' + key);
+    if (!Array.isArray(node.sources) || !node.sources.length) errors.push('Missing sources for ' + key);
+    else for(const source of node.sources) {
+      if (!source || typeof source.name !== 'string' || !source.name.trim() || typeof source.url !== 'string' || !/^https:\/\/[^\s/?#]+\.[^\s/?#]+(?:[/?#][^\s]*)?$/.test(source.url)) errors.push('Invalid source for ' + key);
+    }
+    if (!Array.isArray(node.sourceIds) || !node.sourceIds.every(url => typeof url === 'string' && url.startsWith('https://'))) errors.push('Invalid source IDs for ' + key);
     const visited = new Set();
     let cursor = node;
     while (cursor) {
       if (visited.has(cursor.id)) { errors.push('Cycle at ' + key); break; }
       visited.add(cursor.id);
-      cursor = LOCATIONS[cursor.parent];
+      cursor = nodes[cursor.parent];
     }
   }
   return errors;
