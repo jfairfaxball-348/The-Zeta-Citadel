@@ -13,7 +13,46 @@ const SOURCE_DENSITY = [
   {name:'Guth–Maynard, author manuscript §1, Theorem 1.2 and equation (1.4)',url:'https://arxiv.org/pdf/2405.20552'},
   {name:'NIST DLMF §25.10, zero strip and symmetry',url:'https://dlmf.nist.gov/25.10'}
 ];
+const SOURCE_KEEP = [
+ {name:'NIST DLMF §25.10(i), Euler product and zero taxonomy',url:'https://dlmf.nist.gov/25.10'},
+ {name:'Mossinghoff–Trudgian–Yang, Research in Number Theory 10:11 (2024), peer reviewed',url:'https://link.springer.com/article/10.1007/s40993-023-00498-y'}
+];
 const ADDITIONS = {
+ 'keep-classical': {
+  id:'keep-classical',parent:'keep',type:'site',name:'The Classical Bastion',
+  subtitle:'A published logarithmic zero-free region',status:'Proved · explicit 2024 published bound',
+  concept:'Mossinghoff, Trudgian and Yang prove ζ(σ+it)≠0 for σ≥1−1/(5.558691 ln|t|) when |t|≥2. Natural logarithm and absolute imaginary height are essential.',
+  progress:'The constant is explicit and effective on its stated range; it is not a universal zero-free guarantee for ½<σ<1, nor asserted here as the latest record.',
+  stakes:'The region approaches Re(s)=1 as |t| grows and leaves a gap to the critical line.',
+  teaser:'Compare the exact published logarithmic boundary at different heights.',
+  sources:SOURCE_KEEP,children:['keep-comparison-exhibit']
+ },
+ 'keep-vk': {
+  id:'keep-vk',parent:'keep',type:'site',name:'The Korobov Tower',
+  subtitle:'Published Vinogradov–Korobov-shaped bound',status:'Proved · explicit 2024 published bound',
+  concept:'Mossinghoff, Trudgian and Yang prove ζ(σ+it)≠0 for σ≥1−1/[55.241 (ln|t|)^(2/3)(ln ln|t|)^(1/3)] when |t|≥3.',
+  progress:'The improved power-log form can outperform this particular classical bound at sufficiently immense heights; the validity domain and exact constants must remain attached.',
+  stakes:'A stronger asymptotic boundary is still not a proof that every nontrivial zero lies on the central line.',
+  teaser:'Explore the height dependence and compare with the classical bastion.',
+  sources:SOURCE_KEEP,children:['keep-vk-exhibit']
+ },
+ 'keep-geometry-exhibit':{
+  id:'keep-geometry-exhibit',parent:'keep-boundary',type:'exhibit',name:'The Outer Wall Coordinate Chart',subtitle:'Trivial zeros, critical line and the pole',
+  status:'Established facts · schematic plane',concept:'The Euler product gives nonvanishing for σ>1; Hadamard and de la Vallée Poussin proved nonvanishing on σ=1 except at s=1, which is a pole.',
+  progress:'The only zeros with Re(s)≤0 are the negative even integers. The critical strip is 0<σ<1, and RH concerns zeros within it.',stakes:'A pole is not a zero and not a counterexample; a generic strip point is not a known zero.',teaser:'See the exact zero/pole taxonomy on a labelled schematic plane.',
+  sources:SOURCE_KEEP,children:[],exhibit:'keep-geometry'
+ },
+ 'keep-comparison-exhibit':{
+  id:'keep-comparison-exhibit',parent:'keep-classical',type:'exhibit',name:'Logarithmic Boundary Comparator',subtitle:'Height-sensitive guaranteed boundaries',
+  status:'Published rigorous formulas · computed boundary values',concept:'At |t|≥10 the interface evaluates two theorem boundaries, each known to be zero-free at and to the right of its σ threshold.',progress:'Move the height parameter to read admissible regions. This does not sample ζ or plot actual zeros.',stakes:'Neither theorem covers the entire off-line strip, and a stronger bound is still not RH.',
+  teaser:'Change absolute height and compare the 2024 published zero-free formulas.',sources:SOURCE_KEEP,children:[],exhibit:'keep-boundaries'
+ },
+ 'keep-vk-exhibit':{
+  id:'keep-vk-exhibit',parent:'keep-vk',type:'exhibit',name:'Vinogradov–Korobov Boundary Comparator',subtitle:'When the power-log form overtakes the classical',
+  status:'Published rigorous formulas · computed boundary values',concept:'The Vinogradov–Korobov-form inequality is valid at |t|≥3; this comparator uses |t|≥10 and evaluates its exact 2024 published boundary.',progress:'Compare it against the 5.558691 classical bound with all domains labelled.',stakes:'Even a sharper known zero-free edge remains near σ=1, not σ=½.',teaser:'See how the two proved boundaries change with height.',
+  sources:SOURCE_KEEP,children:[],exhibit:'keep-boundaries'
+ },
+
   'density-exponent-exhibit': {
     id:'density-exponent-exhibit',parent:'density-guth',type:'exhibit',name:'The Density Exponent Bench',
     subtitle:'Sigma and asymptotic height-scale controls',status:'Published theorem · symbolic exponent demonstration',
@@ -161,6 +200,14 @@ LOCATIONS['density-idea'].children = ['density-definition-exhibit'];
 LOCATIONS['density-idea'].sources = SOURCE_DENSITY;
 LOCATIONS['density-idea'].sourceIds = SOURCE_DENSITY.map(item => item.url);
 LOCATIONS['density-idea'].teaser = 'Why very few potential exceptions is different from none.';
+// Extend the S001 Keep ID instead of replacing its historic hash.
+LOCATIONS.keep.children = ['keep-boundary','keep-classical','keep-vk'];
+LOCATIONS.keep.sources = SOURCE_KEEP;
+LOCATIONS.keep.sourceIds = SOURCE_KEEP.map(s=>s.url);
+LOCATIONS['keep-boundary'].children = ['keep-geometry-exhibit'];
+LOCATIONS['keep-boundary'].sources = SOURCE_KEEP;
+LOCATIONS['keep-boundary'].sourceIds = SOURCE_KEEP.map(s=>s.url);
+LOCATIONS['keep-boundary'].teaser = 'The Euler-product outer wall, critical strip and exact zero/pole distinctions.';
 export const getLocation = id => (id ? LOCATIONS[id] : null) || null;
 export const getParentLocation = id => getLocation(getLocation(id)?.parent);
 export function getAncestors(id) {

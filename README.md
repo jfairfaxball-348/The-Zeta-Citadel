@@ -39,6 +39,7 @@ No npm install or build is required.
 | `locations.js` | Validated arbitrary-depth typed place graph, stable URLs, status and sources. |
 | `hall.js` / `laboratory.js` | Great Hall floor plan and six labelled, interactive educational exhibits. |
 | `courtyard.js` | S004 Courtyard floor plan, exponent comparison and sparse-versus-zero exhibit. |
+| `keep.js` | S005 Keep floor plan, exact zero/pole coordinate chart and height-dependent published zero-free boundaries. |
 | `tests/graph.mjs` / `tests/browser.mjs` | Graph regression and HTTP Chromium desktop/mobile suite. |
 | `favicon.svg` | Original project icon. |
 | `vercel.json` | Static Vercel settings. |
@@ -70,7 +71,7 @@ Apache-2.0 (see LICENSE).
 
 The source of truth is [authoritative/STATE.json](authoritative/STATE.json), [authoritative/START_HERE.md](authoritative/START_HERE.md) and [docs/ROADMAP.md](docs/ROADMAP.md), under [AGENTS.md](AGENTS.md) and [docs/SESSION_PROTOCOL.md](docs/SESSION_PROTOCOL.md).
 
-**S002, S003 and S004 are completed. S005 is prepared but unexecuted.** The one next authoritative prompt is [authoritative/NEXT_SESSION_PROMPT.md](authoritative/NEXT_SESSION_PROMPT.md). Every session requires a separate explicit owner invocation; committing a future prompt does not run it.
+**S002–S005 are completed. S006 is prepared but unexecuted.** The one next authoritative prompt is [authoritative/NEXT_SESSION_PROMPT.md](authoritative/NEXT_SESSION_PROMPT.md). Every session requires a separate explicit owner invocation; committing a future prompt does not run it.
 
 ## Explore the completed interiors
 
@@ -78,4 +79,10 @@ The **Great Hall** contains five chambers and six interactive exhibits: critical
 
 The **Courtyard** has two research sites and two further exhibits. Visit `#density-guth` → `#density-exponent-exhibit` for sliders comparing asymptotic Guth–Maynard and classical exponents; visit `#density-idea` → `#density-definition-exhibit` for logical differences between sparse exceptional zeros, a zero-free theorem and RH. Neither graphic proves RH or computes zeta zeros. Back/Forward, Up, deep links, keyboard navigation and mobile touch reuse the shared recursive atlas.
 
-S004 source and CI evidence are in [sessions/S004/VALIDATION.md](sessions/S004/VALIDATION.md) and [sessions/S004/CLOSEOUT.md](sessions/S004/CLOSEOUT.md). The next distinct phase, **S005 — Keep zero-free territories**, awaits fresh owner authorisation.
+S004 source and CI evidence are in [sessions/S004/VALIDATION.md](sessions/S004/VALIDATION.md) and [sessions/S004/CLOSEOUT.md](sessions/S004/CLOSEOUT.md). The next distinct phase, **S006 — Dungeons numerical verification and certificates**, awaits fresh owner authorisation.
+
+## Explore the proved Keep
+
+The Keep retains `#keep-boundary` and adds two published theorem sites, `#keep-classical` and `#keep-vk`. From the outer wall enter `#keep-geometry-exhibit` for an exact zero/pole taxonomy; `#keep-comparison-exhibit` and `#keep-vk-exhibit` let you change log₁₀|t| and compute the real-part thresholds of two Mossinghoff–Trudgian–Yang (2024) explicit, unconditional zero-free bounds. The controls work only on heights at least 10, a common domain of validity, and clearly show their full original |t|≥2 and |t|≥3 restrictions. The bars show theorem guarantees, never sampled zeta zeros. Neither estimate proves RH nor is it promoted as a 2026 record.
+
+[S005 documented source audit and browser test evidence](sessions/S005/VALIDATION.md). Future S006 is not executed by this release.
