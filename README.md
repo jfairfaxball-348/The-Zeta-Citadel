@@ -61,3 +61,9 @@ An educational explanatory atlas, not a zeta-zero computation engine, research-p
 ## Licence
 
 Apache-2.0 (see LICENSE).
+
+## Authoritative S002–S010 roadmap
+
+The expandable-world development plan is [docs/ROADMAP.md](docs/ROADMAP.md). Start from [authoritative/START_HERE.md](authoritative/START_HERE.md), follow [AGENTS.md](AGENTS.md) and [docs/SESSION_PROTOCOL.md](docs/SESSION_PROTOCOL.md), and consult [authoritative/STATE.json](authoritative/STATE.json). The **single next ready (unexecuted)** prompt is [authoritative/NEXT_SESSION_PROMPT.md](authoritative/NEXT_SESSION_PROMPT.md). S001's retrospective checkpoint is in [sessions/S001/CLOSEOUT.md](sessions/S001/CLOSEOUT.md).
+
+Installing the roadmap and prompt does not execute S002. Each numbered session requires a separate explicit owner invocation.
