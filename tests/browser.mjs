@@ -88,7 +88,7 @@ try {
  assert.match(await page.locator('#dungeon-count-estimate').innerText(),/NOT an exact integer zero count/);
  await page.locator('#dungeon-preset').selectOption('3000000000000');
  assert.match(await page.locator('#dungeon-proof-status').innerText(),/3 × 10¹²/);
- assert.match(await page.locator('#dungeon-count-chart-label').innerText(),/NOT N\(T\)/);
+ assert.match(await page.locator('#dungeon-count-chart-label').textContent(),/NOT N\(T\)/);
  await page.locator('#dungeon-logt').focus(); await page.keyboard.press('ArrowLeft');
  assert.equal(await page.locator('#dungeon-preset').inputValue(),'');
  await page.goBack();assert.equal(new URL(page.url()).hash,'#dungeon-counting');
