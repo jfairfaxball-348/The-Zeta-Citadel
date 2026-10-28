@@ -6,19 +6,19 @@
   "updated_date_utc": "2026-10-28",
   "programme": "S002-S010 progressively explorable mathematical world",
   "baseline": {
-    "last_completed_session": "S008",
+    "last_completed_session": "S009",
     "status": "CLOSED",
-    "app_commit_sha": "5308932f560fd01c182f62ef7fc9f936f5e820ef",
-    "application": "S008 independent eight-edge sourced relationship graph; two proved logical entailments with conjectural premises, two explicitly conditional consequences, two historically documented developments, two non-entailing analogies; accessible filters, evidence panels and original-location navigation via one hash/history router."
+    "app_commit_sha": "cff8bd9086d1a43ef9510d13b1962aa6c5182c7c",
+    "application": "S009 client-side ranked discovery over canonical mathematical locations and eight typed S008 bridges; six-stop beginner and seven-stop advanced learning journeys, stable routes and copy links, local optional saved-place/progress persistence, desktop/mobile Chromium regression."
   },
   "session": {
-    "next": "S009",
+    "next": "S010",
     "status": "READY_UNEXECUTED",
     "execution_authorized": false,
     "canonical_prompt": "authoritative/NEXT_SESSION_PROMPT.md",
-    "predecessor": "S008",
+    "predecessor": "S009",
     "roadmap": "docs/ROADMAP.md",
-    "required_owner_invocation": "New and separate owner instruction to run S009"
+    "required_owner_invocation": "New and separate owner instruction to run S010"
   },
   "roadmap": [
     {
@@ -59,12 +59,12 @@
     {
       "id": "S009",
       "title": "Search and learning journeys",
-      "status": "READY_UNEXECUTED"
+      "status": "CLOSED"
     },
     {
       "id": "S010",
       "title": "Consolidation and audited release",
-      "status": "PLANNED"
+      "status": "READY_UNEXECUTED"
     }
   ],
   "invariant_files": [
@@ -80,7 +80,8 @@
     "keep.js",
     "dungeon.js",
     "outer.js",
-    "connections.js"
+    "connections.js",
+    "discovery.js"
   ],
   "authority_files": [
     "AGENTS.md",
@@ -97,6 +98,6 @@
     "No implication inferred from map geography",
     "No automatic publication, external outreach, paid services, or proof-of-RH claim"
   ],
-  "next_gate": "S009: accessible search and source-labelled beginner/advanced journeys using the existing typed locations and S008 relationships, with stable deep links, local-only optional saved places and no analytics",
-  "deployment_note": "S007 production READY deployment dpl_5Tkh9sDPRjgw5HXpV2WETkZcv539 at ordinary two-parent merged main e4fb51f6caafa26748f2a9b321adbae6f62e33fb. S008 branch push S008 workflow run 40733372247 succeeded at implementation 5308932f560fd01c182f62ef7fc9f936f5e820ef (legacy S002–S007 HTTP Chromium plus new connection tests). Final S008 documentation head PR CI, ordinary merge, merged main CI and Vercel production are downstream events and must be verified LIVE; this premerge note does not claim them."
+  "next_gate": "S010: comprehensive mathematical source/status/link audit, recursive location/connection/discovery schema and deep-link testing, cross-device accessibility/performance, operational/deployment verification, contributor guide, limitations and audited release. S010 not authorised by S009.",
+  "deployment_note": "S008 entry production READY dpl_9kZj4iUYi4B2WnNkqNRPJ2uqYmUH at SHA 6b547330c5eb330296da1c5b976d4205a28c2b51. S009 green implementation workflow 40737691789 at cff8bd9086d1a43ef9510d13b1962aa6c5182c7c; final S009 governance PR head, merge, merged main CI and S009 production deployment are downstream and must be checked LIVE before assertion."
 }
