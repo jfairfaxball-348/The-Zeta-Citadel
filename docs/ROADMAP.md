@@ -1,7 +1,7 @@
 # The Zeta Citadel — authoritative development roadmap (S002–S010)
 
 **Adopted:** 28 October 2026. **Predecessor:** S001, commit `577c5d1a92187cbd0d8db89a2160317706a3eec7`. **Site:** https://the-zeta-citadel.vercel.app/  
-**Programme status:** S002 READY / UNEXECUTED; S003–S010 PLANNED. Each session requires its own explicit owner invocation.
+**Programme status (updated 28 October 2026):** S002 CLOSED; S003 READY / UNEXECUTED; S004–S010 PLANNED. Each session requires its own explicit owner invocation.
 
 ## Product vision and non-negotiable invariants
 Build an explorable mathematical world in which a visitor journeys from the larger RH context into the Citadel, a district, an individual building, a theorem chamber, and an interactive exhibit. The goal is mathematical clarity as well as visual immersion; the map is *not* a diagram of logically nested conjectures. Preserve the existing S001 Vercel static site, eight top-level regions, content provenance, brand/design, navigation and deep links. Maintain a single navigable place graph; avoid a parallel hardcoded experience that cannot scale. Do not mistake numerical checking, zero proportions, density estimates or new preprints for a proof of RH.
@@ -89,7 +89,7 @@ Use stable node IDs, parent IDs, ordered children, world/local geometry, camera 
 **PASS:** no known critical navigation or factual blocker; tests and remaining limitations truthfully documented; production deployment checked if access permits. **Boundary:** do not execute S011 or submit mathematical research.
 
 ## Gates and succession
-S002 is the *only* installed actionable prompt (`authoritative/NEXT_SESSION_PROMPT.md`). S003–S010 are a planned schedule, not open work or permission. At closeout of each accepted session, promote **exactly one** successor and update `authoritative/STATE.json`, `START_HERE.md` and `NEXT_SESSION_PROMPT.md` consistently. If the acceptance gate is blocked, stop and record what remains rather than skipping to another stage. Preserve the predecessor's evidence and fully distinguish implementation tests from mathematics/source verification.
+S002 has been executed and accepted with evidence in `sessions/S002/`. S003 is the *only* installed ready-but-unexecuted prompt (`authoritative/NEXT_SESSION_PROMPT.md`). S004–S010 remain roadmap only. At closeout of each accepted session, promote **exactly one** successor and update `authoritative/STATE.json`, `START_HERE.md` and `NEXT_SESSION_PROMPT.md` consistently. If the acceptance gate is blocked, stop and record what remains rather than skipping to another stage. Preserve the predecessor's evidence and fully distinguish implementation tests from mathematics/source verification.
 
 ## Editorial risk register
 - **M1 mathematical topology:** apparent containment on map misread as logical implication. *Mitigation:* repeated disclaimer and typed edges.
