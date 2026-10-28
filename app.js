@@ -173,7 +173,7 @@ function select(id, options = {}) {
   updateBreadcrumbs();
   $('#map-mode').textContent = isDiscoveryRoute(id) ? 'DISCOVERY / LEARNING JOURNEYS' : isConnectionRoute(id) ? 'CONNECTIONS / SOURCE-AUDITED BRIDGES' : id ? `FOCUSED / ${getNode(id).name.toUpperCase()}` : 'OVERVIEW / THE KNOWN & UNKNOWN';
   hideMobileMenu();
-  if (window.matchMedia('(max-width: 660px)').matches && id && (!isConnectionRoute(id) || connectionFromRoute(id))) $('#story-panel').scrollIntoView({behavior:reducedMotion ? 'instant' : 'smooth', block:'nearest'});
+  if (window.matchMedia('(max-width: 660px)').matches && id && !isDiscoveryRoute(id) && (!isConnectionRoute(id) || connectionFromRoute(id))) $('#story-panel').scrollIntoView({behavior:reducedMotion ? 'instant' : 'smooth', block:'nearest'});
 }
 function updateBreadcrumbs() {
   if (isDiscoveryRoute(state.selected)) {
