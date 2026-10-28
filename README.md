@@ -35,7 +35,11 @@ No npm install or build is required.
 | `index.html` | The page, responsive shell and original SVG map artwork. |
 | `styles.css` | Cartographic visual design, transitions and responsive layout. |
 | `atlas.js` | All region definitions, mathematical copy, milestones, sources and subsite data. |
-| `app.js` | Viewport animation, navigation, interaction and story rendering. |
+| `app.js` | Viewport animation, shared Hall/Courtyard interiors, browser-history navigation and story rendering. |
+| `locations.js` | Validated arbitrary-depth typed place graph, stable URLs, status and sources. |
+| `hall.js` / `laboratory.js` | Great Hall floor plan and six labelled, interactive educational exhibits. |
+| `courtyard.js` | S004 Courtyard floor plan, exponent comparison and sparse-versus-zero exhibit. |
+| `tests/graph.mjs` / `tests/browser.mjs` | Graph regression and HTTP Chromium desktop/mobile suite. |
 | `favicon.svg` | Original project icon. |
 | `vercel.json` | Static Vercel settings. |
 
@@ -44,7 +48,7 @@ No npm install or build is required.
 1. Update a region in `REGIONS` in `atlas.js` to change its description, status, milestones or sources.
 2. Add an entry to `SUBNODES`, supply `parent`, map coordinates (`x`, `y`) and content, then add its key to the parent's `subnodes` array. The app automatically renders a clickable pin and a sidebar link.
 3. To add a full new region, supply a geometric SVG shape with `data-region="id"` in `index.html` and a matching `REGIONS` entry. The navigation builds itself.
-4. For future third-/fourth-level detail, generalize `parent` into an arbitrary parent chain; the current code supports **two geographic detail levels** (regions and subsites) plus the atlas overview.
+4. For deeper educational exhibits, add a typed entry in `locations.js` with `parent` and ordered `children`, named source references and an optional renderer/exhibit key. The existing place graph supports arbitrary depth and preserves browser hashes and Up/Back navigation.
 
 ## Editorial and mathematical safeguards
 
@@ -52,7 +56,7 @@ This is an **analogy**, not a formal lattice of implications. In particular, GRH
 
 The original 41% claim is superseded by 2026 **research preprints** reporting over 67.25% of nontrivial zeta zeros simple and on the line (Alpöge–Furman and Lamzouri). Some newer public refinements exist, but are not automatically promoted to established records here. The Platt–Trudgian 2021 computation reaches *height* 3×10¹², not merely *three trillion zeros*.
 
-Main source references are attached to each region in `atlas.js`. Recheck sources and date status before declaring a new mathematical record. Nothing on this site claims a proof of RH.
+Source references belong in `atlas.js` and typed descendants in `locations.js`. Guth–Maynard's zero-density result is now published in the *Annals of Mathematics* (2026); the Courtyard comparisons are asymptotic leading powers, not computed zeros. Recheck sources and date status before declaring a new mathematical record. Nothing on this site claims a proof of RH.
 
 ## Scope
 
@@ -62,16 +66,16 @@ An educational explanatory atlas, not a zeta-zero computation engine, research-p
 
 Apache-2.0 (see LICENSE).
 
-## Authoritative S002–S010 roadmap
+## Authoritative S002–S010 roadmap and current status
 
-The expandable-world development plan is [docs/ROADMAP.md](docs/ROADMAP.md). Start from [authoritative/START_HERE.md](authoritative/START_HERE.md), follow [AGENTS.md](AGENTS.md) and [docs/SESSION_PROTOCOL.md](docs/SESSION_PROTOCOL.md), and consult [authoritative/STATE.json](authoritative/STATE.json). The **single next ready (unexecuted)** prompt is [authoritative/NEXT_SESSION_PROMPT.md](authoritative/NEXT_SESSION_PROMPT.md). S001's retrospective checkpoint is in [sessions/S001/CLOSEOUT.md](sessions/S001/CLOSEOUT.md); S002 validation and handoff are in [sessions/S002](sessions/S002).
+The source of truth is [authoritative/STATE.json](authoritative/STATE.json), [authoritative/START_HERE.md](authoritative/START_HERE.md) and [docs/ROADMAP.md](docs/ROADMAP.md), under [AGENTS.md](AGENTS.md) and [docs/SESSION_PROTOCOL.md](docs/SESSION_PROTOCOL.md).
 
-S002 is closed. The installed S003 prompt is ready but not executed; every numbered session requires a separate explicit owner invocation.
+**S002, S003 and S004 are completed. S005 is prepared but unexecuted.** The one next authoritative prompt is [authoritative/NEXT_SESSION_PROMPT.md](authoritative/NEXT_SESSION_PROMPT.md). Every session requires a separate explicit owner invocation; committing a future prompt does not run it.
 
-## Session 002 · Enter the Great Hall
+## Explore the completed interiors
 
-The map now supports a stable arbitrary-depth location graph (`locations.js`) and browser history. Select **The Great Hall** to enter the architectural floor plan, then a chamber, then the **Critical Strip Coordinate Explorer** from the Critical Line Observatory. The explorer is a **schematic coordinate lesson**, not a zeta calculator or a list of verified zeros. Select **Up** or breadcrumbs to retrace the path, and use browser Back/Forward or a deep link such as `#critical-line-exhibit`.
+The **Great Hall** contains five chambers and six interactive exhibits: critical-strip coordinates, zero/pole types, Hardy sign changes, historical proportions, toy mollifier and a 2026 research-preprint comparison. These figures are explicitly illustrative or source-labelled, not exhaustive zero computations.
 
-Run `node tests/graph.mjs` to validate recursive IDs. The S002 GitHub Actions workflow also performs syntax checks and real HTTP Chromium desktop/mobile smoke tests using test-only Playwright. The deployed site remains a no-build static project; no client package installation is required.
+The **Courtyard** has two research sites and two further exhibits. Visit `#density-guth` → `#density-exponent-exhibit` for sliders comparing asymptotic Guth–Maynard and classical exponents; visit `#density-idea` → `#density-definition-exhibit` for logical differences between sparse exceptional zeros, a zero-free theorem and RH. Neither graphic proves RH or computes zeta zeros. Back/Forward, Up, deep links, keyboard navigation and mobile touch reuse the shared recursive atlas.
 
-S002 implementation evidence is in [sessions/S002/VALIDATION.md](sessions/S002/VALIDATION.md) and [sessions/S002/CLOSEOUT.md](sessions/S002/CLOSEOUT.md). The next separately authorised milestone is **S003**; the canonical prepared prompt remains [authoritative/NEXT_SESSION_PROMPT.md](authoritative/NEXT_SESSION_PROMPT.md).
+S004 source and CI evidence are in [sessions/S004/VALIDATION.md](sessions/S004/VALIDATION.md) and [sessions/S004/CLOSEOUT.md](sessions/S004/CLOSEOUT.md). The next distinct phase, **S005 — Keep zero-free territories**, awaits fresh owner authorisation.
