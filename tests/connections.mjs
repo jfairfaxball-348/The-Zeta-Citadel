@@ -1,0 +1,35 @@
+import assert from 'node:assert/strict';
+import {LOCATIONS,getAncestors} from '../locations.js';
+import {REGIONS} from '../atlas.js';
+import {CONNECTIONS,CONNECTION_TYPES,validateConnections,connectionRoute,connectionFromRoute,isConnectionRoute} from '../connections.js';
+assert.deepEqual(validateConnections(),[]);
+assert.equal(REGIONS.length,8);
+assert.equal(CONNECTIONS.length,8);
+assert.equal(new Set(CONNECTIONS.map(e=>e.id)).size,8);
+assert.deepEqual(Object.keys(CONNECTION_TYPES).sort(),['conditional_dependency','conceptual_analogy','historical_influence','proved_implication'].sort());
+assert.deepEqual(Object.groupBy(CONNECTIONS,e=>e.type) ? Object.values(Object.groupBy(CONNECTIONS,e=>e.type)).map(a=>a.length).sort():[],[2,2,2,2]);
+const districts=new Set();
+for(const edge of CONNECTIONS) {
+ assert.ok(LOCATIONS[edge.from]&&LOCATIONS[edge.to]);
+ districts.add(getAncestors(edge.from)[0]);districts.add(getAncestors(edge.to)[0]);
+ assert.equal(connectionFromRoute(connectionRoute(edge.id)),edge);
+ assert.ok(isConnectionRoute(connectionRoute(edge.id)));
+ assert.ok(edge.sources.every(s=>s.url.startsWith('https://')));
+ assert.ok(edge.scope.length>60);
+}
+assert.ok(districts.size>=3);
+assert.ok(isConnectionRoute('connections'));
+assert.ok(!isConnectionRoute('connection--not-real'));
+assert.equal(connectionFromRoute('connection--not-real'),null);
+const clone=CONNECTIONS.map(e=>({...e,sources:[...e.sources]}));
+const mustReject=(edit,expected)=>{const copy=clone.map(e=>({...e,sources:[...e.sources]}));edit(copy);assert.ok(validateConnections(copy).some(e=>e.includes(expected)),expected);};
+mustReject(es=>es[1].id=es[0].id,'Duplicate edge ID');
+mustReject(es=>es[1].from='unknown-location','Missing endpoint');
+mustReject(es=>es[1].to=es[1].from,'Self-edge');
+mustReject(es=>es[1].type='unproven_containment','Invalid type');
+mustReject(es=>es[1].sources=[],'Empty source list');
+mustReject(es=>es[1].sources=[{name:'bad',url:'javascript:alert(1)'}],'Invalid source');
+mustReject(es=>es[1].claim='','Missing claim');
+mustReject(es=>es[1].directed=false,'Direction/type mismatch');
+for(const id of ['hall','courtyard','keep','dungeon','selberg','grand','grh','erh'])assert.ok(LOCATIONS[id]);
+console.log('PASS S008: 8 sourced nontransitive edges, 4 types, >=3 districts, routes, negative schema cases and all 8 roots');

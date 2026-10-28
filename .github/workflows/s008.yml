@@ -1,0 +1,28 @@
+name: S008 Typed Connections
+on:
+  pull_request:
+  push:
+    branches: [main, session/S008-typed-connections]
+jobs:
+  validation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax, authority, legacy and S008 edge validator
+        run: |
+          for file in atlas.js locations.js hall.js laboratory.js courtyard.js keep.js dungeon.js outer.js connections.js app.js tests/graph.mjs tests/connections.mjs tests/browser.mjs tests/browser-connections.mjs; do node --check "$file"; done
+          node tests/graph.mjs
+          node tests/connections.mjs
+          node -e "JSON.parse(require('fs').readFileSync('authoritative/STATE.json','utf8'))"
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Existing S002-S007 HTTP desktop and mobile regression
+        run: node tests/browser.mjs
+      - name: S008 typed connections HTTP Chromium desktop and touch mobile
+        run: node tests/browser-connections.mjs
