@@ -50,7 +50,7 @@ try{
  assert.equal(await mobile.locator('.connection-card').count(),2);
  await mobile.locator('[data-navigate="connection--zero-count-density-analogy"]').first().tap();
  assert.equal(new URL(mobile.url()).hash,'#connection--zero-count-density-analogy');
- assert.match(await mobile.locator('#story-content').innerText(),/different restrictions/);
+ assert.match(await mobile.locator('#story-content').innerText(),/restricts the count by real part/);
  await mobile.emulateMedia({reducedMotion:'reduce'});
  await mobile.locator('#map-up').tap();
  assert.equal(new URL(mobile.url()).hash,'#connections');
