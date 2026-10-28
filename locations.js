@@ -17,7 +17,58 @@ const SOURCE_KEEP = [
  {name:'NIST DLMF §25.10(i), Euler product and zero taxonomy',url:'https://dlmf.nist.gov/25.10'},
  {name:'Mossinghoff–Trudgian–Yang, Research in Number Theory 10:11 (2024), peer reviewed',url:'https://link.springer.com/article/10.1007/s40993-023-00498-y'}
 ];
+const SOURCE_DUNGEON = [
+ {name:'Platt–Trudgian, Bulletin of the London Mathematical Society 53 (2021), 792–797 · published theorem',url:'https://doi.org/10.1112/blms.12460'},
+ {name:'NIST DLMF §25.10 · zero counting, sign changes and Riemann–Siegel formula',url:'https://dlmf.nist.gov/25.10'},
+ {name:'Riemann–von Mangoldt formula (asymptotic reference)',url:'https://mathworld.wolfram.com/Riemann-vonMangoldtFormula.html'}
+];
 const ADDITIONS = {
+ 'dungeon-counting':{
+  id:'dungeon-counting',parent:'dungeon',type:'site',name:'The Counting Well',
+  subtitle:'Compare height T with the asymptotic N(T) estimate',status:'Asymptotic theorem · illustrative calculation',
+  concept:'N(T) counts all nontrivial zeros in the critical strip with positive imaginary part, counted with multiplicity. It is a zero count; T is an imaginary coordinate. The Riemann–von Mangoldt main term estimates the scale of the count, but it does not produce its exact integer value.',
+  progress:'The interactive formula uses T/(2π)·(ln(T/(2π))−1) with an omitted O(ln T) term as T→∞. It plots no zeros and certifies no counts.',
+  stakes:'At a chosen height, a plausible count estimate is logically different from identifying and accounting for every zero.',
+  teaser:'Move a height slider to compare two independently labelled quantities.',
+  sources:SOURCE_DUNGEON,children:['dungeon-count-exhibit']
+ },
+ 'dungeon-methods':{
+  id:'dungeon-methods',parent:'dungeon',type:'site',name:'The Completeness Workshop',
+  subtitle:'From candidate roots to rigorous finite certification',status:'Proof-method exposition · not new computation',
+  concept:'Numerical root guesses locate possible line zeros; rigorous enclosures certify sign decisions; a separate total-zero count can show whether any strip zeros were missed.',
+  progress:'Riemann–Siegel evaluations and Turing-style zero accounting help explain why proof methods need both reliable arithmetic and completeness, not merely attractive dots.',
+  stakes:'Failing to check completeness can hide off-line zeros even if many line zeros are found.',
+  teaser:'Explore root estimation, interval certificates and completeness checks.',
+  sources:SOURCE_DUNGEON,children:['dungeon-certification-exhibit']
+ },
+ 'dungeon-height-exhibit':{
+  id:'dungeon-height-exhibit',parent:'dungeon-cert',type:'exhibit',name:'Verification Ledger',
+  subtitle:'Published height versus historically reported counts',status:'Published 2021 result · historical reference',
+  concept:'Platt–Trudgian proved rigorously that all nontrivial zeros with 0<Im(ρ)≤3×10¹² are simple and lie on Re(ρ)=½. The height 3×10¹² is not the number of zeros checked.',
+  progress:'DLMF reports 1986 verification of the first ten billion zeros on the line, a separately described count milestone. The chart keeps those units distinct.',
+  stakes:'Even a fully certified finite interval cannot settle all future imaginary heights.',
+  teaser:'Compare different measurement units without conflating height with count.',
+  sources:SOURCE_DUNGEON,children:[],exhibit:'dungeon-height'
+ },
+ 'dungeon-count-exhibit':{
+  id:'dungeon-count-exhibit',parent:'dungeon-counting',type:'exhibit',name:'Height–Count Compass',
+  subtitle:'Interactive Riemann–von Mangoldt asymptotic estimate',status:'Asymptotic mathematics · noncertifying calculator',
+  concept:'N(T)=T/(2π)·(ln(T/(2π))−1)+O(ln T) as T tends to infinity. N(T) is integer and counts zeros with multiplicity; its displayed main term is generally not integer.',
+  progress:'Move between T=100 and the published rigorous height 3×10¹² to see the estimate only. No exact N(T) value, zero ordinate or finite certificate is produced by the app.',
+  stakes:'An estimator cannot substitute for rigorous checking that ALL zeros were accounted for in a finite region.',
+  teaser:'Compare height against indicative zero-count growth with distinct units.',
+  sources:SOURCE_DUNGEON,children:[],exhibit:'dungeon-count'
+ },
+ 'dungeon-certification-exhibit':{
+  id:'dungeon-certification-exhibit',parent:'dungeon-methods',type:'exhibit',name:'Certificate Procedure Table',
+  subtitle:'What makes a numerical claim rigorous?',status:'Methodology exposition · rounded historical examples',
+  concept:'Interval error enclosures can validate critical-line sign changes; a separate complete count of all strip zeros is needed to rule out missed off-line zeros.',
+  progress:'Review the steps and view three rounded first-zero ordinates labelled as reference examples only. They are not numerically certified by the atlas.',
+  stakes:'Rigor is a logical procedure with controlled error and completeness, not a smooth plot or an unsourced list of coordinates.',
+  teaser:'Toggle the verification stage and read its mathematical obligation.',
+  sources:[...SOURCE_DUNGEON,{name:'OEIS reference table · approximate first zeta-zero ordinates',url:'https://oeis.org/wiki/Nontrivial_zeros_of_the_Riemann_zeta_function'}],children:[],exhibit:'dungeon-method'
+ },
+
  'keep-classical': {
   id:'keep-classical',parent:'keep',type:'site',name:'The Classical Bastion',
   subtitle:'A published logarithmic zero-free region',status:'Proved · explicit 2024 published bound',
@@ -208,6 +259,15 @@ LOCATIONS['keep-boundary'].children = ['keep-geometry-exhibit'];
 LOCATIONS['keep-boundary'].sources = SOURCE_KEEP;
 LOCATIONS['keep-boundary'].sourceIds = SOURCE_KEEP.map(s=>s.url);
 LOCATIONS['keep-boundary'].teaser = 'The Euler-product outer wall, critical strip and exact zero/pole distinctions.';
+// S006: extend the original #dungeon and #dungeon-cert hashes without replacing them.
+LOCATIONS.dungeon.children = ['dungeon-cert','dungeon-counting','dungeon-methods'];
+LOCATIONS.dungeon.sources = SOURCE_DUNGEON;
+LOCATIONS.dungeon.sourceIds = SOURCE_DUNGEON.map(item=>item.url);
+LOCATIONS['dungeon-cert'].children = ['dungeon-height-exhibit'];
+LOCATIONS['dungeon-cert'].sources = SOURCE_DUNGEON;
+LOCATIONS['dungeon-cert'].sourceIds = SOURCE_DUNGEON.map(item=>item.url);
+LOCATIONS['dungeon-cert'].teaser = 'Published certified height, historically counted zeros, and why the units differ.';
+
 export const getLocation = id => (id ? LOCATIONS[id] : null) || null;
 export const getParentLocation = id => getLocation(getLocation(id)?.parent);
 export function getAncestors(id) {
