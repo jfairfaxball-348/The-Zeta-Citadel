@@ -36,14 +36,14 @@ try {
  // S003: deep-linked functional exhibits across every Hall chamber.
  await page.goto(base+'/#hardy-signs-exhibit');
  await page.locator('#hardy-waves').waitFor();
- await page.locator('#hardy-waves').fill('6');
+ await page.locator('#hardy-waves').evaluate(el => { el.value='6'; el.dispatchEvent(new Event('input',{bubbles:true})); });
  assert.match(await page.locator('#hardy-readout').innerText(),/5 interior zeros/);
  await page.goto(base+'/#milestones-exhibit');
  await page.locator('#milestone-select').selectOption('conrey');
  assert.match(await page.locator('#milestone-claim').innerText(),/two fifths/);
  assert.match(await page.locator('#milestone-kind').innerText(),/multiplicity/i);
  await page.goto(base+'/#mollifier-toy-exhibit');
- await page.locator('#toy-a').fill('0.70');
+ await page.locator('#toy-a').evaluate(el => { el.value='0.7'; el.dispatchEvent(new Event('input',{bubbles:true})); });
  assert.match(await page.locator('#toy-result').innerText(),/0.51/);
  await page.goto(base+'/#research-comparison-exhibit');
  await page.locator('#paper-select').selectOption('lam');
@@ -69,6 +69,7 @@ try {
  await mobile.locator('#milestone-select').selectOption('levinson');
  assert.match(await mobile.locator('#milestone-kind').innerText(),/multiplicity/);
  assert.ok(!(await mobile.evaluate(()=>document.documentElement.scrollWidth > innerWidth + 2)),'S003 mobile overflow');
+ await mobile.goto(base+'/#critical-line-exhibit');
  await mobile.emulateMedia({reducedMotion:'reduce'});
  await mobile.locator('#map-up').tap();
  assert.equal(new URL(mobile.url()).hash,'#hall-critical');
