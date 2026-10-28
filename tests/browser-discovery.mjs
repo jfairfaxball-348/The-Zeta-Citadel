@@ -26,6 +26,9 @@ try {
  assert.ok((await page.evaluate(()=>navigator.clipboard.readText())).includes('#hall-hardy'));
  await page.locator('#story-content [data-save-route="hall-hardy"]').click();
  assert.equal(await page.locator('#story-content [data-save-route="hall-hardy"]').getAttribute('aria-pressed'),'true');
+ await page.locator('.discovery-top-trigger').click();
+ await page.locator('#remember-discovery').check();
+ await page.goBack();assert.equal(new URL(page.url()).hash,'#hall-hardy');
  await page.reload();assert.equal(new URL(page.url()).hash,'#hall-hardy');
  await page.goBack();assert.equal(new URL(page.url()).hash,'#discover');
  await page.goForward();assert.equal(new URL(page.url()).hash,'#hall-hardy');
