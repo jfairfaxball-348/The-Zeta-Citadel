@@ -42,6 +42,8 @@ No npm install or build is required.
 | `keep.js` | S005 Keep floor plan, exact zero/pole coordinate chart and height-dependent published zero-free boundaries. |
 | `dungeon.js` | S006 Dungeons floor plan, historical verified-height ledger, zero-count main-term estimate and certification-method exhibit. |
 | `outer.js` | S007 source-cited Selberg, Grand RH, GRH and ERH horizons; four exact/illustrative interactive exhibits. |
+| `connections.js` | S008 independently sourced, validated typed relationships and connections-map/evidence renderers. |
+| `tests/connections.mjs` / `tests/browser-connections.mjs` | S008 edge schema negative cases and real HTTP Chromium desktop/mobile interactions. |
 | `tests/graph.mjs` / `tests/browser.mjs` | Graph regression and HTTP Chromium desktop/mobile suite. |
 | `favicon.svg` | Original project icon. |
 | `vercel.json` | Static Vercel settings. |
@@ -73,7 +75,7 @@ Apache-2.0 (see LICENSE).
 
 The source of truth is [authoritative/STATE.json](authoritative/STATE.json), [authoritative/START_HERE.md](authoritative/START_HERE.md) and [docs/ROADMAP.md](docs/ROADMAP.md), under [AGENTS.md](AGENTS.md) and [docs/SESSION_PROTOCOL.md](docs/SESSION_PROTOCOL.md).
 
-**S002–S007 have been implemented and checked. S008 is prepared but unexecuted.** The one next authoritative prompt is [authoritative/NEXT_SESSION_PROMPT.md](authoritative/NEXT_SESSION_PROMPT.md). Every session requires a separate explicit owner invocation; committing a future prompt does not run it.
+**S002–S008 have been implemented and checked on their implementation branches. S009 is prepared but unexecuted.** The one next authoritative prompt is [authoritative/NEXT_SESSION_PROMPT.md](authoritative/NEXT_SESSION_PROMPT.md). Every session requires a separate explicit owner invocation; committing a future prompt does not run it.
 
 ## Explore the completed interiors
 
@@ -81,7 +83,7 @@ The **Great Hall** contains five chambers and six interactive exhibits: critical
 
 The **Courtyard** has two research sites and two further exhibits. Visit `#density-guth` → `#density-exponent-exhibit` for sliders comparing asymptotic Guth–Maynard and classical exponents; visit `#density-idea` → `#density-definition-exhibit` for logical differences between sparse exceptional zeros, a zero-free theorem and RH. Neither graphic proves RH or computes zeta zeros. Back/Forward, Up, deep links, keyboard navigation and mobile touch reuse the shared recursive atlas.
 
-S004 source and CI evidence are in [sessions/S004/VALIDATION.md](sessions/S004/VALIDATION.md) and [sessions/S004/CLOSEOUT.md](sessions/S004/CLOSEOUT.md). The distinct next phase, **S008 — typed mathematical connections**, awaits a separate owner invocation.
+S004 source and CI evidence are in [sessions/S004/VALIDATION.md](sessions/S004/VALIDATION.md) and [sessions/S004/CLOSEOUT.md](sessions/S004/CLOSEOUT.md). The subsequent **S008 — typed mathematical connections** has been implemented separately; see below.
 
 ## Explore the proved Keep
 
@@ -97,7 +99,7 @@ Platt–Trudgian's 2021 published rigorous verification covers nontrivial zeta z
 
 Sources: [Platt–Trudgian (2021)](https://doi.org/10.1112/blms.12460), [NIST DLMF §25.10](https://dlmf.nist.gov/25.10), [Riemann–von Mangoldt reference](https://mathworld.wolfram.com/Riemann-vonMangoldtFormula.html), [Odlyzko’s original table](https://www-users.cse.umn.edu/~odlyzko/zeta_tables/zeros2). [S006 validation and precise check evidence](sessions/S006/VALIDATION.md).
 
-S007 is prepared but **not executed** as part of S006.
+S007 was executed only on its separate owner instruction; S008 is likewise a separately authorised session.
 
 
 ## Explore the Outer Territories (S007)
@@ -105,3 +107,11 @@ S007 is prepared but **not executed** as part of S006.
 The original outer rings are now true graph-linked destinations: `#selberg` → `#selberg-axioms` → `#selberg-axioms-exhibit`; `#grand` → `#grand-automorphic` → `#grand-automorphic-exhibit`; `#grh` → `#grh-characters` → `#grh-characters-exhibit`; and `#erh` → `#erh-gaussian` → `#erh-gaussian-exhibit`. All are accessible through the same map/interior, keyboard/touch controls, browser Back/Forward, Up and Home.
 
 The Selberg selector explains all five **defining axioms** rather than pretending that classification is solved. The automorphic exhibit explains GL(1), GL(2), GL(n) as illustrative families and defines this atlas's **Grand RH** convention. The Dirichlet laboratory computes a finite series at s=2 for the nonprincipal modulo-four character with elementary absolute remainder bound ≤1/N—**not** a GRH test. The Gaussian field Q(i) selector illustrates exact splitting/ramification/inertness of selected rational primes and the matching Dedekind local Euler factors—**not** an ERH test. Here GRH means Dirichlet L-function GRH; ERH means Dedekind-zeta RH for every number field. No universal logical nesting follows from the rings. See [S007 validation](sessions/S007/VALIDATION.md) for evidence and limitations.
+
+## Explore the Connections Map (S008)
+
+Open **⌁ BRIDGES** at the map top or the side navigation, or visit `#connections`. The eight sourced relationships can be filtered by **proved implication**, **conditional dependency**, **historical influence** and **conceptual analogy** (two examples of each). Each bridge is directly linkable as `#connection--dirichlet-grh-rh` or its stable connection ID; selecting one shows explicit direction, exact scope, editorial status, review date and original source documents. Each endpoint opens its pre-existing room using the same URL/history router.
+
+The two proved **implications between mathematical statements** have conjectural *premises*: (i) universal Dirichlet GRH entails ordinary RH, since the principal character modulo 1 gives ζ; (ii) the defined universal Dedekind-zeta ERH entails RH, since ζ_Q=ζ. **Neither premise is proved.** Conditional connections explain what RH would force in zero-free and zero-density views. The other connections are historical or analogous and carry no implied proof arrows. All are reviewed as mathematical exposition, not independent research discoveries or new zero calculations.
+
+[S008 validation](sessions/S008/VALIDATION.md) records the source audit, test cases, CI evidence and limitations. Only **S009 — discovery/search and learning journeys** is installed for a future, separate owner invocation.

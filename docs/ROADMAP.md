@@ -1,7 +1,7 @@
 # The Zeta Citadel — authoritative development roadmap (S002–S010)
 
 **Adopted:** 28 October 2026. **Predecessor:** S001, commit `577c5d1a92187cbd0d8db89a2160317706a3eec7`. **Site:** https://the-zeta-citadel.vercel.app/  
-**Programme status (updated 28 October 2026):** S002–S007 CLOSED; S008 READY / UNEXECUTED; S009–S010 PLANNED. Each session requires its own explicit owner invocation.
+**Programme status (updated 28 October 2026):** S002–S008 CLOSED; S009 READY / UNEXECUTED; S010 PLANNED. Each session requires its own explicit owner invocation.
 
 ## Product vision and non-negotiable invariants
 Build an explorable mathematical world in which a visitor journeys from the larger RH context into the Citadel, a district, an individual building, a theorem chamber, and an interactive exhibit. The goal is mathematical clarity as well as visual immersion; the map is *not* a diagram of logically nested conjectures. Preserve the existing S001 Vercel static site, eight top-level regions, content provenance, brand/design, navigation and deep links. Maintain a single navigable place graph; avoid a parallel hardcoded experience that cannot scale. Do not mistake numerical checking, zero proportions, density estimates or new preprints for a proof of RH.
@@ -67,12 +67,12 @@ Use stable node IDs, parent IDs, ordered children, world/local geometry, camera 
 
 **PASS (S007 achieved):** four original outer-region hashes now expand to eight graph-linked site/exhibit IDs, with interactive axioms, automorphic families, character-series arithmetic and prime splitting; source references and explicit non-implication warning; S002–S007 same-head Playwright checks completed green at implementation commit `fcfa1904`. [S007 validation](../sessions/S007/VALIDATION.md). **Boundary:** no asserted equivalence based solely on drawing two concentric rings.
 
-### S008 — Connections: paths between mathematical ideas
+### S008 — Connections: paths between mathematical ideas (CLOSED)
 **Objective:** Add a cross-map network without misrepresenting logical relations.
 
 **Build:** stable graph edges among nodes; filters for `proved implication`, `conditional dependency`, `historical influence`, and `conceptual analogy`; visible legend and edge-specific citations/notes. Clicking an edge opens its rationale, and nodes navigate into the existing map. Avoid spurious or merely decorative mathematical arrows.
 
-**PASS:** every displayed proved/conditional connection is documented, filters and reverse navigation work, and visual/keyboard accessibility remains intact.
+**PASS (S008 achieved on tested implementation):** eight individually sourced edges across four distinct types, guarded schemas, evidence-specific side panel, existing-node navigation, four filters, deep-linked edge routes and desktop/mobile Chromium plus legacy regressions. Proved entailments explicitly have conjectural premises; historical/analogy edges never masquerade as proofs. [S008 validation](../sessions/S008/VALIDATION.md). **Boundary:** no search/journey features from S009 executed here.
 
 ### S009 — Discovery, navigation and learning
 **Objective:** Make the expanding atlas discoverable to visitors with different levels of background.
@@ -89,7 +89,7 @@ Use stable node IDs, parent IDs, ordered children, world/local geometry, camera 
 **PASS:** no known critical navigation or factual blocker; tests and remaining limitations truthfully documented; production deployment checked if access permits. **Boundary:** do not execute S011 or submit mathematical research.
 
 ## Gates and succession
-S002–S007 have been executed with evidence in `sessions/S002/` through `sessions/S007/`. S008 is the *only* installed ready-but-unexecuted prompt (`authoritative/NEXT_SESSION_PROMPT.md`). S009–S010 remain roadmap only. At closeout of each accepted session, promote **exactly one** successor and update `authoritative/STATE.json`, `START_HERE.md` and `NEXT_SESSION_PROMPT.md` consistently. If the acceptance gate is blocked, stop and record what remains rather than skipping to another stage. Preserve the predecessor's evidence and fully distinguish implementation tests from mathematics/source verification.
+S002–S008 have been executed with evidence in `sessions/S002/` through `sessions/S008/`. S009 is the *only* installed ready-but-unexecuted prompt (`authoritative/NEXT_SESSION_PROMPT.md`). S010 remains roadmap only. At closeout of each accepted session, promote **exactly one** successor and update `authoritative/STATE.json`, `START_HERE.md` and `NEXT_SESSION_PROMPT.md` consistently. If the acceptance gate is blocked, stop and record what remains rather than skipping to another stage. Preserve the predecessor's evidence and fully distinguish implementation tests from mathematics/source verification.
 
 ## Editorial risk register
 - **M1 mathematical topology:** apparent containment on map misread as logical implication. *Mitigation:* repeated disclaimer and typed edges.

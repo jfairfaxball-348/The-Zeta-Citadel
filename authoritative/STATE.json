@@ -6,19 +6,19 @@
   "updated_date_utc": "2026-10-28",
   "programme": "S002-S010 progressively explorable mathematical world",
   "baseline": {
-    "last_completed_session": "S007",
+    "last_completed_session": "S008",
     "status": "CLOSED",
-    "app_commit_sha": "fcfa1904efc556923e9fe0d7ab3a503e2dc9b418",
-    "application": "Four recursively navigable mathematical horizon territories with source-defined Selberg axioms, automorphic Grand RH taxonomy, exact Dirichlet character series with rigorous finite tail bound, and Gaussian prime splitting/Dedekind Euler factors; map geography never implies a conjecture hierarchy"
+    "app_commit_sha": "5308932f560fd01c182f62ef7fc9f936f5e820ef",
+    "application": "S008 independent eight-edge sourced relationship graph; two proved logical entailments with conjectural premises, two explicitly conditional consequences, two historically documented developments, two non-entailing analogies; accessible filters, evidence panels and original-location navigation via one hash/history router."
   },
   "session": {
-    "next": "S008",
+    "next": "S009",
     "status": "READY_UNEXECUTED",
     "execution_authorized": false,
     "canonical_prompt": "authoritative/NEXT_SESSION_PROMPT.md",
-    "predecessor": "S007",
+    "predecessor": "S008",
     "roadmap": "docs/ROADMAP.md",
-    "required_owner_invocation": "New and separate owner instruction to run S008"
+    "required_owner_invocation": "New and separate owner instruction to run S009"
   },
   "roadmap": [
     {
@@ -54,12 +54,12 @@
     {
       "id": "S008",
       "title": "Typed mathematics connections",
-      "status": "READY_UNEXECUTED"
+      "status": "CLOSED"
     },
     {
       "id": "S009",
       "title": "Search and learning journeys",
-      "status": "PLANNED"
+      "status": "READY_UNEXECUTED"
     },
     {
       "id": "S010",
@@ -79,7 +79,8 @@
     "courtyard.js",
     "keep.js",
     "dungeon.js",
-    "outer.js"
+    "outer.js",
+    "connections.js"
   ],
   "authority_files": [
     "AGENTS.md",
@@ -96,6 +97,6 @@
     "No implication inferred from map geography",
     "No automatic publication, external outreach, paid services, or proof-of-RH claim"
   ],
-  "next_gate": "S008: carefully sourced typed relations between existing place nodes, with explicit proved/conditional/historical/analogy types and accessible graph interactions, never inferred from map nesting",
-  "deployment_note": "S006 merged-main production READY dpl_6kfSpcz3zRs4gCSvxM3DJQs7mG6A at 35a8c573. S007 implementation preview READY dpl_9PrBgDcsCHPTk51HwGPxuYUMgvB1 on fcfa1904, target preview (not production). Final S007 governance-head CI, PR merge, main CI and production target must be checked LIVE; this committed note does not claim those future events."
+  "next_gate": "S009: accessible search and source-labelled beginner/advanced journeys using the existing typed locations and S008 relationships, with stable deep links, local-only optional saved places and no analytics",
+  "deployment_note": "S007 production READY deployment dpl_5Tkh9sDPRjgw5HXpV2WETkZcv539 at ordinary two-parent merged main e4fb51f6caafa26748f2a9b321adbae6f62e33fb. S008 branch push S008 workflow run 40733372247 succeeded at implementation 5308932f560fd01c182f62ef7fc9f936f5e820ef (legacy S002–S007 HTTP Chromium plus new connection tests). Final S008 documentation head PR CI, ordinary merge, merged main CI and Vercel production are downstream events and must be verified LIVE; this premerge note does not claim them."
 }
