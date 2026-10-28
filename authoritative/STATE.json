@@ -6,19 +6,19 @@
   "updated_date_utc": "2026-10-28",
   "programme": "S002-S010 progressively explorable mathematical world",
   "baseline": {
-    "last_completed_session": "S009",
+    "last_completed_session": "S010",
     "status": "CLOSED",
-    "app_commit_sha": "cff8bd9086d1a43ef9510d13b1962aa6c5182c7c",
-    "application": "S009 client-side ranked discovery over canonical mathematical locations and eight typed S008 bridges; six-stop beginner and seven-stop advanced learning journeys, stable routes and copy links, local optional saved-place/progress persistence, desktop/mobile Chromium regression."
+    "app_commit_sha": "d0fd5f31ab79fd9e8457bd7e5bdb1080cb8304c0",
+    "application": "S010 source provenance and dead-link consolidation, enhanced pure location type/source/negative graph guards, HTTP Chromium desktop/tablet/mobile release matrix, contributor/data contracts and privacy/release documentation. SHA identifies implementation before final governance closeout, not merged main."
   },
   "session": {
-    "next": "S010",
-    "status": "READY_UNEXECUTED",
+    "next": null,
+    "status": "NO_READY_SESSION",
     "execution_authorized": false,
     "canonical_prompt": "authoritative/NEXT_SESSION_PROMPT.md",
-    "predecessor": "S009",
+    "predecessor": "S010",
     "roadmap": "docs/ROADMAP.md",
-    "required_owner_invocation": "New and separate owner instruction to run S010"
+    "required_owner_invocation": "Any later S011 or new programme needs a separately authored scope and explicit owner authorization."
   },
   "roadmap": [
     {
@@ -64,7 +64,7 @@
     {
       "id": "S010",
       "title": "Consolidation and audited release",
-      "status": "READY_UNEXECUTED"
+      "status": "CLOSED"
     }
   ],
   "invariant_files": [
@@ -98,6 +98,16 @@
     "No implication inferred from map geography",
     "No automatic publication, external outreach, paid services, or proof-of-RH claim"
   ],
-  "next_gate": "S010: comprehensive mathematical source/status/link audit, recursive location/connection/discovery schema and deep-link testing, cross-device accessibility/performance, operational/deployment verification, contributor guide, limitations and audited release. S010 not authorised by S009.",
-  "deployment_note": "S008 entry production READY dpl_9kZj4iUYi4B2WnNkqNRPJ2uqYmUH at SHA 6b547330c5eb330296da1c5b976d4205a28c2b51. S009 green implementation workflow 40737691789 at cff8bd9086d1a43ef9510d13b1962aa6c5182c7c; final S009 governance PR head, merge, merged main CI and S009 production deployment are downstream and must be checked LIVE before assertion."
+  "next_gate": "S010 completes the adopted S002–S010 programme. No successor prompt is READY. Any S011+ is PLANNED only and requires an independent owner scope/authorisation; no autonomous continuation.",
+  "deployment_note": "Entry S009 main a6aef02de6ab7488f96d126690441d56627a1d76 was Vercel production READY dpl_76qwA8PBYuwbTEVVvfxszf4vvpbn, exact Git SHA. S010 final PR-head checks, two-parent merge, merged-main checks and new production SHA must be observed after the final governance commit and MUST NOT be inferred from this premerge state.",
+  "release_evidence": {
+    "entry_main_sha": "a6aef02de6ab7488f96d126690441d56627a1d76",
+    "branch": "session/S010-release-audit",
+    "first_green_release_test_sha": "3b8c6742a0f31a1acacb34e04c3a9a5d62cff8b1",
+    "first_green_release_test_run": "https://github.com/jfairfaxball-348/The-Zeta-Citadel/actions/runs/40749958056",
+    "source_audit": "docs/MATHEMATICAL_SOURCE_AUDIT.md",
+    "validation": "sessions/S010/VALIDATION.md",
+    "closeout": "sessions/S010/CLOSEOUT.md",
+    "final_merge_and_production": "LIVE_VERIFICATION_REQUIRED"
+  }
 }
