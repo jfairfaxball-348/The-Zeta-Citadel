@@ -1,4 +1,6 @@
-import { EDITION, REGIONS, SUBNODES, getNode, getRegion } from './atlas.js';
+import { EDITION, REGIONS, SUBNODES, getRegion } from './atlas.js';
+import { getLocation as getNode, getAncestors, getRootRegion, isHallLocation } from './locations.js';
+import { renderHallScene, updateCriticalExplorer } from './hall.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const WIDTH = 1560;
@@ -12,13 +14,18 @@ const regionNav = $('#region-nav');
 const storyContent = $('#story-content');
 const markers = $('#subnode-markers');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const hallScene = document.createElement('div');
+hallScene.id = 'hall-scene';
+hallScene.className = 'hall-scene';
+hallScene.hidden = true;
+$('#map-viewport').append(hallScene);
+$('.map-controls').insertAdjacentHTML('afterbegin', '<button id="map-up" aria-label="Up one location" title="Up one location">↑</button><span></span>');
 
 // All narrative comes from the local, trusted atlas.js; still escape text before templating.
 const escapeHTML = (value) => String(value ?? '').replace(/[&<>"']/g, (ch) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 const safeURL = (url) => /^https:\/\//.test(url) ? url : '#';
 const links = (items = []) => items.map((item) => `<a href="${escapeHTML(safeURL(item.url))}" target="_blank" rel="noopener noreferrer">${escapeHTML(item.name)}</a>`).join('');
-const getParent = (id) => SUBNODES[id]?.parent || null;
-const isSubnode = (id) => Boolean(SUBNODES[id]);
+const getParent = (id) => getNode(id)?.parent || null;
 const animateEase = (t) => 1 - Math.pow(1 - t, 3);
 const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
 
@@ -45,7 +52,7 @@ function createStars() {
 function showView() {
   const v = state.view;
   svg.setAttribute('viewBox', `${v.x.toFixed(3)} ${v.y.toFixed(3)} ${v.w.toFixed(3)} ${v.h.toFixed(3)}`);
-  markers.style.display = state.selected && v.w < 680 && getRegion(getParent(state.selected) || state.selected)?.subnodes?.length ? '' : 'none';
+  markers.style.display = state.selected && !isHallLocation(state.selected) && v.w < 680 && getRegion(getRootRegion(state.selected))?.subnodes?.length ? '' : 'none';
 }
 function bounded(v) {
   const w = clamp(v.w, 155, WIDTH);
@@ -69,14 +76,27 @@ function zoomTo(target, smooth = true) {
   state.animation = requestAnimationFrame(tick);
 }
 function targetFor(id) {
-  if (SUBNODES[id]) {const {x,y} = SUBNODES[id]; const w = 235;return {x:x-w/2,y:y-(w*ASPECT)/2,w,h:w*ASPECT};}
-  const {x,y,w} = getRegion(id).focus;return {x:x-w/2,y:y-(w*ASPECT)/2,w,h:w*ASPECT};
+  if (SUBNODES[id] && !isHallLocation(id)) {
+    const {x,y} = SUBNODES[id], w = 235;
+    return {x:x-w/2,y:y-(w*ASPECT)/2,w,h:w*ASPECT};
+  }
+  const region = getRegion(getRootRegion(id));
+  const {x,y,w} = region.focus;
+  return {x:x-w/2,y:y-(w*ASPECT)/2,w,h:w*ASPECT};
 }
 function updateURL(id) {
   const path = id ? `#${encodeURIComponent(id)}` : window.location.pathname + window.location.search;
-  if (id && window.location.hash === path) return;
-  // A preview rendered in an opaque-origin sandbox may disallow history updates.
-  try { history.replaceState(null, '', path); } catch { /* Navigation itself still works. */ }
+  if ((id && window.location.hash === path) || (!id && !window.location.hash)) return;
+  // Every user navigation creates a restorable Back/Forward history entry.
+  try { history.pushState({ citadelNode: id }, '', path); } catch { /* Sandbox may disallow URL updates. */ }
+}
+function idFromURL() {
+  try { return decodeURIComponent(window.location.hash.slice(1)); }
+  catch { return ''; }
+}
+function restoreURL() {
+  const id = idFromURL();
+  select(getNode(id) ? id : null, { noURL: true });
 }
 function hideMobileMenu() {
   $('#guide').classList.remove('open');
@@ -87,9 +107,11 @@ function select(id, options = {}) {
   state.selected = id || null;
   if (!options.keepView) zoomTo(id ? targetFor(id) : HOME, true);
   if (!options.noURL) updateURL(state.selected);
-  document.querySelectorAll('[data-region]').forEach((el) => el.classList.toggle('active', el.getAttribute('data-region') === (getParent(id) || id)));
-  document.querySelectorAll('.region-nav-button').forEach((el) => el.classList.toggle('active', el.dataset.navigate === (getParent(id) || id)));
+  const root = getRootRegion(id);
+  document.querySelectorAll('[data-region]').forEach((el) => el.classList.toggle('active', el.getAttribute('data-region') === root));
+  document.querySelectorAll('.region-nav-button').forEach((el) => el.classList.toggle('active', el.dataset.navigate === root));
   renderMarkers();
+  renderHall();
   renderStory();
   updateBreadcrumbs();
   $('#map-mode').textContent = id ? `FOCUSED / ${getNode(id).name.toUpperCase()}` : 'OVERVIEW / THE KNOWN & UNKNOWN';
@@ -97,23 +119,33 @@ function select(id, options = {}) {
   if (window.matchMedia('(max-width: 660px)').matches && id) $('#story-panel').scrollIntoView({behavior:reducedMotion ? 'instant' : 'smooth', block:'nearest'});
 }
 function updateBreadcrumbs() {
-  const id = state.selected;
-  let html = '';
-  if (id) {
-    const parent = getParent(id);
-    if (parent) html += `<span class="crumb-sep">/</span><button data-navigate="${parent}">${escapeHTML(getRegion(parent).name.toUpperCase())}</button>`;
-    html += `<span class="crumb-sep">/</span><span class="crumb-name">${escapeHTML(getNode(id).name.toUpperCase())}</span>`;
-  }
-  $('#breadcrumbs').innerHTML = html;
+  const path = getAncestors(state.selected);
+  $('#breadcrumbs').innerHTML = path.map((id,index) =>
+    `<span class="crumb-sep">/</span>${index === path.length-1
+      ? `<span class="crumb-name" aria-current="location">${escapeHTML(getNode(id).name.toUpperCase())}</span>`
+      : `<button data-navigate="${id}">${escapeHTML(getNode(id).name.toUpperCase())}</button>`}`
+  ).join('');
+}
+function renderHall() {
+  const hall = isHallLocation(state.selected);
+  svg.hidden = hall;
+  svg.setAttribute('aria-hidden', String(hall));
+  hallScene.hidden = !hall;
+  hallScene.innerHTML = hall ? renderHallScene(state.selected) : '';
+  $('#map-up').disabled = !state.selected;
+  $('#zoom-in').disabled = hall;
+  $('#zoom-out').disabled = hall;
+  $('.map-hint').textContent = hall ? 'CHOOSE A CHAMBER · USE UP TO RETURN' : 'SCROLL TO ZOOM · DRAG TO PAN · CLICK TO EXPLORE';
 }
 function renderMarkers() {
   markers.replaceChildren();
-  const parentId = getParent(state.selected) || state.selected;
-  const parent = getRegion(parentId);
-  if (!parent?.subnodes?.length) return;
+  if (!state.selected || isHallLocation(state.selected)) {showView();return;}
+  const parent = getRegion(getRootRegion(state.selected));
+  if (!parent?.subnodes?.length) {showView();return;}
   const fragment = document.createDocumentFragment();
   parent.subnodes.forEach((id, index) => {
     const node = SUBNODES[id];
+    if (!node) return;
     const g = document.createElementNS(SVG_NS,'g');
     g.classList.add('subsite');
     if (state.selected === id) g.classList.add('active');
@@ -136,18 +168,18 @@ function renderStory() {
     storyContent.innerHTML = `<div class="story-head"><div class="story-eyebrow"><i></i>WELCOME TO THE ATLAS</div><h2>The mystery<br/>at the <em>centre.</em></h2><p class="story-subtitle">One question, many frontiers</p><p class="story-teaser">Every nontrivial zero of the Riemann zeta function is conjectured to lie on a single vertical line: Re(s) = ½. From this unresolved centre radiate entire fields of mathematics.</p><div class="overview-sigil"><svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="44" stroke="#d8bd87" stroke-opacity=".55"/><circle cx="50" cy="50" r="32" stroke="#d8bd87" stroke-opacity=".55"/><circle cx="50" cy="50" r="20" stroke="#d8bd87" stroke-opacity=".65"/><path d="M50 0V100M0 50H100" stroke="#d8bd87" stroke-opacity=".42"/><text x="50" y="63" text-anchor="middle" font-family="Georgia" font-size="37" fill="#d8bd87">ζ</text></svg></div></div><div class="story-section"><h3><span>01 /</span>THE READING KEY</h3><p>The outer rings describe broader mathematical settings. The fortress holds different kinds of progress on the original Riemann Hypothesis. Choose a region on the map or in the index to explore it.</p><div class="legend"><div class="legend-item"><i class="legend-dot horizon"></i> The mathematical horizons</div><div class="legend-item"><i class="legend-dot interior"></i> The citadel's four chambers</div><div class="legend-item"><i class="legend-dot sites"></i> Smaller sites discovered when you zoom in</div></div></div><div class="overview-card"><strong>THE CARTOGRAPHER'S WARNING</strong><p>The geography is a teaching metaphor, not a strict hierarchy of implication. Terms like Grand RH and Extended RH vary by author. Dates and sources are given for specific claims.</p></div><div class="story-actions"><button data-navigate="selberg">START EXPLORING ↗</button><button data-action="guide">MAP GUIDE ?</button></div>`;
     return;
   }
-  const node = getNode(id), parent = getParent(id), region = getRegion(parent || id), subnode = Boolean(parent);
+  const node = getNode(id), parent = getParent(id), region = getRegion(getRootRegion(id)), subnode = Boolean(parent);
   const header = `<div class="story-head"><div class="story-eyebrow"><i></i>${subnode ? 'DEEP SITE' : region.kind==='horizon' ? 'THE MATHEMATICAL HORIZONS' : 'INSIDE THE CITADEL'} ${subnode ? '/ DETAIL' : `/ REGION ${region.number}`}</div><h2>${escapeHTML(node.name)}</h2><p class="story-subtitle">${escapeHTML(node.subtitle)}</p><p class="story-teaser">${escapeHTML(node.teaser || region.teaser)}</p><div class="story-status"><span class="status-icon">✦</span><div><small>CURRENT STATUS</small><b>${escapeHTML(node.status)}</b></div></div></div>`;
   let body = section('01 /','THE CONCEPT',node.concept);
   body += section('02 /','CURRENT STATE',node.progress);
   body += section('03 /','WHY IT MATTERS',node.stakes);
   if (!subnode && node.milestones?.length) body += `<section class="story-section"><h3><span>04 /</span>CHRONICLE</h3><ol class="timeline">${node.milestones.map((m)=>`<li><strong>${escapeHTML(m.year)}</strong>${escapeHTML(m.text)}</li>`).join('')}</ol></section>`;
-  if (!subnode && node.subnodes?.length) {
-    body += `<section class="story-section"><h3><span>↳ /</span>ZOOM DEEPER</h3><div class="subnode-list">${node.subnodes.map((key) => { const sub = SUBNODES[key];return `<button class="subnode-item" data-navigate="${sub.id}"><span class="subnode-icon">◇</span><span><strong>${escapeHTML(sub.name)}</strong><small>${escapeHTML(sub.subtitle)}</small></span></button>`;}).join('')}</div></section>`;
+  if (node.children?.length) {
+    body += `<section class="story-section"><h3><span>↳ /</span>ZOOM DEEPER</h3><div class="subnode-list">${node.children.map((key) => { const sub = getNode(key); return `<button class="subnode-item" data-navigate="${sub.id}"><span class="subnode-icon">◇</span><span><strong>${escapeHTML(sub.name)}</strong><small>${escapeHTML(sub.subtitle)}</small></span></button>`;}).join('')}</div></section>`;
   }
   if (!subnode) body += section('※ /','CARTOGRAPHER’S NOTE',node.caution,'story-caution');
   body += `<section class="story-section"><h3><span>↗ /</span>PRIMARY SOURCES</h3><div class="story-sources">${links(node.sources)}</div></section>`;
-  body += `<div class="story-actions"><button data-navigate="${parent || ''}">${parent ? '← PARENT REGION' : '← FULL ATLAS'}</button><button data-action="guide">READ THE MAP ?</button></div>`;
+  body += `<div class="story-actions"><button data-navigate="${parent || ''}">${parent ? '← UP ONE LEVEL' : '← FULL ATLAS'}</button><button data-action="guide">READ THE MAP ?</button></div>`;
   storyContent.innerHTML = header + body;
 }
 function svgPoint(event) {
@@ -156,6 +188,7 @@ function svgPoint(event) {
   return matrix ? point.matrixTransform(matrix.inverse()) : {x:780,y:490};
 }
 function zoomStep(factor, at) {
+  if (isHallLocation(state.selected)) return;
   const current = state.view;
   const anchor = at || {x:current.x+current.w/2,y:current.y+current.h/2};
   const scale = clamp(current.w * factor,155,WIDTH) / current.w;
@@ -169,6 +202,9 @@ function targetClick(event) {
   if (region) select(region.dataset.region);
 }
 function bindEvents() {
+  document.addEventListener('input', event => {
+    if (event.target.matches('#critical-sigma, #critical-height')) updateCriticalExplorer(hallScene);
+  });
   document.addEventListener('click',(event)=>{
     const nav = event.target.closest('[data-navigate]');
     if(nav) { select(nav.getAttribute('data-navigate') || null);return; }
@@ -205,6 +241,7 @@ function bindEvents() {
     if(state.moved) {setTimeout(()=>{state.moved=false;},0);}
   }
   svg.addEventListener('pointerup',release);svg.addEventListener('pointercancel',release);
+  $('#map-up').addEventListener('click', goBack);
   $('#map-home').addEventListener('click',()=>select(null));
   $('#reset-view').addEventListener('click',()=>select(null));
   $('#zoom-in').addEventListener('click',()=>zoomStep(.72));
@@ -220,14 +257,15 @@ function bindEvents() {
   $('#dialog-okay').addEventListener('click',()=>$('#guide-dialog').close());
   $('#guide-dialog').addEventListener('click',(event)=>{if(event.target === $('#guide-dialog')) $('#guide-dialog').close();});
   window.addEventListener('keydown',(event)=>{if(event.key==='Escape' && !$('#guide-dialog').open && state.selected) goBack();});
-  window.addEventListener('hashchange',()=>{const id=decodeURIComponent(location.hash.slice(1));select(getNode(id)?id:null,{noURL:true});});
+  window.addEventListener('hashchange', restoreURL);
+  window.addEventListener('popstate', restoreURL);
 }
 function goBack() {select(getParent(state.selected) || null);}
 function showDialog() {$('#guide-dialog').showModal();}
 function boot() {
   $('#edition').textContent = EDITION;
   buildNav();createStars();bindEvents();
-  const hash = decodeURIComponent(location.hash.slice(1));
-  if (hash && getNode(hash)) select(hash,{noURL:true}); else {showView();renderStory();updateBreadcrumbs();}
+  const hash = idFromURL();
+  if (hash && getNode(hash)) select(hash,{noURL:true}); else {showView();renderHall();renderStory();updateBreadcrumbs();}
 }
 boot();

@@ -1,0 +1,27 @@
+name: S002 Citadel regression
+on:
+  pull_request:
+  push:
+    branches: [main, session/S002-great-hall]
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JS syntax and location graph
+        run: |
+          node --check atlas.js
+          node --check locations.js
+          node --check hall.js
+          node --check app.js
+          node tests/graph.mjs
+      - name: Install headless test browser
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: HTTP browser regression
+        run: node tests/browser.mjs
