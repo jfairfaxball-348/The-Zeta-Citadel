@@ -83,7 +83,7 @@ try {
    Object.defineProperty(window,'localStorage',{configurable:true,get(){throw Error('storage disabled');}});
  });
  await denied.goto(base+'/#discover');
- await denied.locator('#remember-discovery').check();
+ await denied.locator('#remember-discovery').click(); // Storage-denied fallback immediately unchecks opt-in; click, not check().
  assert.match(await denied.locator('.discovery-storage').innerText(),/unavailable/);
  await denied.locator('[data-navigate="journey--beginner"]').first().click();
  await denied.locator('.journey-steps [data-journey-step="beginner"]').first().click();
