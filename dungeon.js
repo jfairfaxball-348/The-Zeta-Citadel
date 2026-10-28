@@ -4,7 +4,7 @@ export const isDungeonLocation = id => getRootRegion(id) === 'dungeon';
 export const VERIFIED_HEIGHT = 3e12;
 export const SOURCE_PLATT = 'https://doi.org/10.1112/blms.12460';
 export const SOURCE_DLMF = 'https://dlmf.nist.gov/25.10';
-const SOURCE_ZEROS = 'https://oeis.org/wiki/Nontrivial_zeros_of_the_Riemann_zeta_function';
+const SOURCE_ZEROS = 'https://www-users.cse.umn.edu/~odlyzko/zeta_tables/zeros2';
 const SOURCE_RVM = 'https://mathworld.wolfram.com/Riemann-vonMangoldtFormula.html';
 const refs = '<a href="'+SOURCE_PLATT+'" target="_blank" rel="noopener noreferrer">Platt–Trudgian (2021), published theorem</a> · <a href="'+SOURCE_DLMF+'" target="_blank" rel="noopener noreferrer">NIST DLMF §25.10</a>';
 const escape = value => String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -81,7 +81,7 @@ function certification() {
  '<div class="dungeon-method-panel" role="status" aria-live="polite"><strong id="dungeon-method-title"></strong><p id="dungeon-method-text"></p></div>'+
  '<div class="dungeon-logic"><div><span>ON-LINE LOWER BOUND</span><strong>Rigorous sign changes of real Z(t)</strong><p>Validated sign changes force zeros on σ=½ in the tested interval.</p></div><div class="dungeon-logic-symbol">+</div><div><span>ALL-STRIP COMPLETENESS</span><strong>Independent zero-count control</strong><p>Argument-principle / Turing-style methods check whether additional strip zeros were missed.</p></div></div>'+
  '<p class="dungeon-note">A floating-point root guess alone certifies neither existence nor completeness. Error-bounded interval calculations make individual sign decisions reliable; a separate global counting argument establishes how many zeros must be accounted for. This is an explanation of the methodology, not a replay or independent proof of the 2021 work.</p>'+
- '<div class="dungeon-samples"><h3>FIRST THREE ZERO ORDINATES — ROUNDED REFERENCE VALUES</h3><p>14.134725… &nbsp; · &nbsp; 21.022040… &nbsp; · &nbsp; 25.010858…</p><small>Illustrative coordinates from <a href="'+SOURCE_ZEROS+'" target="_blank" rel="noopener noreferrer">OEIS reference tables</a>. Truncated display precision; not independently re-evaluated or certified by this site. The published height theorem supplies rigorous global verification, not these display digits.</small></div>'+
+ '<div class="dungeon-samples"><h3>FIRST THREE ZERO ORDINATES — ROUNDED REFERENCE VALUES</h3><p>14.134725… &nbsp; · &nbsp; 21.022040… &nbsp; · &nbsp; 25.010858…</p><small>Illustrative truncated coordinates from Andrew Odlyzko’s original <a href="'+SOURCE_ZEROS+'" target="_blank" rel="noopener noreferrer">high-precision first-100-zero table</a>. Truncated display precision; not independently re-evaluated or certified by this site. The published height theorem supplies rigorous global verification, not these display digits.</small></div>'+
  '<p class="lab-references">SOURCES / '+refs+' · <a href="'+SOURCE_ZEROS+'" target="_blank" rel="noopener noreferrer">OEIS ordinates</a></p></div></section>';
 }
 export function renderDungeonScene(id) {
