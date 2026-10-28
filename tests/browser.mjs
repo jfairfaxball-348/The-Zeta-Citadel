@@ -130,6 +130,32 @@ try {
  await page.locator('#map-up').click();
  assert.equal(new URL(page.url()).hash,'#hall-critical');
  await page.goBack();assert.equal(new URL(page.url()).hash,'#zero-types-exhibit');
+
+ // S007 outer horizons: every root, nested source-backed site, exact interactive exhibit.
+ const outerCases=[
+  ['selberg','selberg-axioms','selberg-axioms-exhibit','#outer-axiom','4','Euler-product axiom','#outer-axiom-title'],
+  ['grand','grand-automorphic','grand-automorphic-exhibit','#outer-grand-family','2','Higher-rank horizon','#outer-grand-title'],
+  ['grh','grh-characters','grh-characters-exhibit','#outer-grh-N','80','0.012500','#outer-grh-bound'],
+  ['erh','erh-gaussian','erh-gaussian-exhibit','#outer-erh-prime','7','INERT','#outer-erh-kind']
+ ];
+ for(const [root,site,exhibit,control,value,expected,readout] of outerCases){
+  await page.goto(base);
+  await page.locator('#region-nav [data-navigate="'+root+'"]').click();
+  await page.locator('.outer-gate[data-navigate="'+site+'"]').click();
+  assert.equal(new URL(page.url()).hash,'#'+site);
+  await page.locator('.outer-entry[data-navigate="'+exhibit+'"]').click();
+  assert.equal(new URL(page.url()).hash,'#'+exhibit);
+  await page.locator(control).waitFor();
+  if(control==='#outer-grh-N')await page.locator(control).evaluate((el,v)=>{el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));},value);
+  else await page.locator(control).selectOption(value);
+  assert.ok((await page.locator(readout).innerText()).includes(expected),root+' interactive result');
+  await page.goBack();assert.equal(new URL(page.url()).hash,'#'+site);
+  await page.goForward();assert.equal(new URL(page.url()).hash,'#'+exhibit);
+  await page.reload();await page.locator(control).waitFor();
+  await page.locator('#map-up').click();assert.equal(new URL(page.url()).hash,'#'+site);
+  await page.locator('#map-home').click();assert.equal(new URL(page.url()).hash,'');
+ }
+ await page.goto(base+'/#erh-gaussian-exhibit');await page.locator('#outer-erh-prime').waitFor();
  const mobile=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
  mobile.on('pageerror',e=>errors.push(e.message));
  await mobile.goto(base+'/#hall');
@@ -165,6 +191,22 @@ try {
  await mobile.locator('#dungeon-method').selectOption('interval');
  assert.match(await mobile.locator('#dungeon-method-title').innerText(),/Bounded arithmetic/);
  assert.ok(!(await mobile.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2)),'S006 methods mobile overflow');
+
+ for(const [root,site,exhibit,control,value] of outerCases){
+  await mobile.goto(base+'/#'+root);
+  await mobile.locator('.outer-gate').tap();
+  assert.equal(new URL(mobile.url()).hash,'#'+site);
+  await mobile.locator('.outer-entry').tap();
+  assert.equal(new URL(mobile.url()).hash,'#'+exhibit);
+  await mobile.locator(control).waitFor();
+  if(control==='#outer-grh-N') {await mobile.locator(control).focus();await mobile.keyboard.press('ArrowRight');}
+  else await mobile.locator(control).selectOption(value);
+  assert.ok(!(await mobile.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2)),'S007 '+root+' mobile overflow');
+ }
+ await mobile.goto(base+'/#grh-characters-exhibit');
+ await mobile.emulateMedia({reducedMotion:'reduce'});
+ await mobile.locator('#map-up').tap();
+ assert.equal(new URL(mobile.url()).hash,'#grh-characters');
  await mobile.goto(base+'/#critical-line-exhibit');
  await mobile.emulateMedia({reducedMotion:'reduce'});
  await mobile.locator('#map-up').tap();
