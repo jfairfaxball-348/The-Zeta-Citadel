@@ -66,7 +66,7 @@ const ADDITIONS = {
   progress:'Review the steps and view three rounded first-zero ordinates labelled as reference examples only. They are not numerically certified by the atlas.',
   stakes:'Rigor is a logical procedure with controlled error and completeness, not a smooth plot or an unsourced list of coordinates.',
   teaser:'Toggle the verification stage and read its mathematical obligation.',
-  sources:[...SOURCE_DUNGEON,{name:'OEIS reference table · approximate first zeta-zero ordinates',url:'https://oeis.org/wiki/Nontrivial_zeros_of_the_Riemann_zeta_function'}],children:[],exhibit:'dungeon-method'
+  sources:[...SOURCE_DUNGEON,{name:'Andrew Odlyzko · original high-precision table of first 100 zero ordinates',url:'https://www-users.cse.umn.edu/~odlyzko/zeta_tables/zeros2'}],children:[],exhibit:'dungeon-method'
  },
 
  'keep-classical': {
