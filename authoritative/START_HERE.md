@@ -1,20 +1,24 @@
 # START HERE — The Zeta Citadel
 
-**Date:** 28 October 2026. **S004:** CLOSED on validated application and sourced content (final governance merge CI recorded externally on completion); **S005:** READY / UNEXECUTED; **S006–S010:** PLANNED. Future-session prompts never execute themselves.
+**Date:** 28 October 2026. **S002–S005:** CLOSED on evidenced implementation (S005 merge checks are independently reconciled after the closeout commit). **S006:** READY / UNEXECUTED; **S007–S010:** PLANNED. A future prompt is not execution authorisation.
 
-## Repository and evidence
-- Repo: https://github.com/jfairfaxball-348/The-Zeta-Citadel
+## Verified source-of-truth anchors
+- Repository: https://github.com/jfairfaxball-348/The-Zeta-Citadel
 - Production: https://the-zeta-citadel.vercel.app/
-- Entry main for S004: two-parent S003 merge `055f56741b6de0d7c53281a6bc5012dceb7cf69b`.
-- S004 PR [#4](https://github.com/jfairfaxball-348/The-Zeta-Citadel/pull/4), tested corrected application `05fb27f563dee057d5fc3c720fb28141b4eaa314`; [green S004 branch](https://github.com/jfairfaxball-348/The-Zeta-Citadel/actions/runs/40724007301) and [green S002](https://github.com/jfairfaxball-348/The-Zeta-Citadel/actions/runs/40724017561), [S003](https://github.com/jfairfaxball-348/The-Zeta-Citadel/actions/runs/40724017627), [S004](https://github.com/jfairfaxball-348/The-Zeta-Citadel/actions/runs/40724017775) PR checks at same SHA. Final governance PR checks and main/production separately verify; do not assume deployment from the implementation commit.
-- S004 delivered `courtyard.js`, nested courtyard sites `density-guth` and `density-idea`, two new deep-linked exhibits `density-exponent-exhibit`, `density-definition-exhibit`, graph-aware navigation, exponent sliders and explicit zero-density/zero-free/RH distinction; preserve all eight regions and six Hall exhibits.
-- Sources: Guth–Maynard original arXiv:2405.20552v2 / published *Annals* 203(2) (2026), NIST DLMF §25.10. See `sessions/S004/VALIDATION.md` for two-sided height convention, σ range, asymptotic quantifiers, failed-run correction and honest test limits. No plotted points purport to be computed zeros.
+- S005 entry main: S004 ordinary two-parent merge `f5b77d32f1e856351d248820064118d6844bb113`, parents `055f56741b6de0d7c53281a6bc5012dceb7cf69b` and `111fc56871bf8bb227e75ea4e10fe2e026b36fd1`; main CI S002/S003/S004 successful on entry main.
+- S005: [PR #5](https://github.com/jfairfaxball-348/The-Zeta-Citadel/pull/5), pre-governance implementation commit `0b9c6651e3c37a9d6c2e0cb147ef94a7a36ee19e`, [green S005 branch](https://github.com/jfairfaxball-348/The-Zeta-Citadel/actions/runs/40725770263), [green S005 PR](https://github.com/jfairfaxball-348/The-Zeta-Citadel/actions/runs/40725822208), [green S002 PR](https://github.com/jfairfaxball-348/The-Zeta-Citadel/actions/runs/40725821077), [green S003 PR](https://github.com/jfairfaxball-348/The-Zeta-Citadel/actions/runs/40725821668), [green S004 PR](https://github.com/jfairfaxball-348/The-Zeta-Citadel/actions/runs/40725821300). Those results do not pre-approve later governance commits.
+- Vercel S005 same-commit preview READY: `dpl_CG51yxMSZVf2MdzPPCTs6hqquUxm` (preview, **not production**). Entry-main S004 production READY: `dpl_3WH5kxHYUiB4tjiXzC3wFnDyvxj2`. Recheck post-merge production separately.
+- The Keep now preserves `#keep-boundary` and adds typed `#keep-classical`, `#keep-vk`, `#keep-geometry-exhibit`, `#keep-comparison-exhibit`, `#keep-vk-exhibit`. The old eight top-level IDs, all Hall and Courtyard links are unchanged. One router and one interior canvas serve all districts.
+
+## Mathematical provenance
+- NIST [DLMF §25.10](https://dlmf.nist.gov/25.10): no zeros for Re(s)>1 and the defined part of Re(s)=1, negative-even trivial zeros and simple pole at 1.
+- Mossinghoff–Trudgian–Yang, [*Research in Number Theory* 10:11 (2024)](https://link.springer.com/article/10.1007/s40993-023-00498-y): two explicit unconditional zero-free regions, `5.558691 ln|t|` for |t|≥2 and `55.241 (ln|t|)^(2/3)(ln ln|t|)^(1/3)` for |t|≥3. Exhibit slider uses the intersection |t|≥10 and computes boundary values **not** zeros. Neither is advertised as a 2026 record or a proof of RH.
+- The [S005 validation record](../sessions/S005/VALIDATION.md) distinguishes graphical illustration from theorem assertions, along with CI, navigation, physical-device limits and deployment evidence.
 
 ## Read order
-Pin live remote `main` / PR reconciliation → `authoritative/STATE.json` → `AGENTS.md` → this file → `docs/SESSION_PROTOCOL.md` → `docs/ROADMAP.md` → `sessions/S004/{PLAN,VALIDATION,CLOSEOUT}.md` → relevant code/tests → `authoritative/NEXT_SESSION_PROMPT.md`.
+First pin live remote main, compare PR merge and production status → `authoritative/STATE.json` → `AGENTS.md` → this file → `docs/SESSION_PROTOCOL.md` → `docs/ROADMAP.md` → `sessions/S005/{PLAN,VALIDATION,CLOSEOUT}.md` → relevant application/tests → `authoritative/NEXT_SESSION_PROMPT.md`.
 
-## Sole next task — S005
-Build source-checked, theorem-specific **Keep zero-free territories**, with interactive height-dependent coordinate/boundary demonstration, explicitly stated real/imaginary domains, trivial zero and pole distinctions, and a rigorous contrast with Courtyard density bounds. Keep recursive URLs, Hall and Courtyard intact. No zero-free claim extending all the way to RH without proof.
+## One next task — S006
+The Dungeons: explain rigorous finite-height verification, certified computation, source-backed height and count metrics, and the exact logical gap to an all-height RH claim. No certification claims without exact primary data. See the one committed canonical prompt.
 
-## Authorisation
-S005 is only READY / UNEXECUTED. Its separate execution needs another explicit owner request; do not run S005 now. No submissions, publicity, self-authorised research or future-session acceleration.
+**S006 is READY / UNEXECUTED.** A separate new owner instruction is required. No execution of S006 or later stages as part of S005.

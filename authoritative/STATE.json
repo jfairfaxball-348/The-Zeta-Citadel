@@ -6,19 +6,19 @@
   "updated_date_utc": "2026-10-28",
   "programme": "S002-S010 progressively explorable mathematical world",
   "baseline": {
-    "last_completed_session": "S004",
+    "last_completed_session": "S005",
     "status": "CLOSED",
-    "app_commit_sha": "05fb27f563dee057d5fc3c720fb28141b4eaa314",
-    "application": "Recursive zero-density Courtyard district with interactive Guth–Maynard exponent comparison and sparse-versus-zero exhibit, preserved Hall laboratory, world navigation and deep links"
+    "app_commit_sha": "0b9c6651e3c37a9d6c2e0cb147ef94a7a36ee19e",
+    "application": "Recursive Keep zero-free territory rooms; DLMF zero/pole chart; source-backed effective published height-dependent boundary comparison; full legacy Hall/Courtyard navigation regression"
   },
   "session": {
-    "next": "S005",
+    "next": "S006",
     "status": "READY_UNEXECUTED",
     "execution_authorized": false,
     "canonical_prompt": "authoritative/NEXT_SESSION_PROMPT.md",
-    "predecessor": "S004",
+    "predecessor": "S005",
     "roadmap": "docs/ROADMAP.md",
-    "required_owner_invocation": "Separate explicit owner request to run S005"
+    "required_owner_invocation": "Separate explicit owner request to run S006"
   },
   "roadmap": [
     {
@@ -39,12 +39,12 @@
     {
       "id": "S005",
       "title": "Keep zero-free territories",
-      "status": "READY_UNEXECUTED"
+      "status": "CLOSED"
     },
     {
       "id": "S006",
       "title": "Dungeons numerical verification",
-      "status": "PLANNED"
+      "status": "READY_UNEXECUTED"
     },
     {
       "id": "S007",
@@ -76,7 +76,8 @@
     "hall.js",
     "vercel.json",
     "laboratory.js",
-    "courtyard.js"
+    "courtyard.js",
+    "keep.js"
   ],
   "authority_files": [
     "AGENTS.md",
@@ -93,6 +94,6 @@
     "No implication inferred from map geography",
     "No automatic publication, external outreach, paid services, or proof-of-RH claim"
   ],
-  "next_gate": "S005: verified theorem-specific zero-free territories with carefully bounded T, real-part and pole/trivial-zero conventions; no extension to RH",
-  "deployment_note": "S003 merged main 055f5674 production Vercel READY; S004 implementation 05fb27f5 preview READY on Vercel, GitHub S004 branch run 40724007301 and PR runs 40724017561/40724017627/40724017775 success; S004 production not verified before PR merge."
+  "next_gate": "S006: Dungeons finite-height verified-zero certificates with defensible data provenance, exact zero-height/count distinction and rigorous completeness limitations",
+  "deployment_note": "S004 main f5b77d32 has Vercel production READY dpl_3WH5kxHYUiB4tjiXzC3wFnDyvxj2. S005 branch implementation 0b9c6651 has Vercel preview READY dpl_CG51yxMSZVf2MdzPPCTs6hqquUxm. S005 pre-governance GitHub Actions push 40725770263 and PR 40725822208, 40725821077, 40725821668, 40725821300 all success. S005 post-governance PR/main and final production deployment require separate live check."
 }
