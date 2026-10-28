@@ -2,6 +2,7 @@ import { EDITION, REGIONS, SUBNODES, getRegion } from './atlas.js';
 import { getLocation as getNode, getAncestors, getRootRegion, isHallLocation } from './locations.js';
 import { renderHallScene, updateCriticalExplorer, updateLab } from './hall.js';
 import { renderCourtyardScene, updateCourtyard, isCourtyardLocation } from './courtyard.js';
+import { renderKeepScene, updateKeep, isKeepLocation } from './keep.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const WIDTH = 1560;
@@ -53,7 +54,7 @@ function createStars() {
 function showView() {
   const v = state.view;
   svg.setAttribute('viewBox', `${v.x.toFixed(3)} ${v.y.toFixed(3)} ${v.w.toFixed(3)} ${v.h.toFixed(3)}`);
-  markers.style.display = state.selected && !isHallLocation(state.selected) && !isCourtyardLocation(state.selected) && v.w < 680 && getRegion(getRootRegion(state.selected))?.subnodes?.length ? '' : 'none';
+  markers.style.display = state.selected && !isHallLocation(state.selected) && !isCourtyardLocation(state.selected) && !isKeepLocation(state.selected) && v.w < 680 && getRegion(getRootRegion(state.selected))?.subnodes?.length ? '' : 'none';
 }
 function bounded(v) {
   const w = clamp(v.w, 155, WIDTH);
@@ -130,13 +131,15 @@ function updateBreadcrumbs() {
 function renderHall() {
   const hall = isHallLocation(state.selected);
   const courtyard = isCourtyardLocation(state.selected);
-  const interior = hall || courtyard;
+  const keep = isKeepLocation(state.selected);
+  const interior = hall || courtyard || keep;
   svg.hidden = interior;
   svg.setAttribute('aria-hidden', String(interior));
   hallScene.hidden = !interior;
-  hallScene.innerHTML = hall ? renderHallScene(state.selected) : courtyard ? renderCourtyardScene(state.selected) : '';
+  hallScene.innerHTML = hall ? renderHallScene(state.selected) : courtyard ? renderCourtyardScene(state.selected) : keep ? renderKeepScene(state.selected) : '';
   if (hall) updateLab(hallScene);
   if (courtyard) updateCourtyard(hallScene);
+  if (keep) updateKeep(hallScene);
   $('#map-up').disabled = !state.selected;
   $('#zoom-in').disabled = interior;
   $('#zoom-out').disabled = interior;
@@ -144,7 +147,7 @@ function renderHall() {
 }
 function renderMarkers() {
   markers.replaceChildren();
-  if (!state.selected || isHallLocation(state.selected) || isCourtyardLocation(state.selected)) {showView();return;}
+  if (!state.selected || isHallLocation(state.selected) || isCourtyardLocation(state.selected) || isKeepLocation(state.selected)) {showView();return;}
   const parent = getRegion(getRootRegion(state.selected));
   if (!parent?.subnodes?.length) {showView();return;}
   const fragment = document.createDocumentFragment();
@@ -193,7 +196,7 @@ function svgPoint(event) {
   return matrix ? point.matrixTransform(matrix.inverse()) : {x:780,y:490};
 }
 function zoomStep(factor, at) {
-  if (isHallLocation(state.selected) || isCourtyardLocation(state.selected)) return;
+  if (isHallLocation(state.selected) || isCourtyardLocation(state.selected) || isKeepLocation(state.selected)) return;
   const current = state.view;
   const anchor = at || {x:current.x+current.w/2,y:current.y+current.h/2};
   const scale = clamp(current.w * factor,155,WIDTH) / current.w;
@@ -211,6 +214,13 @@ function bindEvents() {
     if (event.target.matches('#critical-sigma, #critical-height')) updateCriticalExplorer(hallScene);
     if (event.target.matches('#taxonomy-case, #hardy-waves, #milestone-select, #toy-a, #paper-select')) updateLab(hallScene);
     if (event.target.matches('#density-sigma, #density-logt, #density-mode')) updateCourtyard(hallScene);
+    if (event.target.matches('#keep-logt')) updateKeep(hallScene);
+  });
+  document.addEventListener('change',event=>{
+    if(event.target.matches('#keep-preset')) {
+      const slider=hallScene.querySelector('#keep-logt');
+      if(slider){slider.value=event.target.value;updateKeep(hallScene);}
+    }
   });
   document.addEventListener('click',(event)=>{
     const nav = event.target.closest('[data-navigate]');

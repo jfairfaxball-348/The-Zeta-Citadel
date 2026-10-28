@@ -57,6 +57,28 @@ try {
  await page.locator('#density-mode').selectOption('free');
  assert.match(await page.locator('#density-mode-explain').innerText(),/specified domain/);
  await page.goto(base+'/#%ZZ');assert.match(await page.locator('.story-head h2').innerText(),/The mystery/);
+ // S005: Keep world-to-room-to-exhibit, boundaries, history, direct reload, exact facts.
+ await page.goto(base+'/#keep');
+ await page.locator('.keep-gate[data-navigate="keep-classical"]').click();
+ assert.equal(new URL(page.url()).hash,'#keep-classical');
+ await page.locator('.keep-entry[data-navigate="keep-comparison-exhibit"]').click();
+ await page.locator('#keep-logt').waitFor();
+ assert.match(await page.locator('#keep-height-readout').innerText(),/10\^6/);
+ assert.match(await page.locator('#keep-classical-value').innerText(),/0\.986978515/);
+ await page.locator('#keep-preset').selectOption('4000');
+ assert.match(await page.locator('#keep-winner').innerText(),/Vinogradov–Korobov/);
+ assert.equal(await page.locator('#keep-logt').inputValue(),'4000');
+ await page.goBack();assert.equal(new URL(page.url()).hash,'#keep-classical');
+ await page.goForward();assert.equal(new URL(page.url()).hash,'#keep-comparison-exhibit');
+ await page.reload();await page.locator('#keep-logt').waitFor();
+ await page.locator('#map-up').click();assert.equal(new URL(page.url()).hash,'#keep-classical');
+ await page.locator('#map-home').click();assert.equal(new URL(page.url()).hash,'');
+ await page.goto(base+'/#keep');
+ await page.locator('.keep-gate[data-navigate="keep-boundary"]').click();
+ await page.locator('.keep-entry[data-navigate="keep-geometry-exhibit"]').click();
+ assert.match(await page.locator('.keep-exhibit .keep-note').first().innerText(),/simple pole/);
+ await page.goto(base+'/#keep-vk-exhibit');await page.locator('#keep-logt').waitFor();
+ assert.match(await page.locator('.keep-formulas').innerText(),/\|t\| ≥ 3/);
  // S003: deep-linked functional exhibits across every Hall chamber.
  await page.goto(base+'/#hardy-signs-exhibit');
  await page.locator('#hardy-waves').waitFor();
@@ -100,6 +122,12 @@ try {
  await mobile.locator('#density-sigma').focus();await mobile.keyboard.press('ArrowRight');
  assert.match(await mobile.locator('#density-sigma-output').innerText(),/0.76/);
  assert.ok(!(await mobile.evaluate(()=>document.documentElement.scrollWidth > innerWidth+2)),'S004 mobile overflow');
+ await mobile.goto(base+'/#keep');
+ await mobile.locator('.keep-gate[data-navigate="keep-vk"]').tap();
+ await mobile.locator('.keep-entry[data-navigate="keep-vk-exhibit"]').tap();
+ await mobile.locator('#keep-logt').focus();await mobile.keyboard.press('ArrowRight');
+ assert.match(await mobile.locator('#keep-logt-output').innerText(),/7/);
+ assert.ok(!(await mobile.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2)),'S005 mobile overflow');
  await mobile.goto(base+'/#critical-line-exhibit');
  await mobile.emulateMedia({reducedMotion:'reduce'});
  await mobile.locator('#map-up').tap();
