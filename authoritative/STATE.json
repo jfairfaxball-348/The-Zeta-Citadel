@@ -6,19 +6,19 @@
   "updated_date_utc": "2026-10-28",
   "programme": "S002-S010 progressively explorable mathematical world",
   "baseline": {
-    "last_completed_session": "S003",
+    "last_completed_session": "S004",
     "status": "CLOSED",
-    "app_commit_sha": "54cd7f3c64eb36f4741c7dae90356338ef129f73",
-    "application": "Dependency-free recursive Citadel with six interactive Great Hall exhibits, curated original sources, preserved world navigation and deep links"
+    "app_commit_sha": "05fb27f563dee057d5fc3c720fb28141b4eaa314",
+    "application": "Recursive zero-density Courtyard district with interactive Guth–Maynard exponent comparison and sparse-versus-zero exhibit, preserved Hall laboratory, world navigation and deep links"
   },
   "session": {
-    "next": "S004",
+    "next": "S005",
     "status": "READY_UNEXECUTED",
     "execution_authorized": false,
     "canonical_prompt": "authoritative/NEXT_SESSION_PROMPT.md",
-    "predecessor": "S003",
+    "predecessor": "S004",
     "roadmap": "docs/ROADMAP.md",
-    "required_owner_invocation": "Separate explicit owner request to run S004"
+    "required_owner_invocation": "Separate explicit owner request to run S005"
   },
   "roadmap": [
     {
@@ -34,12 +34,12 @@
     {
       "id": "S004",
       "title": "Courtyard zero-density district",
-      "status": "READY_UNEXECUTED"
+      "status": "CLOSED"
     },
     {
       "id": "S005",
       "title": "Keep zero-free territories",
-      "status": "PLANNED"
+      "status": "READY_UNEXECUTED"
     },
     {
       "id": "S006",
@@ -75,7 +75,8 @@
     "locations.js",
     "hall.js",
     "vercel.json",
-    "laboratory.js"
+    "laboratory.js",
+    "courtyard.js"
   ],
   "authority_files": [
     "AGENTS.md",
@@ -92,6 +93,6 @@
     "No implication inferred from map geography",
     "No automatic publication, external outreach, paid services, or proof-of-RH claim"
   ],
-  "next_gate": "S004: source-checked zero-density Courtyard with mathematically scoped interactive N(sigma,T) demonstration, no zero-free claims",
-  "deployment_note": "Production S002 a3003d60 verified READY via Vercel before S003 merge; S003 production rollout not yet verified. GitHub Actions S003 implementation branch check 40719950002 green on 54cd7f3; rerun required for governance PR head."
+  "next_gate": "S005: verified theorem-specific zero-free territories with carefully bounded T, real-part and pole/trivial-zero conventions; no extension to RH",
+  "deployment_note": "S003 merged main 055f5674 production Vercel READY; S004 implementation 05fb27f5 preview READY on Vercel, GitHub S004 branch run 40724007301 and PR runs 40724017561/40724017627/40724017775 success; S004 production not verified before PR merge."
 }

@@ -153,7 +153,7 @@ LOCATIONS['hall-critical'].children.push('zero-types-exhibit');
 LOCATIONS['density-guth'].children = ['density-exponent-exhibit'];
 LOCATIONS['density-guth'].status = 'Guth–Maynard · Annals of Mathematics (2026)';
 LOCATIONS['density-guth'].concept = 'Guth and Maynard proved zero-density estimates, including N(σ,T) with exponent 30(1−σ)/13+o(1) as T→∞. The estimate counts possible zeros in a rectangle, rather than excluding them.';
-LOCATIONS['density-guth'].progress = 'The 2024 preprint was published online 1 March 2026 in the peer-reviewed Annals. The author manuscript gives a sharper sigma-dependent result and the combined 30/13 corollary.';
+LOCATIONS['density-guth'].progress = 'The 2024 preprint was published online 1 March 2026 in the peer-reviewed Annals. The author manuscript gives a σ-dependent estimate and a combined 30/13 corollary; which exponent is lower depends on σ.';
 LOCATIONS['density-guth'].sources = SOURCE_DENSITY;
 LOCATIONS['density-guth'].sourceIds = SOURCE_DENSITY.map(item => item.url);
 LOCATIONS['density-guth'].teaser = 'A published theorem with an interactive asymptotic exponent chart.';

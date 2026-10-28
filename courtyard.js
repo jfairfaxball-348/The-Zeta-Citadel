@@ -32,7 +32,7 @@ function exponentExhibit() {
     '<title id="density-chart-title">Comparison of three zero-density exponents</title>'+
     '<desc id="density-chart-desc">Lengths of three bars are controlled by sigma. Each length represents a theorem exponent, not observed zeros, missing zeros, or a certified count.</desc>'+
     '<path class="lab-grid" d="M125 30V241M225 30V241M325 30V241M425 30V241M525 30V241"/>'+
-    '<g class="density-chart-labels"><text x="4" y="75">GM SHARP</text><text x="4" y="145">GM UNIFORM</text><text x="4" y="215">CLASSICAL</text><text x="125" y="263">0</text><text x="225" y="263">0.4</text><text x="325" y="263">0.8</text><text x="425" y="263">1.2</text><text x="515" y="263">1.6</text></g>'+
+    '<g class="density-chart-labels"><text x="4" y="75">GM σ-DEP</text><text x="4" y="145">GM UNIFORM</text><text x="4" y="215">CLASSICAL</text><text x="125" y="263">0</text><text x="225" y="263">0.4</text><text x="325" y="263">0.8</text><text x="425" y="263">1.2</text><text x="515" y="263">1.6</text></g>'+
     '<rect id="density-bar-sharp" x="125" y="51" width="0" height="34" rx="3" fill="#e9c886"/>'+
     '<rect id="density-bar-uniform" x="125" y="121" width="0" height="34" rx="3" fill="#83c9c1"/>'+
     '<rect id="density-bar-classical" x="125" y="191" width="0" height="34" rx="3" fill="#a69abf"/>'+
@@ -75,7 +75,7 @@ export function updateCourtyard(root) {
     root.querySelector('#density-sigma-output').textContent=s.toFixed(2);
     root.querySelector('#density-logt-output').textContent=String(k);
     for (const [id,e] of [['sharp',g],['uniform',u],['classical',c]]) root.querySelector('#density-bar-'+id).setAttribute('width',String(250*e));
-    root.querySelector('#density-exponents').textContent='Exponent values: Guth–Maynard sharper '+toFixed(g)+'; combined 30/13 '+toFixed(u)+'; earlier classical 12/5 '+toFixed(c)+'.';
+    root.querySelector('#density-exponents').textContent='Exponent values: Guth–Maynard σ-dependent '+toFixed(g)+'; combined 30/13 '+toFixed(u)+'; earlier classical 12/5 '+toFixed(c)+'.';
     root.querySelector('#density-height-readout').textContent='At the illustrative height scale T=10^'+k+', the leading uniform power alone has log₁₀(T^a)='+toFixed(k*u)+'. This omits o(1), implied constants and all finite-height certification; it is NOT a count or numerical upper bound.';
   }
   const mode=root.querySelector('#density-mode');
