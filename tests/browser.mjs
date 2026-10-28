@@ -41,7 +41,7 @@ try {
  await page.goto(base+'/#milestones-exhibit');
  await page.locator('#milestone-select').selectOption('conrey');
  assert.match(await page.locator('#milestone-claim').innerText(),/two fifths/);
- assert.match(await page.locator('#milestone-kind').innerText(),/multiplicity/ii);
+ assert.match(await page.locator('#milestone-kind').innerText(),/multiplicity/i);
  await page.goto(base+'/#mollifier-toy-exhibit');
  await page.locator('#toy-a').evaluate(el => { el.value='0.7'; el.dispatchEvent(new Event('input',{bubbles:true})); });
  assert.match(await page.locator('#toy-result').innerText(),/0.51/);
