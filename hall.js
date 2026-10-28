@@ -1,5 +1,6 @@
 /* S002 architectural map and teaching exhibit; all statements come from locations.js. */
 import { getLocation, isHallLocation } from './locations.js';
+import { renderLabExhibit, updateLab } from './laboratory.js';
 
 const ROOMS = [
   {id: 'hall-hardy', slot: 'hardy', symbol: '∞'},
@@ -14,6 +15,7 @@ export { isHallLocation };
 export function renderHallScene(id) {
   if (!isHallLocation(id)) return '';
   if (id === 'critical-line-exhibit') return renderExhibit();
+  if (getLocation(id)?.type === 'exhibit') return renderLabExhibit(id);
   const chambers = ROOMS.map(({id: roomId, slot, symbol}) => {
     const room = getLocation(roomId);
     return `<button class="hall-room hall-room-${slot} ${id===roomId?'hall-room-active':''}" data-navigate="${roomId}" aria-label="Enter ${esc(room.name)}" aria-current="${id===roomId?'location':'false'}"><span class="hall-room-glyph" aria-hidden="true">${symbol}</span><strong>${esc(room.name)}</strong><small>${esc(room.subtitle)}</small><span class="hall-room-entry">EXPLORE ↗</span></button>`;
@@ -75,3 +77,5 @@ export function updateCriticalExplorer(root) {
   const position = Math.abs(s - .5) < 0.0001 ? 'on the critical line' : s > 0 && s < 1 ? 'inside the critical strip, off the critical line' : 'on the boundary of the strip';
   root.querySelector('#critical-coordinate').textContent = `s = ${s.toFixed(2)} + ${t}i — ${position}. This does not establish a zeta zero.`;
 }
+
+export { updateLab };

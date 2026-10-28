@@ -11,4 +11,15 @@ assert.deepEqual(LOCATIONS.hall.children,['hall-hardy','hall-levinson','hall-mol
 assert.equal(getLocation('not-real'),null);
 for(const node of Object.values(LOCATIONS)){assert.ok(Array.isArray(node.children));assert.ok(Array.isArray(node.sourceIds));}
 assert.match(getLocation('critical-line-exhibit').concept,/does not make it a zero/);
-console.log('PASS graph, legacy IDs, typed locations, content caveat');
+for (const [parent,child] of [
+ ['hall-hardy','hardy-signs-exhibit'],['hall-levinson','milestones-exhibit'],
+ ['hall-mollifier','mollifier-toy-exhibit'],['hall-2026','research-comparison-exhibit'],
+ ['hall-critical','zero-types-exhibit']
+]) {
+ assert.ok(LOCATIONS[parent].children.includes(child), 'missing exhibit '+child);
+ assert.equal(getLocation(child)?.parent,parent);
+ assert.equal(getAncestors(child)[0],'hall');
+ assert.ok(getLocation(child).sources.length,'source missing: '+child);
+}
+assert.deepEqual(getAncestors('zero-types-exhibit'),['hall','hall-critical','zero-types-exhibit']);
+console.log('PASS S003 graph, legacy IDs, sourced exhibit children, cycle-free locations');

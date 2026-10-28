@@ -6,19 +6,19 @@
   "updated_date_utc": "2026-10-28",
   "programme": "S002-S010 progressively explorable mathematical world",
   "baseline": {
-    "last_completed_session": "S002",
+    "last_completed_session": "S003",
     "status": "CLOSED",
-    "app_commit_sha": "a23a2d07b2c94a750cc36dd9ef7ca70ec73ef160",
-    "application": "Static atlas with recursive place graph, Great Hall five-chamber floor plan, coordinate teaching exhibit, browser-history navigation"
+    "app_commit_sha": "54cd7f3c64eb36f4741c7dae90356338ef129f73",
+    "application": "Dependency-free recursive Citadel with six interactive Great Hall exhibits, curated original sources, preserved world navigation and deep links"
   },
   "session": {
-    "next": "S003",
+    "next": "S004",
     "status": "READY_UNEXECUTED",
     "execution_authorized": false,
     "canonical_prompt": "authoritative/NEXT_SESSION_PROMPT.md",
-    "predecessor": "S002",
+    "predecessor": "S003",
     "roadmap": "docs/ROADMAP.md",
-    "required_owner_invocation": "Separate explicit owner request to run S003"
+    "required_owner_invocation": "Separate explicit owner request to run S004"
   },
   "roadmap": [
     {
@@ -29,12 +29,12 @@
     {
       "id": "S003",
       "title": "Critical-line laboratory",
-      "status": "READY_UNEXECUTED"
+      "status": "CLOSED"
     },
     {
       "id": "S004",
       "title": "Courtyard zero-density district",
-      "status": "PLANNED"
+      "status": "READY_UNEXECUTED"
     },
     {
       "id": "S005",
@@ -74,7 +74,8 @@
     "app.js",
     "locations.js",
     "hall.js",
-    "vercel.json"
+    "vercel.json",
+    "laboratory.js"
   ],
   "authority_files": [
     "AGENTS.md",
@@ -91,6 +92,6 @@
     "No implication inferred from map geography",
     "No automatic publication, external outreach, paid services, or proof-of-RH claim"
   ],
-  "next_gate": "S003: at least three sourced Great Hall exhibits with meaningful interaction, status caveats, and no invented computational zeros",
-  "deployment_note": "S002 approved on GitHub Actions PR head a23a2d07 (run 40717477709). Live Vercel deployment of merged main requires separate verification; no claim that it has already deployed."
+  "next_gate": "S004: source-checked zero-density Courtyard with mathematically scoped interactive N(sigma,T) demonstration, no zero-free claims",
+  "deployment_note": "Production S002 a3003d60 verified READY via Vercel before S003 merge; S003 production rollout not yet verified. GitHub Actions S003 implementation branch check 40719950002 green on 54cd7f3; rerun required for governance PR head."
 }

@@ -1,6 +1,6 @@
 import { EDITION, REGIONS, SUBNODES, getRegion } from './atlas.js';
 import { getLocation as getNode, getAncestors, getRootRegion, isHallLocation } from './locations.js';
-import { renderHallScene, updateCriticalExplorer } from './hall.js';
+import { renderHallScene, updateCriticalExplorer, updateLab } from './hall.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const WIDTH = 1560;
@@ -132,6 +132,7 @@ function renderHall() {
   svg.setAttribute('aria-hidden', String(hall));
   hallScene.hidden = !hall;
   hallScene.innerHTML = hall ? renderHallScene(state.selected) : '';
+  if (hall) updateLab(hallScene);
   $('#map-up').disabled = !state.selected;
   $('#zoom-in').disabled = hall;
   $('#zoom-out').disabled = hall;
@@ -204,6 +205,7 @@ function targetClick(event) {
 function bindEvents() {
   document.addEventListener('input', event => {
     if (event.target.matches('#critical-sigma, #critical-height')) updateCriticalExplorer(hallScene);
+    if (event.target.matches('#taxonomy-case, #hardy-waves, #milestone-select, #toy-a, #paper-select')) updateLab(hallScene);
   });
   document.addEventListener('click',(event)=>{
     const nav = event.target.closest('[data-navigate]');
