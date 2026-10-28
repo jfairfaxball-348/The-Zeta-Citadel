@@ -22,4 +22,13 @@ for (const [parent,child] of [
  assert.ok(getLocation(child).sources.length,'source missing: '+child);
 }
 assert.deepEqual(getAncestors('zero-types-exhibit'),['hall','hall-critical','zero-types-exhibit']);
+assert.deepEqual(getAncestors('density-exponent-exhibit'),['courtyard','density-guth','density-exponent-exhibit']);
+assert.deepEqual(getAncestors('density-definition-exhibit'),['courtyard','density-idea','density-definition-exhibit']);
+for(const id of ['density-exponent-exhibit','density-definition-exhibit']) {
+ assert.ok(LOCATIONS[id].sources.length >= 2);
+ assert.ok(LOCATIONS[id].status);
+}
+assert.ok(LOCATIONS['density-guth'].children.includes('density-exponent-exhibit'));
+assert.ok(LOCATIONS['density-idea'].children.includes('density-definition-exhibit'));
+console.log('PASS S004 density graph, legacy IDs, source metadata');
 console.log('PASS S003 graph, legacy IDs, sourced exhibit children, cycle-free locations');

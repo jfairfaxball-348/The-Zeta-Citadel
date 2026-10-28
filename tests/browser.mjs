@@ -32,6 +32,26 @@ try {
  await page.locator('#map-home').click();assert.equal(new URL(page.url()).hash,'');
  await page.goto(base+'/#hall-hardy');await page.locator('.hall-plan').waitFor();
  await page.goto(base+'/#density-guth');assert.match(await page.locator('#story-content h2').innerText(),/Guth/);
+ // S004: route, accessibility, exact exponent calculations and browser navigation.
+ await page.goto(base+'/#courtyard');
+ await page.locator('.density-room').first().click();
+ assert.equal(new URL(page.url()).hash,'#density-guth');
+ await page.locator('#story-content [data-navigate="density-exponent-exhibit"]').click();
+ await page.locator('#density-sigma').waitFor();
+ await page.locator('#density-sigma').evaluate(el=>{el.value='0.80';el.dispatchEvent(new Event('input',{bubbles:true}));});
+ assert.match(await page.locator('#density-exponents').innerText(),/0.429/);
+ await page.locator('#density-logt').evaluate(el=>{el.value='10';el.dispatchEvent(new Event('input',{bubbles:true}));});
+ assert.match(await page.locator('#density-height-readout').innerText(),/4.615/);
+ assert.match(await page.locator('.density-exhibit .lab-micro').last().innerText(),/No bars contain zeta-zero samples/);
+ await page.goBack();assert.equal(new URL(page.url()).hash,'#density-guth');
+ await page.goForward();assert.equal(new URL(page.url()).hash,'#density-exponent-exhibit');
+ await page.reload();await page.locator('#density-sigma').waitFor();
+ await page.locator('#map-up').click();assert.equal(new URL(page.url()).hash,'#density-guth');
+ await page.goto(base+'/#density-definition-exhibit');
+ await page.locator('#density-mode').selectOption('rh');
+ assert.match(await page.locator('#density-mode-explain').innerText(),/every σ>½/);
+ await page.locator('#density-mode').selectOption('free');
+ assert.match(await page.locator('#density-mode-explain').innerText(),/specified domain/);
  await page.goto(base+'/#%ZZ');assert.match(await page.locator('.story-head h2').innerText(),/The mystery/);
  // S003: deep-linked functional exhibits across every Hall chamber.
  await page.goto(base+'/#hardy-signs-exhibit');
@@ -69,6 +89,13 @@ try {
  await mobile.locator('#milestone-select').selectOption('levinson');
  assert.match(await mobile.locator('#milestone-kind').innerText(),/multiplicity/i);
  assert.ok(!(await mobile.evaluate(()=>document.documentElement.scrollWidth > innerWidth + 2)),'S003 mobile overflow');
+ await mobile.goto(base+'/#courtyard');
+ await mobile.locator('.density-room').first().tap();
+ assert.equal(new URL(mobile.url()).hash,'#density-guth');
+ await mobile.locator('#story-content [data-navigate="density-exponent-exhibit"]').tap();
+ await mobile.locator('#density-sigma').focus();await mobile.keyboard.press('ArrowRight');
+ assert.match(await mobile.locator('#density-sigma-output').innerText(),/0.76/);
+ assert.ok(!(await mobile.evaluate(()=>document.documentElement.scrollWidth > innerWidth+2)),'S004 mobile overflow');
  await mobile.goto(base+'/#critical-line-exhibit');
  await mobile.emulateMedia({reducedMotion:'reduce'});
  await mobile.locator('#map-up').tap();
