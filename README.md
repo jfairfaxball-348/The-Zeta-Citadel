@@ -2,6 +2,12 @@
 
 An interactive, zoomable cartographic atlas of the Riemann Hypothesis and its mathematical surroundings.
 
+## Volume I release consolidation (S010)
+
+The S010 consolidation audits mathematical provenance and link availability, tests the full recursive tree, all eight relationship types and both guided paths, and adds a desktop/tablet/touch-mobile HTTP Chromium release suite. It replaces the defunct original AIM PDF references with directly retrievable scholarly sources; terminology remains defined within this atlas rather than by an assumed universal GRH/ERH convention.
+
+Read [the review and source evidence](docs/MATHEMATICAL_SOURCE_AUDIT.md), [architecture and contributor guide](docs/CONTRIBUTING_AND_DATA_CONTRACT.md), [privacy and release limitations](docs/RELEASE_AND_PRIVACY.md), and [S010 validation](sessions/S010/VALIDATION.md). Check [authoritative state](authoritative/STATE.json) for the final accepted status; a green implementation branch alone is not a production release.
+
 ## Session 001 · First playable atlas
 
 - Eight clickable regions: Selberg class, Grand RH, GRH, ERH, zero-density theorems, critical-line theorems, zero-free regions and rigorous computation.
@@ -76,7 +82,7 @@ Apache-2.0 (see LICENSE).
 
 The source of truth is [authoritative/STATE.json](authoritative/STATE.json), [authoritative/START_HERE.md](authoritative/START_HERE.md) and [docs/ROADMAP.md](docs/ROADMAP.md), under [AGENTS.md](AGENTS.md) and [docs/SESSION_PROTOCOL.md](docs/SESSION_PROTOCOL.md).
 
-**S002–S008 have been implemented and checked on their implementation branches. S009 is prepared but unexecuted.** The one next authoritative prompt is [authoritative/NEXT_SESSION_PROMPT.md](authoritative/NEXT_SESSION_PROMPT.md). Every session requires a separate explicit owner invocation; committing a future prompt does not run it.
+**S002–S009 are merged and have green merged-main CI. S010 is the separately authorised release-audit stage.** The canonical authority path is [authoritative/NEXT_SESSION_PROMPT.md](authoritative/NEXT_SESSION_PROMPT.md). Every session requires a separate explicit owner invocation; committing a future prompt does not run it.
 
 ## Explore the completed interiors
 
@@ -115,7 +121,7 @@ Open **⌁ BRIDGES** at the map top or the side navigation, or visit `#connectio
 
 The two proved **implications between mathematical statements** have conjectural *premises*: (i) universal Dirichlet GRH entails ordinary RH, since the principal character modulo 1 gives ζ; (ii) the defined universal Dedekind-zeta ERH entails RH, since ζ_Q=ζ. **Neither premise is proved.** Conditional connections explain what RH would force in zero-free and zero-density views. The other connections are historical or analogous and carry no implied proof arrows. All are reviewed as mathematical exposition, not independent research discoveries or new zero calculations.
 
-[S008 validation](sessions/S008/VALIDATION.md) records the source audit, test cases, CI evidence and limitations. S009 search and learning journeys have since been executed. Only **S010 — first-release consolidation and research audit** is now installed, READY / UNEXECUTED, requiring a separate future owner invocation.
+[S008 validation](sessions/S008/VALIDATION.md) records the source audit, test cases, CI evidence and limitations. S009 search and learning journeys are merged. S010 release auditing is described at the top of this README and in the authoritative state.
 
 ## Search, save and learn (S009)
 
@@ -125,4 +131,4 @@ Two optional guided reading paths are directly linkable: **beginner** `#journey-
 
 Every room/bridge also offers **COPY DEEP LINK** and **SAVE PLACE**. Saved places and journey checkmarks are initially **session-only**. To retain them across page reloads on the current device, explicitly check **Remember my saved places and journey progress on this device** in Discovery; this uses `localStorage` only, with a visible session-only fallback if storage is unavailable. Disable retention from the same control. There is **no account, cookie, remote search API or tracking**, and neither browsing nor a schematic map implies proof of RH. Old eight region IDs and prior hashes still work.
 
-[S009 detailed validation](sessions/S009/VALIDATION.md) documents the exact successful GitHub-hosted real HTTP Chromium desktop/touch-mobile run at implementation SHA `cff8bd9086d1a43ef9510d13b1962aa6c5182c7c` and remaining audit gaps. [S009 closeout](sessions/S009/CLOSEOUT.md) records the downstream PR/production verification boundary. S010 is the separate **source, accessibility, performance and release consolidation** stage — it is prepared, not run.
+[S009 detailed validation](sessions/S009/VALIDATION.md) documents the exact successful GitHub-hosted real HTTP Chromium desktop/touch-mobile run at implementation SHA `cff8bd9086d1a43ef9510d13b1962aa6c5182c7c` and remaining audit gaps. [S009 closeout](sessions/S009/CLOSEOUT.md) records the downstream PR/production verification boundary. S010 is the **source, accessibility, performance and release consolidation** stage; see its current validation and closeout for exact check/deployment status.
