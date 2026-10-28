@@ -13,7 +13,7 @@ export const REGIONS = [
     caution: 'The Selberg class is not literally an outer theorem that implies every inner region.',
     evidence: 'Axiomatic framework',
     milestones: [{year:'1990s', text:'Selberg formulates an axiomatic setting for L-functions.'},{year:'Today',text:'Higher-degree classification remains an active field.'}],
-    sources: [{name:'AIM — Riemann Hypothesis landscape',url:'https://www.aimath.org/WWN/rh/rh.pdf'}],
+    sources: [{name:'Selberg class mathematical survey (Li Zheng)',url:'https://www.math.ubc.ca/~gerg/teaching/613-Winter2011/SelbergClass.pdf'}],
     focus: {x: 780, y: 490, w: 1130}, subnodes: []
   },
   {
@@ -22,10 +22,10 @@ export const REGIONS = [
     concept: 'One precise use of “Grand Riemann Hypothesis” asks that the nontrivial zeros of all automorphic L-functions lie on the critical line. This reaches into the Langlands programme, where automorphic objects connect number theory and representation theory.',
     progress: 'There are deep theorems for special families, but no general proof of the grand statement. Important parts of Langlands are about much more than zeros and should not be mistaken for merely larger versions of RH.',
     stakes: 'Uniform control of zeros across these families would sharpen error terms and connect prime-like phenomena in many arithmetic settings.',
-    caution: '“Grand RH” is not standardized in every source; here it follows the AIM formulation for automorphic L-functions.',
+    caution: '“Grand RH” is not standardized in every source; here we explicitly mean the critical-line conjecture for the relevant automorphic L-functions, with stated normalization.',
     evidence: 'Broad conjectural extension',
     milestones: [{year:'20th c.',text:'Automorphic forms and Langlands connections develop.'},{year:'Today',text:'Spectral and automorphic families remain open in general.'}],
-    sources: [{name:'AIM — Grand RH formulation',url:'https://www.aimath.org/WWN/rh/rh.pdf'}],
+    sources: [{name:'Arthur–Gelbart — Lectures on automorphic L-functions',url:'https://www.math.toronto.edu/arthur/pdf/automorphic-L.pdf'}],
     focus: {x: 780, y: 490, w: 935}, subnodes: []
   },
   {
@@ -37,7 +37,7 @@ export const REGIONS = [
     caution: 'The ring depicts scope, not a certified chain of logical implications for every terminology convention.',
     evidence: 'Conjecture for Dirichlet L-functions',
     milestones: [{year:'1837',text:'Dirichlet proves infinitely many primes in reduced residue classes.'},{year:'Today',text:'GRH remains open beyond finite verification and special cases.'}],
-    sources: [{name:'AIM — GRH definition',url:'https://www.aimath.org/WWN/rh/rh.pdf'}],
+    sources: [{name:'NIST DLMF §25.15 — Dirichlet L-functions',url:'https://dlmf.nist.gov/25.15'}],
     focus: {x: 780, y: 490, w: 745}, subnodes: []
   },
   {
@@ -49,7 +49,7 @@ export const REGIONS = [
     caution: 'ERH is sometimes used as a synonym for GRH. Under the specific definitions used here, the GRH and ERH scopes are related but should not be presented as strictly nested walls.',
     evidence: 'Dedekind zeta conjecture',
     milestones: [{year:'19th c.',text:'Dedekind extends arithmetic to general number fields.'},{year:'Today',text:'The corresponding zero-location conjecture remains unresolved.'}],
-    sources: [{name:'AIM — ERH definition',url:'https://www.aimath.org/WWN/rh/rh.pdf'}],
+    sources: [{name:'Harvard algebraic number theory course notes — Dedekind zeta',url:'https://people.math.harvard.edu/~achenjang/assets/pdf/Fall_2020_Course_Notes.pdf'}],
     focus: {x: 780, y: 490, w: 575}, subnodes: []
   },
   {
