@@ -445,3 +445,66 @@ button:focus-visible, a:focus-visible, [role="button"]:focus-visible { outline: 
  .connection-filters button {font-size:9px; padding:8px 7px;}
  .map-stage:has(.connections-map) {min-height:650px;}
 }
+
+
+/* S009 — search, sourced trails and local-only atlas bookmarks */
+.discovery-open { border-color:rgba(125,197,196,.58); background:#12313d; }
+.discovery-top-trigger { border:1px solid rgba(167,198,191,.48); background:#173640; padding:6px 9px; color:#e1e7db; font:10px var(--mono); white-space:nowrap; }
+.discovery-top-trigger:hover,.discovery-top-trigger:focus-visible {background:#355863;}
+.discovery-scene { padding:clamp(18px,3vw,44px); min-width:0; max-width:1100px; margin:auto; color:var(--pale); }
+.discovery-scene h2 {font:500 clamp(32px,3.6vw,51px)/1.02 var(--serif); color:#f4dfb6; margin:12px 0 17px;}
+.discovery-scene h3 {font:400 27px/1.2 var(--serif);color:#e9d0a1; margin:25px 0 12px;}
+.discovery-kicker,.discovery-search-label {color:#c1d8cc; font:10px/1.6 var(--mono); letter-spacing:.16em; }
+.discovery-intro,.discovery-warning {max-width:730px;color:#bfcdc4;font:13px/1.8 var(--body);}
+.discovery-search-label {display:block;margin:26px 0 9px;}
+.discovery-search-box {display:flex; gap:7px;max-width:760px;}
+.discovery-search-box input {min-width:0;width:100%;padding:15px; border:1px solid #a6b8ac;color:#fff0d8;background:#0d2631;font:15px var(--body);border-radius:2px;}
+.discovery-search-box input:focus-visible,.discovery-optin input:focus-visible {outline:2px solid #f5d59d;outline-offset:3px;}
+.discovery-search-box button,.discovery-back {background:#2a4750;border:1px solid #adbaaa;color:#f9e3c4;padding:10px 13px;font:11px var(--mono);}
+.discovery-empty,.discovery-count {color:#b7c7c2;font:12px/1.8 var(--body);margin:19px 0;}
+.discovery-results {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,295px),1fr));gap:9px;margin:16px 0;}
+.discovery-result {background:#132d39;border:1px solid rgba(232,203,149,.35); min-width:0; padding:12px;display:flex;flex-direction:column;gap:8px;}
+.discovery-result > button:first-child {background:transparent;border:0;color:#f6e4c8;display:flex; flex-direction:column;gap:6px;text-align:left; padding:8px; flex:1; min-width:0;}
+.discovery-result strong {font:24px/1.1 var(--serif);}
+.discovery-result small {font:11px/1.4 var(--body);color:#ccdbd2;}
+.discovery-result span {font:9px/1.6 var(--mono);color:#a7c8bf;overflow-wrap:anywhere;}
+.discovery-result button:hover,.discovery-trail:hover,.journey-actions button:hover {background:#335460;}
+.discovery-copy {padding:7px 9px;background:#183743;border:1px solid #78948f;color:#e9dbb9;font:10px var(--mono);align-self:flex-start;}
+.discovery-trails {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px; margin-top:10px;}
+.discovery-trails h3 {grid-column:1 / -1;}
+.discovery-trail {background:linear-gradient(135deg,#30444a,#19313b);border:1px solid #b49e75;min-width:0;text-align:left;color:#efe3cb;display:flex;flex-direction:column;gap:9px;padding:17px;}
+.discovery-trail span {color:#d1b880;font:10px var(--mono);}
+.discovery-trail strong {font:27px var(--serif);}
+.discovery-trail small {color:#bfcfc8;font:11px/1.6 var(--body);}
+.discovery-saved ul {list-style:none;padding:0;display:grid;gap:8px;}
+.discovery-saved li {display:flex;flex-wrap:wrap;align-items:center;gap:12px;}
+.discovery-saved li button:first-child {background:none;border:0;color:#e6c890;text-decoration:underline;padding:8px 0;}
+.discovery-saved p {font:12px/1.7 var(--body);color:#afc1bb;}
+.journey-progress {font:11px var(--mono);color:#c9e0ca;border-left:3px solid #8cbaae;padding:10px 15px;}
+.journey-steps {list-style:none;padding:0;margin:25px 0;display:grid;gap:12px;}
+.journey-steps li {display:grid;grid-template-columns:45px minmax(0,1fr) auto;gap:14px;align-items:start;border:1px solid rgba(211,195,152,.32);background:#17313a;padding:18px;}
+.journey-steps li.is-done {border-color:#79ae9b;}
+.journey-number {color:#edd29b;font:18px var(--mono);}
+.journey-steps strong {font:26px/1.1 var(--serif);color:#f4dfb8;}
+.journey-steps p {color:#c4d0c6;font:12px/1.7 var(--body);margin:8px 0;}
+.journey-steps small {color:#95bfb0;font:10px/1.5 var(--mono);}
+.journey-actions {display:flex;flex-wrap:wrap;gap:8px;margin-top:13px;}
+.journey-actions button,.discovery-context button {padding:9px 12px;background:#2d4a50;border:1px solid #a99a74;color:#f7e4c5;font:10px/1.5 var(--mono);}
+.journey-done {font:10px var(--mono);color:#a4cfb2;white-space:nowrap;}
+.discovery-optin {display:flex;align-items:start;gap:8px;color:#ead8b4;font:12px/1.6 var(--body);cursor:pointer;margin:14px 0;}
+.discovery-optin input {width:18px;height:18px;flex-shrink:0;accent-color:#d3ad6f;}
+.discovery-storage {font:11px/1.5 var(--body);color:#b6cdbc;}
+.discovery-context .story-section {padding:0;}
+.discovery-context > button {margin:7px 8px 5px 0;}
+.discovery-utilities .story-actions {padding:15px 0 25px;}
+@media(max-width:1050px){.discovery-trails {grid-template-columns:1fr;}}
+@media(max-width:660px){
+ .discovery-top-trigger {padding:6px;font-size:9px;}
+ .map-stage:has(.discovery-scene) {min-height:620px;}
+ .discovery-scene {padding:20px 14px;}
+ .discovery-search-box input {padding:12px;font-size:13px;}
+ .discovery-results {grid-template-columns:1fr;}
+ .journey-steps li {grid-template-columns:30px minmax(0,1fr);padding:12px;gap:10px;}
+ .journey-steps strong {font-size:22px;}
+ .journey-done {grid-column:2;}
+}
