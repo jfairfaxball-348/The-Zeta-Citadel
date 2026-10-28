@@ -1,0 +1,65 @@
+import assert from 'node:assert/strict';
+import {spawn} from 'node:child_process';
+import {chromium} from 'playwright';
+const port=8766, base='http://127.0.0.1:'+port;
+const server=spawn('python3',['-m','http.server',String(port),'--bind','127.0.0.1'],{stdio:'ignore'});
+let browser;const errors=[];
+async function ready(){for(let i=0;i<60;i++){try{if((await fetch(base)).ok)return;}catch{}await new Promise(r=>setTimeout(r,200));}throw Error('HTTP server unavailable');}
+try{
+ await ready(); browser=await chromium.launch({headless:true});
+ const page=await browser.newPage({viewport:{width:1440,height:900}});
+ page.on('pageerror',e=>errors.push(e.message));
+ page.on('console',msg=>{if(msg.type()==='error'&&!msg.text().includes('fonts.googleapis'))errors.push(msg.text());});
+ await page.goto(base);
+ await page.locator('.connections-top-trigger').click();
+ assert.equal(new URL(page.url()).hash,'#connections');
+ assert.equal(await page.locator('.connection-card').count(),8);
+ assert.equal(await page.locator('#region-nav button').count(),8);
+ assert.equal(await page.locator('.connections-legend > div').count(),4);
+ for(const type of ['proved_implication','conditional_dependency','historical_influence','conceptual_analogy']){
+  await page.locator('[data-connection-filter="'+type+'"]').click();
+  assert.equal(await page.locator('.connection-card').count(),2,type);
+  assert.equal(await page.locator('[data-connection-filter="'+type+'"]').getAttribute('aria-pressed'),'true');
+ }
+ await page.locator('[data-connection-filter="all"]').click();
+ await page.locator('[data-navigate="connection--dirichlet-grh-rh"]').first().click();
+ assert.equal(new URL(page.url()).hash,'#connection--dirichlet-grh-rh');
+ assert.match(await page.locator('#story-content').innerText(),/principal character modulo 1/);
+ assert.match(await page.locator('#story-content').innerText(),/NIST DLMF/);
+ assert.equal(await page.locator('.connection-selected').count(),1);
+ await page.locator('#story-content [data-navigate="hall-critical"]').click();
+ assert.equal(new URL(page.url()).hash,'#hall-critical');
+ await page.goBack();assert.equal(new URL(page.url()).hash,'#connection--dirichlet-grh-rh');
+ await page.goBack();assert.equal(new URL(page.url()).hash,'#connections');
+ await page.goForward();assert.equal(new URL(page.url()).hash,'#connection--dirichlet-grh-rh');
+ await page.reload();await page.locator('.connection-selected').waitFor();
+ await page.locator('#map-up').click();assert.equal(new URL(page.url()).hash,'#connections');
+ await page.keyboard.press('Escape');assert.equal(new URL(page.url()).hash,'');
+ await page.goto(base+'/#connection--euler-factors-analogy');
+ assert.match(await page.locator('#story-content').innerText(),/prime ideals/);
+ await page.locator('#map-home').click();assert.equal(new URL(page.url()).hash,'');
+ await page.goto(base+'/#connection--not-real');
+ assert.match(await page.locator('.story-head h2').innerText(),/mystery/);
+ await page.goto(base+'/#hardy-signs-exhibit');
+ assert.ok(await page.locator('#hardy-waves').count());
+ const mobile=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+ mobile.on('pageerror',e=>errors.push(e.message));
+ await mobile.goto(base);
+ await mobile.locator('.connections-top-trigger').tap();
+ await mobile.locator('[data-connection-filter="conceptual_analogy"]').tap();
+ assert.equal(await mobile.locator('.connection-card').count(),2);
+ await mobile.locator('[data-navigate="connection--zero-count-density-analogy"]').first().tap();
+ assert.equal(new URL(mobile.url()).hash,'#connection--zero-count-density-analogy');
+ assert.match(await mobile.locator('#story-content').innerText(),/different restrictions/);
+ await mobile.emulateMedia({reducedMotion:'reduce'});
+ await mobile.locator('#map-up').tap();
+ assert.equal(new URL(mobile.url()).hash,'#connections');
+ assert.ok(!(await mobile.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2)),'mobile horizontal overflow');
+ await mobile.locator('[data-connection-filter="historical_influence"]').focus();
+ await mobile.keyboard.press('Enter');
+ assert.equal(await mobile.locator('.connection-card').count(),2);
+ await mobile.locator('.connection-link').first().focus();await mobile.keyboard.press('Enter');
+ assert.match(new URL(mobile.url()).hash,/connection--hardy-levinson-history/);
+ assert.deepEqual(errors,[]);
+ console.log('PASS S008 real HTTP Chromium desktop/mobile: 4 filters, edge evidence, endpoints, Back/Forward/reload/Up/Home/Escape, invalid hash, keyboard, touch, reduced motion and no overflow');
+}finally{await browser?.close();server.kill();}
